@@ -13,7 +13,10 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        // $roles = Role::all();
+
+        // return view('roles.index')->with('roles', $roles);
+        return view('employees.index');
     }
 
     /**

@@ -39,5 +39,10 @@ Route::resource('roles', 'RoleController');
 Route::resource('permissions', 'PermissionController');
 
 Route::resource('posts', 'PostController');
-Route::resource('employee', 'EmployeeController');
+Route::resource('employees', 'EmployeeController');
+Route::resource('designations', 'EmployeeDesignationController');
+Route::resource('departments', 'EmployeeDepartmentController');
+Route::resource('attendances', 'EmployeeAttendanceController');
+Route::resource('leaves', 'EmployeeLeaveTypeController');
+Route::resource('paydeads', 'EmployeePayHeadController');
 

@@ -30,6 +30,8 @@
         <!--Jasmine Stylesheet [ REQUIRED ]-->
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
         <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+
+
         <!--Font Awesome [ OPTIONAL ]-->
         <link href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
         <!--Switchery [ OPTIONAL ]-->
@@ -48,7 +50,7 @@
         
 
     <!-- Scripts -->
-
+        
 
     <script>
         window.Laravel = {!! json_encode([
@@ -408,12 +410,12 @@
                                 <li class="dropdown">
                                     <a href="#" data-toggle="dropdown" class="dropdown-toggle"> Employees <b class="caret"></b></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#"> Manage Employees </a></li>
-                                        <li><a href="#">Attendance </a></li>
-                                        <li><a href="#"> Employee Department </a></li>
-                                        <li><a href="#">Employee Designation </a></li>
-                                        <li><a href="#"> Leave Type </a></li>
-                                        <li><a href="#"> Payheads </a></li>
+                                        <li><a href="{{route('employees.index')}}"> Manage Employees </a></li>
+                                        <li><a href="{{route('attendances.index')}}">Attendance </a></li>
+                                        <li><a href="{{route('departments.index')}}"> Employee Department </a></li>
+                                        <li><a href="{{route('designations.index')}}">Employee Designation </a></li>
+                                        <li><a href="{{route('leaves.index')}}"> Leave Type </a></li>
+                                        <li><a href="{{route('paydeads.index')}}"> Payheads </a></li>
                                     </ul>
                                     <!-- end dropdown-menu -->
                                 </li>
@@ -568,7 +570,7 @@
                 <!--CONTENT CONTAINER-->
                 <!--===================================================-->
                 <div id="content-container">
-                    <div id="profilebody">
+                    <!-- <div id="profilebody">
                         <div class="pad-all animated fadeInDown">
                             <div class="row">
                                 <div class="col-lg-2 col-sm-6 col-md-6 col-xs-12">
@@ -645,7 +647,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!--Page Title-->
                     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                     <!-- <div class="pageheader">
@@ -691,7 +693,7 @@
             <footer id="footer">
                 <!-- Visible when footer positions are fixed -->
                 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-                <div class="show-fixed pull-right">
+                <!-- <div class="show-fixed pull-right">
                     <ul class="footer-list list-inline">
                         <li>
                             <p class="text-sm">SEO Proggres</p>
@@ -709,7 +711,7 @@
                             <button class="btn btn-sm btn-dark btn-active-success">Checkout</button>
                         </li>
                     </ul>
-                </div>
+                </div> -->
                 <!-- Visible when footer positions are static -->
                 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
                 <div class="hide-fixed pull-right pad-rgt">Currently v2.2</div>

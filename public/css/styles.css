@@ -28,7 +28,9 @@ p.teaser {
 	.panel-body input[type="radio"]{margin:0;}
 	#vbizz ul, #vbizz ol{margin:0;}
 	
-	
+	.body_content{
+		margin-top:20px;
+	}
 	
 	#vbizz img {
 		max-width: none;
@@ -48,7 +50,7 @@ p.teaser {
 		font-weight:300;
 	}
 	.content_part {
-		width: 77%;
+		width: 100%;
 		padding:1.5%;
 		float:right;
 		box-sizing:unset;
@@ -3206,3 +3208,5 @@ p.teaser {
     top: 3% !important;
     width: 87% !important;
 }
+
+

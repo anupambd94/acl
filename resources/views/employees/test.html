@@ -1,0 +1,1197 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb" dir="ltr" slick-uniqueid="3">
+
+<head>
+    <base href="http://vbizz.joomlawings.com/vbizz-dashboard/employee">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="generator" content="Joomla! - Open Source Content Management">
+    <title>vBizz Dashboard</title>
+    <link href="/components/com_vbizz/assets/css/jquery-ui.css" rel="stylesheet" type="text/css">
+    <link href="/media/system/css/modal.css?fff1c72eed1a3c56f80a13367de2f480" rel="stylesheet" type="text/css">
+    <link href="/modules/mod_vbizz_search/assets/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/modules/mod_vbizz_notify/assets/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/modules/mod_vbizz_notify/assets/css/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css">
+    <link href="/modules/mod_vbizz_login/tmpl/css/style2.0.css" rel="stylesheet" type="text/css">
+    <link href="/components/com_vbizz/assets/css/vbizz-new.css" rel="stylesheet" type="text/css">
+    <link href="/components/com_vbizz/assets/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="/components/com_vbizz/assets/css/font-awesome-animation.min.css" rel="stylesheet" type="text/css">
+    <link href="/components/com_vbizz/assets/css/jquery-ui.css" rel="stylesheet" type="text/css">
+    <link href="/components/com_vbizz/assets/css/fullcalendar.css" rel="stylesheet" type="text/css">
+    <link href="/media/jui/css/chosen.css?fff1c72eed1a3c56f80a13367de2f480" rel="stylesheet" type="text/css">
+    <script type="application/json" class="joomla-script-options new">
+        {
+            "csrf.token": "220b893261b90897456b343f5343c2d8",
+            "system.paths": {
+                "root": "",
+                "base": ""
+            }
+        }
+    </script>
+    <script src="/media/jui/js/jquery.min.js?fff1c72eed1a3c56f80a13367de2f480" type="text/javascript"></script>
+    <script src="/components/com_vbizz/assets/js/jquery-ui.js" type="text/javascript"></script>
+    <script src="/media/system/js/mootools-core.js?fff1c72eed1a3c56f80a13367de2f480" type="text/javascript"></script>
+    <script src="/media/system/js/core.js?fff1c72eed1a3c56f80a13367de2f480" type="text/javascript"></script>
+    <script src="/media/system/js/mootools-more.js?fff1c72eed1a3c56f80a13367de2f480" type="text/javascript"></script>
+    <script src="/media/jui/js/jquery-noconflict.js?fff1c72eed1a3c56f80a13367de2f480" type="text/javascript"></script>
+    <script src="/media/jui/js/jquery-migrate.min.js?fff1c72eed1a3c56f80a13367de2f480" type="text/javascript"></script>
+    <script src="/media/system/js/modal.js?fff1c72eed1a3c56f80a13367de2f480" type="text/javascript"></script>
+    <script src="/modules/mod_vbizz_notify/assets/js/jquery.mCustomScrollbar.concat.min.js" type="text/javascript"></script>
+    <script src="/modules/mod_vbizz_login/tmpl/js/jquery.simplemodal.js" type="text/javascript"></script>
+    <script src="/modules/mod_vbizz_login/tmpl/js/default.js" type="text/javascript"></script>
+    <script src="/components/com_vbizz/assets/js/jquery.1.10.js" type="text/javascript"></script>
+    <script src="/components/com_vbizz/assets/js/jquery-ui.js" type="text/javascript"></script>
+    <script src="/components/com_vbizz/assets/js/moment.min.js" type="text/javascript"></script>
+    <script src="/components/com_vbizz/assets/js/fullcalendar.min.js" type="text/javascript"></script>
+    <script src="/media/jui/js/chosen.jquery.min.js?fff1c72eed1a3c56f80a13367de2f480" type="text/javascript"></script>
+    <script src="/media/jui/js/bootstrap.min.js?fff1c72eed1a3c56f80a13367de2f480" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        jQuery(function($) {
+            $('.hasTip').each(function() {
+                var title = $(this).attr('title');
+                if (title) {
+                    var parts = title.split('::', 2);
+                    var mtelement = document.id(this);
+                    mtelement.store('tip:title', parts[0]);
+                    mtelement.store('tip:text', parts[1]);
+                }
+            });
+            var JTooltips = new Tips($('.hasTip').get(), {
+                "maxTitleChars": 50,
+                "fixed": false
+            });
+        });
+        jQuery(function($) {
+            SqueezeBox.initialize({});
+            SqueezeBox.assign($('a.modal').get(), {
+                parse: 'rel'
+            });
+        });
+
+        window.jModalClose = function() {
+            SqueezeBox.close();
+        };
+
+        // Add extra modal close functionality for tinyMCE-based editors
+        document.onreadystatechange = function() {
+            if (document.readyState == 'interactive' && typeof tinyMCE != 'undefined' && tinyMCE) {
+                if (typeof window.jModalClose_no_tinyMCE === 'undefined') {
+                    window.jModalClose_no_tinyMCE = typeof(jModalClose) == 'function' ? jModalClose : false;
+
+                    jModalClose = function() {
+                        if (window.jModalClose_no_tinyMCE) window.jModalClose_no_tinyMCE.apply(this, arguments);
+                        tinyMCE.activeEditor.windowManager.close();
+                    };
+                }
+
+                if (typeof window.SqueezeBoxClose_no_tinyMCE === 'undefined') {
+                    if (typeof(SqueezeBox) == 'undefined') SqueezeBox = {};
+                    window.SqueezeBoxClose_no_tinyMCE = typeof(SqueezeBox.close) == 'function' ? SqueezeBox.close : false;
+
+                    SqueezeBox.close = function() {
+                        if (window.SqueezeBoxClose_no_tinyMCE) window.SqueezeBoxClose_no_tinyMCE.apply(this, arguments);
+                        tinyMCE.activeEditor.windowManager.close();
+                    };
+                }
+            }
+        };
+
+        jQuery(function($) {
+            initChosen();
+            $("body").on("subform-row-add", initChosen);
+
+            function initChosen(event, container) {
+                container = container || document;
+                $(container).find("select").chosen({
+                    "disable_search_threshold": 10,
+                    "search_contains": true,
+                    "allow_single_deselect": true,
+                    "placeholder_text_multiple": "Type or select some options",
+                    "placeholder_text_single": "Select an option",
+                    "no_results_text": "No results match"
+                });
+            }
+        });
+
+        jQuery(function($) {
+            initPopovers();
+            $("body").on("subform-row-add", initPopovers);
+
+            function initPopovers(event, container) {
+                $(container || document).find(".hasPopover").popover({
+                    "html": true,
+                    "trigger": "hover focus",
+                    "container": "body"
+                });
+            }
+        });
+        jQuery(document).ready(function() {
+            jQuery("a.close").on("click", function() {
+                jQuery("#system-message-container").remove();
+            });
+        });
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/templates/vbizz/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/templates/vbizz/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="/templates/vbizz/css/responsive.css" rel="stylesheet" type="text/css">
+    <link href="/templates/vbizz/css/font-awesome-animation.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700" rel="stylesheet" type="text/css">
+    <script type="text/javascript">
+        jQuery(window).ready(function(e) {
+
+            var window_height = jQuery(window).height();
+            var header = jQuery('.header').height();
+            var copyright = jQuery('.copyright').height();
+            var new_height = window_height - (copyright + header);
+            jQuery('.shwocase').css('min-height', new_height);
+        });
+    </script>
+</head>
+
+<body class="com_vbizz" style="">
+    <div class="shadow_box"></div>
+    <div class="wrapper">
+        <div class="top">
+            <div class="container">
+            </div>
+        </div>
+        <div class="main-body">
+            <div class="container">
+                <div class="content-section">
+                    <div class="content" style="width:100%;">
+                        <div id="system-message-container">
+                        </div>
+
+
+
+                        <script type="text/javascript">
+                            jQuery(document).ready(function(e) {
+
+                                var window_height = jQuery(document).height();
+                                var header = jQuery('.header').height();
+                                var copyright = jQuery('.copyright').height();
+                                var new_height = window_height - (copyright + header);
+                                jQuery('.cpanel').css('min-height', new_height);
+                                //jQuery("a.menu-heading:first").addClass('active');
+                                jQuery('.desktop_menu li.has-sub>a').on('click', function() {
+                                    jQuery(this).removeAttr('href');
+                                    var element = jQuery(this).parent('li');
+                                    if (element.hasClass('open')) {
+                                        element.removeClass('open');
+                                        element.find('li').removeClass('open');
+                                        element.find('li').removeClass('opendiv');
+                                        element.find('ul').slideUp();
+                                    } else {
+                                        element.addClass('open');
+                                        element.children('ul').slideDown();
+                                        element.siblings('li').children('ul').slideUp();
+                                        element.siblings('li').removeClass('open');
+                                        element.siblings('li').find('li').removeClass('open');
+                                        element.find('li').removeClass('opendiv');
+                                        element.siblings('li').find('ul').slideUp();
+                                    }
+                                });
+                            });
+                        </script>
+
+                        <script>
+                            jQuery(function() {
+                                jQuery(document).on('click', '.toggle', function() {
+                                    jQuery(".responsive_lisy").slideToggle("slow");
+                                });
+                            });
+                        </script>
+
+                        <div class="front-page">
+                            <div class="vbizz-top">
+                                <div class="vbizz-left">
+                                    <a href="/vbizz-dashboard/vbizz"><img src="/components/com_vbizz/assets/images/logo.png" alt="vbizz"> vBizz</a>
+                                </div>
+                                <div class="vbizz-right">
+                                    <div class="moduletable mod_vbizz_search">
+
+                                        <script>
+                                            jQuery.widget("custom.catcomplete", jQuery.ui.autocomplete, {
+                                                _create: function() {
+                                                    this._super();
+                                                    this.widget().menu("option", "items", "> :not(.ui-autocomplete-category)");
+                                                },
+                                                _renderMenu: function(ul, items) {
+                                                    var that = this,
+                                                        currentCategory = "";
+                                                    jQuery.each(items, function(index, item) {
+                                                        var li;
+                                                        if (item.category != currentCategory) {
+                                                            ul.append("<li class='ui-autocomplete-category'>" + item.category + "</li>");
+                                                            currentCategory = item.category;
+                                                        }
+                                                        li = that._renderItemData(ul, item);
+                                                        if (item.category) {
+                                                            li.attr("aria-label", item.category + " : " + item.label);
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        </script>
+
+                                        <script>
+                                            jQuery(function() {
+
+                                                jQuery("#vc_search").catcomplete({
+
+                                                    source: function(request, response) {
+
+                                                        jQuery.ajax({
+                                                            url: "",
+                                                            type: "POST",
+                                                            dataType: "json",
+                                                            data: {
+                                                                "option": "com_vbizz",
+                                                                "task": "search",
+                                                                "tmpl": "component",
+                                                                "keyword": request.term
+                                                            },
+                                                            success: function(data) {
+                                                                response(jQuery.map(JSON.parse(data.search), function(item) {
+
+                                                                    return {
+                                                                        label: item.label,
+                                                                        category: item.category,
+                                                                        view: item.view,
+                                                                        task: item.task
+                                                                    };
+
+                                                                }));
+                                                            }
+                                                        });
+
+                                                    },
+
+                                                    select: function(event, ui) {
+                                                        var view = ui.item.view;
+                                                        var task = ui.item.task;
+
+                                                        jQuery('form[name="vcAdminForm"] #view').val(view);
+                                                        jQuery('form[name="vcAdminForm"] #task').val(task);
+                                                    },
+
+                                                    minlength: 0
+
+                                                });
+
+                                            });
+
+
+                                            jQuery(document).on('click', '#sbmt', function() {
+
+                                                var val = jQuery('form[name="vcAdminForm"] #vc_search').val();
+
+                                                if (val == "") {
+                                                    alert('Please enter some keyword/text');
+                                                    return false;
+                                                }
+
+                                                var view = jQuery('form[name="vcAdminForm"] #view').val();
+                                                var task = jQuery('form[name="vcAdminForm"] #task').val();
+
+                                                if (task != "" && task != "none" && task != "viewonly") {
+                                                    window.location.href = "index.php?option=com_vbizz&view=" + view + "&task=" + task;
+                                                } else if (task == "viewonly") {
+                                                    window.location.href = "index.php?option=com_vbizz&view=" + view;
+                                                } else if (view == "") {
+                                                    window.location.href = "index.php?option=com_vbizz&view=search&search=" + val;
+                                                } else {
+                                                    window.location.href = "index.php?option=com_vbizz&view=" + view + "&search=" + val;
+                                                }
+
+                                                return false;
+
+                                            });
+
+
+                                            jQuery(document).on('keyup', 'input#vc_search', function(e) {
+                                                if (e.keyCode == 8 || e.keyCode == 46) {
+                                                    jQuery('form[name="vcAdminForm"] #view').val('');
+                                                    jQuery('form[name="vcAdminForm"] #task').val('');
+                                                }
+                                            });
+                                        </script>
+
+
+                                        <form action="" method="post" name="vcAdminForm" id="vcAdminForm">
+                                            <div class="vbz_search">
+                                                <div class="vc_search">
+                                                    <input type="text" name="vc_search" id="vc_search" placeholder="Search" value="" class="text_area ui-autocomplete-input" autocomplete="off">
+                                                    <button id="sbmt" class="btn"><i class="fa fa-search"></i></button>
+                                                </div>
+
+                                                <input type="hidden" name="option" id="option" value="com_vbizz">
+                                                <input type="hidden" name="view" id="view" value="">
+                                                <input type="hidden" name="task" id="task" value="">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="moduletable mod_vbizz_notify">
+
+                                        <script type="text/javascript">
+                                            /* jQuery('body').not('#notify').click(function () {    		
+                                                                                                                                                                                                                                        jQuery('#notifications').hide();
+                                                                                                                                                                                                                                    }); */
+
+
+
+                                            jQuery(document).on('click', '#notify', function() {
+                                                jQuery('#notifications').slideToggle('show-notify');
+                                                jQuery(this).toggleClass('show-notify');
+                                                jQuery('.count-notes').remove();
+                                                var that = this;
+
+                                                if ((jQuery(this).hasClass('show-notify')) && (!jQuery(this).hasClass('notify-update'))) {
+                                                    jQuery.ajax({
+                                                        type: "POST",
+                                                        dataType: "JSON",
+                                                        data: {
+                                                            'option': 'com_vbizz',
+                                                            'task': 'updateNotes',
+                                                            'tmpl': 'component'
+                                                        },
+
+                                                        success: function(data) {
+                                                            if (data.result == "success") {
+                                                                jQuery(that).addClass('notify-update');
+                                                            }
+                                                        }
+
+                                                    });
+                                                }
+                                            });
+
+                                            jQuery(document).on('click', '#clear_all', function() {
+
+                                                jQuery.ajax({
+                                                    type: "POST",
+                                                    dataType: "JSON",
+                                                    data: {
+                                                        'option': 'com_vbizz',
+                                                        'task': 'clearNotes',
+                                                        'tmpl': 'component'
+                                                    },
+
+                                                    success: function(data) {
+                                                        if (data.result == "success") {
+                                                            var ht = '<div class="notify-parts"><div class="notify-result"><div class="notify-title"><span>No New Notifications!!!</span></div></div></div>';
+
+                                                            jQuery('#notifications').html(ht);
+                                                        }
+                                                    }
+
+                                                });
+
+                                            });
+
+                                            jQuery(document).click(function(e) {
+                                                if (!jQuery(e.target).parents().andSelf().is('#notify')) {
+                                                    jQuery("#notify").removeClass("show-notify");
+                                                    //jQuery('#notifications').hide( "slide", { direction: "up" }, "slow" );
+                                                    jQuery('#notifications').slideUp();
+                                                }
+
+                                            });
+                                            jQuery("#notifications").click(function(e) {
+                                                e.stopPropagation();
+                                            });
+                                        </script>
+
+                                        <form action="" method="post" name="vbNotifyForm" id="vbNotifyForm">
+
+                                            <div class="vbizz-notification">
+
+                                                <div class="vb_notify">
+                                                    <a id="notify" class="notify  faa-parent animated-hover faa-slow" href="javascript:void(0);" title="Notification"><i class="fa fa-bell faa-ring faa-slow"></i></a>
+                                                </div>
+                                                <div class="notifications" id="notifications">
+
+                                                    <div class="clear-all"><span class="noti_title">Notifications</span><a id="clear_all" class="clear_all" href="javascript:void(0);"><i class="fa fa-close"></i> Clear All</a></div>
+
+                                                    <div class="sub-notification mCustomScrollbar _mCS_1 mCS_no_scrollbar">
+                                                        <div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: 0px;">
+                                                            <div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">
+                                                                <div class="notify-parts">
+                                                                    <div class="notify-result">
+                                                                        <div class="notify-title">
+                                                                            <a href="/vbizz-dashboard/banking"><span>Money Is Transferred from ICICI to SBI by Test Owner on 22-08-2019, 7:43 PM</span></a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;">
+                                                                <div class="mCSB_draggerContainer">
+                                                                    <div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px;" oncontextmenu="return false;">
+                                                                        <div class="mCSB_dragger_bar" style="line-height: 30px;"></div>
+                                                                    </div>
+                                                                    <div class="mCSB_draggerRail"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                    <div class="moduletable mod_vbizz_login">
+                                        <div id="btl">
+                                            <!-- Panel top -->
+                                            <div class="btl-panel">
+                                                <!-- Profile button -->
+                                                <span class="btl_avtar"><img src="http://vbizz.joomlawings.com/components/com_vbizz/uploads/profile_pics/avtar.png"></span><span id="btl-panel-profile" class="btl-dropdown">
+                
+                testowner <i class="fa fa-angle-down"></i>
+            </span>
+                                            </div>
+                                            <!-- content dropdown/modal box -->
+
+                                            <div class="clear"></div>
+                                        </div>
+
+                                        <script type="text/javascript">
+                                            /*<![CDATA[*/
+                                            var btlOpt = {
+                                                BT_AJAX: 'http://vbizz.joomlawings.com/vbizz-dashboard/employee',
+                                                BT_RETURN: '/vbizz-dashboard/employee',
+                                                RECAPTCHA: 'none',
+                                                LOGIN_TAGS: '',
+                                                REGISTER_TAGS: '',
+                                                EFFECT: 'btl-modal',
+                                                ALIGN: '',
+                                                BG_COLOR: '#6d850a',
+                                                MOUSE_EVENT: 'click',
+                                                TEXT_COLOR: '#fff',
+                                                MESSAGES: {
+                                                    E_LOGIN_AUTHENTICATE: 'Username and password do not match or you do not have an account yet.',
+                                                    REQUIRED_NAME: 'Please enter your name!',
+                                                    REQUIRED_USERNAME: 'Please enter your username!',
+                                                    REQUIRED_PASSWORD: 'Please enter your password!',
+                                                    REQUIRED_VERIFY_PASSWORD: 'Please re-enter your password!',
+                                                    PASSWORD_NOT_MATCH: 'Password does not match the verify password!',
+                                                    REQUIRED_EMAIL: 'Please enter your email!',
+                                                    EMAIL_INVALID: 'Please enter a valid email!',
+                                                    REQUIRED_VERIFY_EMAIL: 'Please re-enter your email!',
+                                                    EMAIL_NOT_MATCH: 'Email does not match the verify email!',
+                                                    CAPTCHA_REQUIRED: 'Please enter captcha key'
+                                                }
+                                            }
+                                            if (btlOpt.ALIGN == "center") {
+                                                BTLJ(".btl-panel").css('textAlign', 'center');
+                                            } else {
+                                                BTLJ(".btl-panel").css('float', btlOpt.ALIGN);
+                                            }
+                                            //BTLJ("input.btl-buttonsubmit,button.btl-buttonsubmit").css({"color":btlOpt.TEXT_COLOR,"background":btlOpt.BG_COLOR});
+                                            //BTLJ("#btl .btl-panel > span").css({"color":btlOpt.TEXT_COLOR,"background-color":btlOpt.BG_COLOR});
+                                            /*]]>*/
+                                        </script>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="vbizz">
+                                <div class="cpanel-left sidebar">
+                                    <div class="mobile_menu cpanel" style="min-height: 638px;">
+                                        <div class="desktop_menu">
+                                            <a class="toggle" href="#"><i class="fa fa-navicon"></i></a>
+                                            <ul class="responsive_lisy" style="display:none;">
+                                                <li class="m_dashboard"><a href="/vbizz-dashboard/vbizz"><span><i class="fa fa-th-large"></i> Dashboard</span></a></li>
+
+                                                <li class="has-sub"><a class="menu-heading" href="#"><span><i class="fa fa-plus"></i> Income</span></a>
+                                                    <ul class="childnav">
+
+                                                        <li><a href="/vbizz-dashboard/order"><span><i class="fa fa-circle-o"></i> Sales Order</span></a></li>
+
+
+                                                        <li><a href="/vbizz-dashboard/invoices"><span><i class="fa fa-circle-o"></i> Invoices</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/quotes"><span><i class="fa fa-circle-o"></i> Quotation</span></a></li>
+
+
+                                                        <li><a href="/vbizz-dashboard/customer"><span><i class="fa fa-circle-o"></i> Customers</span></a></li>
+
+
+                                                    </ul>
+                                                </li>
+
+                                                <li class="has-sub"><a class="menu-heading" href="#"><span><i class="fa fa-minus"></i> Expense</span></a>
+                                                    <ul class="childnav">
+                                                        <li><a href="/vbizz-dashboard/purchase"><span><i class="fa fa-circle-o"></i> Purchase Order</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/invoicesexpense"><span><i class="fa fa-circle-o"></i> Invoices</span></a></li>
+
+                                                        <li><a href="/"><span><i class="fa fa-circle-o"></i> Quotation</span></a></li>
+
+
+
+                                                        <li><a href="/vbizz-dashboard/vendor"><span><i class="fa fa-circle-o"></i> Vendors</span></a></li>
+
+
+                                                    </ul>
+                                                </li>
+
+                                                <li class="has-sub"><a class="menu-heading" href="#"><span><i class="fa fa-file-text-o"></i> Projects</span></a>
+                                                    <ul class="childnav">
+
+                                                        <li><a href="/vbizz-dashboard/projects"><span><i class="fa fa-circle-o"></i> Manage Projects</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/ptask"><span><i class="fa fa-circle-o"></i> Manage Task</span></a></li>
+
+                                                    </ul>
+                                                </li>
+
+
+                                                <li class="has-sub"><a class="menu-heading" href="#"><span><i class="fa fa-bank"></i> Banking</span></a>
+                                                    <ul class="childnav">
+
+                                                        <li><a href="/vbizz-dashboard/accounts"><span><i class="fa fa-circle-o"></i> Accounts</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/banking"><span><i class="fa fa-circle-o"></i> Transfer</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/statement"><span><i class="fa fa-circle-o"></i> Statement</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/trial"><span><i class="fa fa-circle-o"></i> Trial Balance</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/deposit"><span><i class="fa fa-circle-o"></i> Deposits</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/withdrawl"><span><i class="fa fa-circle-o"></i> Withdrawal</span></a></li>
+
+
+                                                    </ul>
+                                                </li>
+
+                                                <li class="has-sub"><a class="menu-heading" href="#"><span><i class="fa fa-envelope"></i> Interactions</span></a>
+                                                    <ul class="childnav">
+
+
+                                                        <li><a href="/vbizz-dashboard/support"><span><i class="fa fa-circle-o"></i> Support Forum</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/bug"><span><i class="fa fa-circle-o"></i> Bug Tracker</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/mail"><span><i class="fa fa-circle-o"></i> Mail Recipient</span></a></li>
+
+                                                    </ul>
+                                                </li>
+                                                <li class="has-sub opendiv"><a class="menu-heading" href="#"><span><i class="fa fa-users"></i> Employees</span></a>
+                                                    <ul class="childnav">
+                                                        <li><a href="/vbizz-dashboard/employee" class="active"><span><i class="fa fa-circle-o"></i> Manage Employees</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/attendance"><span><i class="fa fa-circle-o"></i> Attendance</span></a></li>
+
+
+
+
+                                                        <li><a href="/vbizz-dashboard/edept"><span><i class="fa fa-circle-o"></i> Employee Department</span></a>
+                                                        </li>
+
+                                                        <li><a href="/vbizz-dashboard/edesg"><span><i class="fa fa-circle-o"></i> Employee Designation</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/leaves"><span><i class="fa fa-circle-o"></i> Leave Type</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/payheads"><span><i class="fa fa-circle-o"></i> Payheads</span></a></li>
+
+
+
+                                                    </ul>
+                                                </li>
+                                                <li class="has-sub"><a class="menu-heading" href="#"><span><i class="fa fa-file-text"></i> Inventory</span></a>
+                                                    <ul class="childnav">
+
+                                                        <li><a href="/vbizz-dashboard/category"><span><i class="fa fa-circle-o"></i> Category</span></a></li>
+                                                        <li><a href="/vbizz-dashboard/itemqueue"><span><i class="fa fa-circle-o"></i> Items in queue for validation</span></a></li>
+                                                        <li><a href="/vbizz-dashboard/items"><span><i class="fa fa-circle-o"></i> Items</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/stock"><span><i class="fa fa-circle-o"></i> Manage Stock</span></a></li>
+                                                        <li><a href="/vbizz-dashboard/assets"><span><i class="fa fa-circle-o"></i> Assets</span></a></li>
+
+                                                    </ul>
+                                                </li>
+
+                                                <li><a class="menu-heading" href="/vbizz-dashboard/reports"><span><i class="fa fa-clipboard"></i> Reports</span></a></li>
+
+                                                <li class="has-sub"><a class="menu-heading" href="#"><span><i class="fa fa-gears"></i> Settings</span></a>
+                                                    <ul class="childnav">
+                                                        <li><a href="/vbizz-dashboard/config"><span><i class="fa fa-circle-o"></i> Configuration</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/etemp"><span><i class="fa fa-circle-o"></i> Email Templates</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/users"><span><i class="fa fa-circle-o"></i> User Profile</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/notes"><span><i class="fa fa-circle-o"></i> Activity Log</span></a></li>
+                                                        <li><a href="/vbizz-dashboard/tran"><span><i class="fa fa-circle-o"></i> Transactions</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/mode"><span><i class="fa fa-circle-o"></i> Transaction Mode</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/import"><span><i class="fa fa-circle-o"></i> Import/Export</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/imtask"><span><i class="fa fa-circle-o"></i> Import Schedule Task</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/exptask"><span><i class="fa fa-circle-o"></i> Export Schedule Task</span></a></li>
+
+
+                                                    </ul>
+                                                </li>
+                                                <li>
+
+                                                    <!--<li><a href="/vbizz-dashboard/tax" ><span class="menu-heading"><i class="fa"></i> Tax</span></a></li>
+    
+    <li><a href="/vbizz-dashboard/discount" ><span class="menu-heading"><i class="fa"></i> Discount</span></a></li>
+    -->
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="desktop cpanel" style="min-height: 638px;">
+                                        <div class="desktop_menu">
+                                            <ul class="side_menu_items">
+                                                <li class="m_dashboard"><a href="/vbizz-dashboard/vbizz"><span><i class="fa fa-th-large"></i> Dashboard</span></a></li>
+                                                <li class="has-sub"><a class="menu-heading" href="#"><span><i class="fa fa-plus"></i> Income</span><span class="selected"></span></a>
+                                                    <ul class="childnav">
+
+                                                        <li><a href="/vbizz-dashboard/order"><span><i class="fa fa-circle-o"></i> Sales Order</span></a></li>
+
+
+                                                        <li><a href="/vbizz-dashboard/invoices"><span><i class="fa fa-circle-o"></i> Invoices</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/quotes"><span><i class="fa fa-circle-o"></i> Quotation</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/customer"><span><i class="fa fa-circle-o"></i> Customers</span></a></li>
+                                                        <li><a href="/vbizz-dashboard/leads"><span><i class="fa fa-circle-o"></i> Leads</span></a></li>
+                                                    </ul>
+                                                </li>
+
+
+                                                <li class="has-sub"><a class="menu-heading" href="#"><span><i class="fa fa-minus"></i> Expense</span><span class="selected"></span></a>
+                                                    <ul class="childnav">
+                                                        <li><a href="/vbizz-dashboard/purchase"><span><i class="fa fa-circle-o"></i> Purchase Order</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/invoicesexpense"><span><i class="fa fa-circle-o"></i> Invoices</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/quotesexpense"><span><i class="fa fa-circle-o"></i> Quotation</span></a></li>
+
+
+                                                        <li><a href="/vbizz-dashboard/vendor"><span><i class="fa fa-circle-o"></i> Vendors</span></a></li>
+
+                                                    </ul>
+                                                </li>
+
+
+                                                <li class="has-sub"><a class="menu-heading" href="#"><span><i class="fa fa-file-text-o"></i> Projects</span><span class="selected"></span></a>
+                                                    <ul class="childnav">
+
+                                                        <li><a href="/vbizz-dashboard/projects"><span><i class="fa fa-circle-o"></i> Manage Projects</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/ptask"><span><i class="fa fa-circle-o"></i> Manage Task</span></a></li>
+
+                                                    </ul>
+                                                </li>
+
+
+                                                <li class="has-sub"><a class="menu-heading" href="#"><span><i class="fa fa-bank"></i> Banking</span><span class="selected"></span></a>
+                                                    <ul class="childnav">
+
+
+                                                        <li><a href="/vbizz-dashboard/accounts"><span><i class="fa fa-circle-o"></i> Accounts</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/banking"><span><i class="fa fa-circle-o"></i> Transfer</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/statement"><span><i class="fa fa-circle-o"></i> Statement</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/trial"><span><i class="fa fa-circle-o"></i> Trial Balance</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/deposit"><span><i class="fa fa-circle-o"></i> Deposits</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/withdrawl"><span><i class="fa fa-circle-o"></i> Withdrawal</span></a></li>
+
+
+
+                                                    </ul>
+                                                </li>
+
+                                                <li class="has-sub"><a class="menu-heading" href="#"><span><i class="fa fa-envelope"></i> Interactions</span><span class="selected"></span></a>
+                                                    <ul class="childnav">
+
+                                                        <li><a href="/vbizz-dashboard/support"><span><i class="fa fa-circle-o"></i> Support Forum</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/bug"><span><i class="fa fa-circle-o"></i> Bug Tracker</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/mail"><span><i class="fa fa-circle-o"></i> Mail Recipient</span></a></li>
+
+                                                    </ul>
+                                                </li>
+                                                <li class="has-sub opendiv"><a class="menu-heading" href="#"><span><i class="fa fa-users"></i> Employees</span><span class="selected"></span></a>
+                                                    <ul class="childnav">
+                                                        <li><a href="/vbizz-dashboard/employee" class="active"><span><i class="fa fa-circle-o"></i> Manage Employees</span></a></li>
+
+
+                                                        <li><a href="/vbizz-dashboard/attendance"><span><i class="fa fa-circle-o"></i> Attendance</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/edept"><span><i class="fa fa-circle-o"></i> Employee Department</span></a>
+                                                        </li>
+
+                                                        <li><a href="/vbizz-dashboard/edesg"><span><i class="fa fa-circle-o"></i> Employee Designation</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/leaves"><span><i class="fa fa-circle-o"></i> Leave Type</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/payheads"><span><i class="fa fa-circle-o"></i> Payheads</span></a></li>
+
+
+
+                                                    </ul>
+                                                </li>
+                                                <li class="has-sub"><a class="menu-heading" href="#"><span><i class="fa fa-file-text"></i> Inventory</span><span class="selected"></span></a>
+                                                    <ul class="childnav">
+
+                                                        <li><a href="/vbizz-dashboard/category"><span><i class="fa fa-circle-o"></i> Category</span></a></li>
+                                                        <li><a href="/vbizz-dashboard/itemqueue"><span><i class="fa fa-circle-o"></i> Items in queue for validation</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/items"><span><i class="fa fa-circle-o"></i> Items</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/stock"><span><i class="fa fa-circle-o"></i> Manage Stock</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/assets"><span><i class="fa fa-circle-o"></i> Assets</span></a></li>
+
+                                                    </ul>
+                                                </li>
+                                                <li class="has-sub"><a class="menu-heading" href="#"><span><i class="fa fa-clipboard"></i> Reports</span><span class="selected"></span></a>
+                                                    <ul class="childnav">
+                                                        <li><a href="/vbizz-dashboard/reports"><span><i class="fa fa-circle-o"></i> Calender View</span></a>
+                                                        </li>
+
+                                                        <li><a href="/vbizz-dashboard/stats"><span><i class="fa fa-circle-o"></i> Stats</span></a>
+                                                        </li>
+
+                                                    </ul>
+                                                </li>
+                                                <li class="has-sub"><a class="menu-heading" href="#"><span><i class="fa fa-gears"></i> Settings</span><span class="selected"></span></a>
+                                                    <ul class="childnav">
+                                                        <li><a href="/vbizz-dashboard/config"><span><i class="fa fa-circle-o"></i> Configuration</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/etemp"><span><i class="fa fa-circle-o"></i> Email Templates</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/users"><span><i class="fa fa-circle-o"></i> User Profile</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/notes"><span><i class="fa fa-circle-o"></i> Activity Log</span></a></li>
+                                                        <li><a href="/vbizz-dashboard/tran"><span><i class="fa fa-circle-o"></i> Transactions</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/mode"><span><i class="fa fa-circle-o"></i> Transaction Mode</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/import"><span><i class="fa fa-circle-o"></i> Import/Export</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/imtask"><span><i class="fa fa-circle-o"></i> Import Schedule Task</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/exptask"><span><i class="fa fa-circle-o"></i> Export Schedule Task</span></a></li>
+
+
+
+                                                        <li><a href="/vbizz-dashboard/tax"><span><i class="fa fa-circle-o"></i> Tax</span></a></li>
+
+                                                        <li><a href="/vbizz-dashboard/discount"><span><i class="fa fa-circle-o"></i> Discount</span></a></li>
+
+
+
+                                                        <li><a href="/vbizz-dashboard/vbizz?layout=widgetlisting"><span><i class="fa fa-circle-o"></i> Widget Listing</span></a></li>
+
+                                                    </ul>
+                                                </li>
+
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <script type="text/javascript">
+                                    jQuery(function() {
+
+                                        jQuery("#dialog").dialog({
+                                            autoOpen: false,
+                                            width: 700,
+                                            height: 400,
+                                            show: {
+                                                effect: "blind",
+                                                //duration: 1000
+                                            },
+                                            hide: {
+                                                effect: "explode",
+                                                //duration: 1000
+                                            },
+                                            open: function(event, ui) {
+                                                var empid = jQuery('#dialog').data('empid');
+                                                var htm = '<input type="hidden" name="empid" value="' + empid + '" />';
+                                                jQuery('#mail-sent').append(htm);
+                                            },
+                                            close: function(event, ui) {
+                                                jQuery('#mail-sent').find('input[name="empid"]').remove();
+                                            }
+                                        });
+
+
+                                        jQuery(document).on('click', '.send', function() {
+
+                                            var empid = jQuery(this).parent().parent().parent().find('input[name="empid"]').val();
+                                            var subject = jQuery(this).parent().parent().parent().find('input[name="subject"]').val();
+                                            var email = jQuery(this).parent().parent().parent().find('textarea[name="email_content"]').val();
+
+                                            var that = this;
+
+
+                                            jQuery.ajax({
+                                                type: "POST",
+                                                dataType: "JSON",
+                                                data: {
+                                                    'option': 'com_vbizz',
+                                                    'view': 'employee',
+                                                    'task': 'sendCustomEmail',
+                                                    'tmpl': 'component',
+                                                    'empid': empid,
+                                                    'subject': subject,
+                                                    'email': email
+                                                },
+
+                                                beforeSend: function() {
+                                                    jQuery(that).parent().find("span.loadingbox").show();
+                                                },
+
+                                                complete: function() {
+                                                    jQuery(that).parent().find("span.loadingbox").hide();
+                                                },
+
+                                                success: function(data) {
+                                                    if (data.result == "success") {
+                                                        jQuery(that).parent().parent().parent().find('input[name="subject"]').val('');
+                                                        jQuery(that).parent().parent().parent().find('textarea[name="email_content"]').val('');
+                                                        var htm = '<tr><td></td><td><span>Email Sent Successfully</span></td></tr>';
+                                                        jQuery(that).parent().parent().parent().append(htm);
+
+                                                        setTimeout(function() {
+                                                            jQuery("#dialog").dialog("close");
+                                                        }, 3000);
+                                                    }
+                                                }
+                                            });
+                                        });
+
+                                    });
+
+                                    jQuery(document).on('click', '.send_mail', function() {
+                                        var empid = jQuery(this).attr('empid');
+                                        jQuery("#dialog").data('empid', empid).dialog("open");
+                                    });
+                                </script>
+
+                                <header class="header">
+                                    <div class="container-title">
+                                        <h1 class="page-title">Employee</h1>
+                                    </div>
+                                </header>
+                                <div class="content_part">
+                                    <form action="/vbizz-dashboard/employee" method="post" name="adminForm" id="adminForm">
+
+                                        <div class="subhead">
+                                            <div class="container-fluid">
+                                                <div id="container-collapse" class="container-collapse"></div>
+                                                <div class="row-fluid">
+                                                    <div class="span12">
+                                                        <div id="toolbar" class="btn-toolbar">
+                                                            <div class="btn-wrapper" id="toolbar-new">
+                                                                <span onclick="Joomla.submitbutton('add')" class="btn btn-small btn-success">
+                            <span class="fa fa-plus"></span> New</span>
+                                                            </div>
+
+                                                            <div class="btn-wrapper" id="toolbar-edit">
+                                                                <span onclick="if (document.adminForm.boxchecked.value==0){alert('Please first make a selection from the list');}else{ Joomla.submitbutton('edit')}" class="btn btn-small">
+                            <span class="fa fa-edit"></span> Edit</span>
+                                                            </div>
+
+
+                                                            <div class="btn-wrapper" id="toolbar-setting" style="float: right;">
+                                                                <a class="modal btn" id="modal1" title="Select" href="http://vbizz.joomlawings.com/index.php?option=com_vbizz&amp;view=config&amp;task=loadEmployeeSetting&amp;tmpl=component&amp;ot=1" rel="{handler: 'iframe', size: {x: 550, y: 400}}">
+                                                                    <span class="fa fa-cog"></span>
+                                                                </a>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="adminlist filter filter_emp">
+                                            <div class="filet_left">
+                                                <input type="text" name="search" id="search" placeholder="Search" value="" class="text_area">
+                                                <button class="btn hasTooltip" title="Search" onclick="this.form.submit();"><i class="fa fa-search"></i></button>
+                                                <button class="btn hasTooltip" title="Clear" onclick="document.getElementById('search').value='';this.form.submit();
+    document.getElementById('filter_dept').value='';this.form.submit();
+    document.getElementById('filter_desg').value='';this.form.submit();"><i class="fa fa-remove"></i></button>
+                                            </div>
+
+                                            <div class="filter_right">
+                                                <select id="filter_dept" name="filter_dept" class="inputbox" size="1" onchange="submitform( );" style="display: none;">
+        <option value="">Select Department</option>
+        <option value="5">Designing</option>
+        <option value="6">Styrelse</option>
+        <option value="7">Info</option>
+        <option value="8">Reality</option>
+        <option value="9">Pojištění</option>
+        <option value="10">Менеджеры по продажам</option>
+        <option value="11">Сборщики мебели</option>
+        <option value="12">Диспетчер заказов</option>
+        <option value="13">программисты</option>
+    </select>
+                                                <div class="chzn-container chzn-container-single chzn-container-single-nosearch" style="width: 195px;" title="" id="filter_dept_chzn"><a class="chzn-single"><span>Select Department</span><div><b></b></div></a>
+                                                    <div class="chzn-drop">
+                                                        <div class="chzn-search"><input type="text" autocomplete="off" readonly=""></div>
+                                                        <ul class="chzn-results"></ul>
+                                                    </div>
+                                                </div>
+                                                <select id="filter_desg" name="filter_desg" class="inputbox" size="1" onchange="submitform( );" style="display: none;">
+        <option value="">Select Designation</option>
+        <option value="6">Sjednatel</option>
+        <option value="7">Tipař</option>
+        <option value="8">Старший продавец </option>
+    </select>
+                                                <div class="chzn-container chzn-container-single chzn-container-single-nosearch" style="width: 155px;" title="" id="filter_desg_chzn"><a class="chzn-single"><span>Select Designation</span><div><b></b></div></a>
+                                                    <div class="chzn-drop">
+                                                        <div class="chzn-search"><input type="text" autocomplete="off" readonly=""></div>
+                                                        <ul class="chzn-results"></ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div id="editcell">
+                                            <table class="adminlist table">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="10" class="hidden-phone">#</th>
+                                                        <th width="10"><input type="checkbox" name="toggle" value="" onclick="Joomla.checkAll(this);"></th>
+                                                        <th><a href="#" onclick="Joomla.tableOrdering('i.name','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="Name">Name</a></th>
+                                                        <th class="hidden-phone"><a href="#" onclick="Joomla.tableOrdering('i.empid','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="Employee Id">Employee Id</a></th>
+                                                        <th><a href="#" onclick="Joomla.tableOrdering('d.name','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="Department">Department</a></th>
+                                                        <th class="hidden-phone"><a href="#" onclick="Joomla.tableOrdering('p.title','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="Designation">Designation</a></th>
+                                                        <th class="hidden-phone"><a href="#" onclick="Joomla.tableOrdering('i.email','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="Email">Email</a></th>
+                                                        <th class="hidden-phone"><a href="#" onclick="Joomla.tableOrdering('i.ctc','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="CTC">CTC</a></th>
+                                                        <th class="hidden-phone"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="row0">
+
+                                                        <td align="center" class="hidden-phone">1</td>
+
+                                                        <td><input type="checkbox" id="cb0" name="cid[]" value="75" onclick="Joomla.isChecked(this.checked);"></td>
+
+                                                        <td align="center">
+                                                            <a href="/vbizz-dashboard/employee?task=edit&amp;cid[0]=75">firmanpd</a>
+                                                        </td>
+
+                                                        <td align="center" class="hidden-phone">1</td>
+
+                                                        <td align="center">Info</td>
+
+                                                        <td align="center" class="hidden-phone">Sjednatel</td>
+
+
+                                                        <td align="center" class="hidden-phone">
+                                                            <a href="mailto:fir@gmail.com">
+                                                                <div> fir@gmail.com</div>
+                                                            </a>
+                                                        </td>
+
+                                                        <td align="center" class="hidden-phone">$ 160,00</td>
+
+
+                                                        <td align="center" class="hidden-phone"><a href="javascript:void(0);" class="send_mail btn" empid="75">Send Email</a></td>
+
+
+                                                    </tr>
+
+
+                                                    <tr class="row1">
+
+                                                        <td align="center" class="hidden-phone">2</td>
+
+                                                        <td><input type="checkbox" id="cb1" name="cid[]" value="60" onclick="Joomla.isChecked(this.checked);"></td>
+
+                                                        <td align="center">
+                                                            <a href="/vbizz-dashboard/employee?task=edit&amp;cid[0]=60">test</a>
+                                                        </td>
+
+                                                        <td align="center" class="hidden-phone">435</td>
+
+                                                        <td align="center">Designing</td>
+
+                                                        <td align="center" class="hidden-phone">Tipař</td>
+
+
+                                                        <td align="center" class="hidden-phone">
+                                                            <a href="mailto:test@test.test">
+                                                                <div> test@test.test</div>
+                                                            </a>
+                                                        </td>
+
+                                                        <td align="center" class="hidden-phone">$ 111,00</td>
+
+
+                                                        <td align="center" class="hidden-phone"><a href="javascript:void(0);" class="send_mail btn" empid="60">Send Email</a></td>
+
+
+                                                    </tr>
+
+
+                                                    <tr class="row0">
+
+                                                        <td align="center" class="hidden-phone">3</td>
+
+                                                        <td><input type="checkbox" id="cb2" name="cid[]" value="58" onclick="Joomla.isChecked(this.checked);"></td>
+
+                                                        <td align="center">
+                                                            <a href="/vbizz-dashboard/employee?task=edit&amp;cid[0]=58">Test Employee</a>
+                                                        </td>
+
+                                                        <td align="center" class="hidden-phone">58585</td>
+
+                                                        <td align="center">Pojištění</td>
+
+                                                        <td align="center" class="hidden-phone">Sjednatel</td>
+
+
+                                                        <td align="center" class="hidden-phone">
+                                                            <a href="mailto:testemployee@vbizz.com">
+                                                                <div> testemployee@vbizz.com</div>
+                                                            </a>
+                                                        </td>
+
+                                                        <td align="center" class="hidden-phone">$ 2.500,00</td>
+
+
+                                                        <td align="center" class="hidden-phone"><a href="javascript:void(0);" class="send_mail btn" empid="58">Send Email</a></td>
+
+
+                                                    </tr>
+
+
+
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td colspan="10">
+                                                            <div class="pagination pagination-toolbar clearfix" style="text-align: center;">
+
+                                                                <div class="limit pull-right">
+                                                                    Display #<select id="limit" name="limit" class="inputbox input-mini" size="1" onchange="this.form.submit()" style="display: none;">
+        <option value="5" selected="selected">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+        <option value="25">25</option>
+        <option value="30">30</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+        <option value="0">All</option>
+    </select>
+                                                                    <div class="chzn-container chzn-container-single chzn-container-single-nosearch" style="width: 59px;" title="" id="limit_chzn"><a class="chzn-single"><span>5</span><div><b></b></div></a>
+                                                                        <div class="chzn-drop">
+                                                                            <div class="chzn-search"><input type="text" autocomplete="off" readonly=""></div>
+                                                                            <ul class="chzn-results"></ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <input type="hidden" name="limitstart" value="0">
+
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tfoot>
+
+                                            </table>
+                                        </div>
+
+
+
+                                        <input type="hidden" name="option" value="com_vbizz">
+                                        <input type="hidden" name="task" value="">
+                                        <input type="hidden" name="boxchecked" value="0">
+                                        <input type="hidden" name="view" value="employee">
+                                        <input type="hidden" name="filter_order" value="i.userid">
+                                        <input type="hidden" name="filter_order_Dir" value="desc">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="btl-content">
+        <!-- Profile module -->
+        <div id="btl-content-profile" class="btl-content-block" style="left: 1195.66px; top: 42px;">
+            <div class="btl-buttonsubmit">
+                <form action="/vbizz-dashboard" method="post" name="logoutForm">
+                    <div class="usr_inf">
+                        <a href="/vbizz-dashboard/vbizz" class="dashboard"><i class="fa fa-th-large"></i> Dashboard</a>
+                        <a href="/vbizz-dashboard/users" class="edit_profile"><i class="fa fa-user"></i> Edit Profile</a>
+                        <a href="/vbizz-dashboard/users" class="change_password"><i class="fa fa-pencil"></i> Change Password</a></div>
+                    <button name="Submit" class="btl-buttonsubmit" onclick="document.logoutForm.submit();"><i class="fa fa-power-off"></i> Log out</button>
+                    <input type="hidden" name="option" value="com_users">
+                    <input type="hidden" name="task" value="user.logout">
+                    <input type="hidden" name="return" value="aW5kZXgucGhwP29wdGlvbj1jb21fdmJpenomdmlldz1lbXBsb3llZSZJdGVtaWQ9MTEw">
+                    <input type="hidden" name="220b893261b90897456b343f5343c2d8" value="1">
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <div id="sbox-overlay" aria-hidden="true" tabindex="-1" style="z-index: 65555; opacity: 0;"></div>
+    <div id="sbox-window" role="dialog" aria-hidden="true" class="shadow" style="z-index: 65557;">
+        <div id="sbox-content" style="opacity: 0;"></div>
+        <a id="sbox-btn-close" href="#" role="button" aria-controls="sbox-window"></a>
+    </div>
+    <ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content" id="ui-id-1" tabindex="0" style="display: none;"></ul><span role="status" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></span>
+    <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-describedby="dialog" aria-labelledby="ui-id-2" style="display: none; position: absolute;">
+        <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle"><span id="ui-id-2" class="ui-dialog-title">Send Email</span><button type="button" class="ui-dialog-titlebar-close"></button></div>
+        <div id="dialog" class="ui-dialog-content ui-widget-content">
+            <table class="adminform table table-striped">
+                <tbody id="mail-sent">
+                    <tr>
+                        <th><label>Subject</label></th>
+                        <td><input class="text_area" type="text" name="subject" id="subject" value=""></td>
+                    </tr>
+
+                    <tr>
+                        <th><label>Message</label></th>
+                        <td><textarea class="text_area" name="email_content" id="email_content" rows="6" cols="50"></textarea>
+                            <input type="button" class="send btn btn-small" value="Send Email">
+                            <span class="loadingbox" style="display:none;"><img src="http://vbizz.joomlawings.com/components/com_vbizz/assets/images/loading.gif"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="ui-resizable-handle ui-resizable-n" style="z-index: 90;"></div>
+        <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90;"></div>
+        <div class="ui-resizable-handle ui-resizable-s" style="z-index: 90;"></div>
+        <div class="ui-resizable-handle ui-resizable-w" style="z-index: 90;"></div>
+        <div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style="z-index: 90;"></div>
+        <div class="ui-resizable-handle ui-resizable-sw" style="z-index: 90;"></div>
+        <div class="ui-resizable-handle ui-resizable-ne" style="z-index: 90;"></div>
+        <div class="ui-resizable-handle ui-resizable-nw" style="z-index: 90;"></div>
+    </div>
+</body>
+
+</html>
