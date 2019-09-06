@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Session;
 
 class EmployeeController extends Controller
 {
@@ -11,12 +15,23 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        // $roles = Role::all();
+        $roles = Role::all();
 
-        // return view('roles.index')->with('roles', $roles);
-        return view('employees.index');
+            if (!Auth::user()->hasPermissionTo('Employee Management')) {
+                abort('401');
+            } else {
+                return view('employees.index')->with('roles', $roles);
+            }
+       
+        
+        // return view('employees.index');
     }
 
     /**
@@ -26,7 +41,13 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        $permissions = Permission::all();
+
+        if (!Auth::user()->hasPermissionTo('Employee Management')) {
+            abort('401');
+        } else {
+        return view('employees.create', ['permissions'=>$permissions]);
+        }
     }
 
     /**
@@ -37,7 +58,13 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $roles = Role::all();
+
+            if (!Auth::user()->hasPermissionTo('Employee Management')) {
+                abort('401');
+            } else {
+                return view('employees.index')->with('roles', $roles);
+            }
     }
 
     /**
@@ -48,7 +75,13 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        //
+        $roles = Role::all();
+
+            if (!Auth::user()->hasPermissionTo('Employee Management')) {
+                abort('401');
+            } else {
+                return view('employees.index')->with('roles', $roles);
+            }
     }
 
     /**
@@ -59,7 +92,13 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $roles = Role::all();
+
+            if (!Auth::user()->hasPermissionTo('Employee Management')) {
+                abort('401');
+            } else {
+                return view('employees.index')->with('roles', $roles);
+            }
     }
 
     /**
@@ -71,7 +110,13 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $roles = Role::all();
+
+            if (!Auth::user()->hasPermissionTo('Employee Management')) {
+                abort('401');
+            } else {
+                return view('employees.index')->with('roles', $roles);
+            }
     }
 
     /**
@@ -82,6 +127,12 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $roles = Role::all();
+
+        if (!Auth::user()->hasPermissionTo('Employee Management')) {
+            abort('401');
+        } else {
+            return view('employees.index')->with('roles', $roles);
+        }
     }
 }

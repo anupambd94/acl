@@ -39,8 +39,8 @@
 														<div class="span12">
 															<div id="toolbar" class="btn-toolbar">
 																<div class="btn-wrapper" id="toolbar-new">
-																	<span onclick="Joomla.submitbutton('add')" class="btn btn-small btn-success">
-								<span class="fa fa-plus"></span> New</span>
+																	<span  class="btn btn-small btn-success">
+																	<span class="fa fa-plus"></span><a href="{{route('employees.create')}}">New</a></span>
 																</div>
 
 																<div class="btn-wrapper" id="toolbar-edit">

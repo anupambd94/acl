@@ -40,6 +40,12 @@
         <link href="{{ asset('plugins/bootstrap-select/bootstrap-select.min.css') }}" rel="stylesheet">
         <!--Demo [ DEMONSTRATION ]-->
         <link href="{{ asset('css/demo/jasmine.css') }}" rel="stylesheet">
+        <!--Bootstrap Validator [ OPTIONAL ]-->
+        <link href="{{ asset('plugins/bootstrap-validator/bootstrapValidator.min.css') }}" rel="stylesheet">
+        <!--Demo [ DEMONSTRATION ]-->
+        <link href="{{ asset('css/demo/jquery-steps.min.css') }}" rel="stylesheet">
+        <!--Demo [ DEMONSTRATION ]-->
+        <link href="{{ asset('css/demo/jasmine.css') }}" rel="stylesheet">
         <!--SCRIPT-->
         <!--Page Load Progress Bar [ OPTIONAL ]-->
         <link href="{{ asset('plugins/pace/pace.min.css') }}" rel="stylesheet">
@@ -49,7 +55,14 @@
         <link href="{{ asset('plugins/datatables/extensions/Responsive/css/dataTables.responsive.css') }}" rel="stylesheet">
         
 
-    <!-- Scripts -->
+                
+                
+
+    <!--SCRIPT-->
+    <!--=================================================-->
+    <script src="{{ asset('plugins/pace/pace.min.js') }}"></script>
+    
+   
         
 
     <script>
@@ -103,7 +116,7 @@
                                                     <a href="#" class="media">
 
                                                         <div class="media-left">
-                                                            <img src="img/av2.png" alt="Profile Picture" class="img-circle img-sm">
+                                                            <img src="{{ asset('img/av2.png')}}" alt="Profile Picture" class="img-circle img-sm">
                                                         </div>
                                                         <div class="media-body">
                                                             <div class="text-nowrap">Andy sent you a message</div>
@@ -115,7 +128,7 @@
                                                 <li>
                                                     <a href="#" class="media">
                                                         <div class="media-left">
-                                                            <img src="img/av4.png" alt="Profile Picture" class="img-circle img-sm">
+                                                            <img src="{{ asset('img/av4.png')}}" alt="Profile Picture" class="img-circle img-sm">
                                                         </div>
                                                         <div class="media-body">
                                                             <div class="text-nowrap">Lucy sent you a message</div>
@@ -127,7 +140,7 @@
                                                 <li>
                                                     <a href="#" class="media">
                                                         <div class="media-left">
-                                                            <img src="img/av3.png" alt="Profile Picture" class="img-circle img-sm">
+                                                            <img src="{{ asset('img/av3.png')}}" alt="Profile Picture" class="img-circle img-sm">
                                                         </div>
                                                         <div class="media-body">
                                                             <div class="text-nowrap">Jackson sent you a message</div>
@@ -139,7 +152,7 @@
                                                 <li>
                                                     <a href="#" class="media">
                                                         <div class="media-left">
-                                                            <img src="img/av6.png" alt="Profile Picture" class="img-circle img-sm">
+                                                            <img src="{{ asset('img/av6.png')}}" alt="Profile Picture" class="img-circle img-sm">
                                                         </div>
                                                         <div class="media-body">
                                                             <div class="text-nowrap">Donna sent you a message</div>
@@ -151,7 +164,7 @@
                                                 <li>
                                                     <a href="#" class="media">
                                                         <div class="media-left">
-                                                            <img src="img/av4.png" alt="Profile Picture" class="img-circle img-sm">
+                                                            <img src="{{ asset('img/av4.png')}}" alt="Profile Picture" class="img-circle img-sm">
                                                         </div>
                                                         <div class="media-body">
                                                             <div class="text-nowrap">Lucy sent you a message</div>
@@ -163,7 +176,7 @@
                                                 <li>
                                                     <a href="#" class="media">
                                                         <div class="media-left">
-                                                            <img src="img/av3.png" alt="Profile Picture" class="img-circle img-sm">
+                                                            <img src="{{ asset('img/av3.png')}}" alt="Profile Picture" class="img-circle img-sm">
                                                         </div>
                                                         <div class="media-body">
                                                             <div class="text-nowrap">Jackson sent you a message</div>
@@ -303,7 +316,7 @@
                                 <li id="dropdown-user" class="dropdown">
                             
                                 <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right">
-                                    <span class="pull-right"> <img class="img-circle img-user media-object" src="img/av1.png" alt="Profile Picture"> </span>
+                                    <span class="pull-right"> <img class="img-circle img-user media-object" src="{{ asset('img/av1.png')}}" alt="Profile Picture"> </span>
                                     <div class="username hidden-xs">{{ Auth::user()->name }}</div>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right with-arrow">
@@ -735,6 +748,7 @@
         <!--=================================================-->
         <!--jQuery [ REQUIRED ]-->
         <script src="{{ asset('js/jquery-2.1.1.min.js') }}"></script>
+        <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
         <!--BootstrapJS [ RECOMMENDED ]-->
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>
         <!--Fast Click [ OPTIONAL ]-->
@@ -772,7 +786,7 @@
         <script src="{{ asset('plugins/morris-js/morris.min.js') }}"></script>
         <script src="{{ asset('plugins/morris-js/raphael-js/raphael.min.js') }}"></script>        
         <!--Easy Pie Chart [ OPTIONAL ]-->
-        <script src="plugins/easy-pie-chart/jquery.easypiechart.min.js') }}"></script>
+        <script src="{{ asset('plugins/easy-pie-chart/jquery.easypiechart.min.js') }}"></script>
         <!--Fullscreen jQuery [ OPTIONAL ]-->
         <script src="{{ asset('plugins/screenfull/screenfull.js') }}"></script>
         <!--Form Wizard [ SAMPLE ]-->

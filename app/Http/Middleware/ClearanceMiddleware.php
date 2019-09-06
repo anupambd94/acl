@@ -18,6 +18,13 @@ class ClearanceMiddleware {
             return $next($request);
         }
 
+        if ($request->is('employees')) {
+            if (!Auth::user()->hasPermissionTo('Employee Management')) {
+                abort('401');
+            } else {
+                return $next($request);
+            }
+        }
         if ($request->is('posts/create')) {
             if (!Auth::user()->hasPermissionTo('Create Post')) {
                 abort('401');
