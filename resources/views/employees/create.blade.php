@@ -29,52 +29,52 @@
                                                 <div class="panel-body">
                                                         
                                                             <div class="form-group ">
-                                                                <label class="control-label"> Name : </label>
+                                                                <label class="control-label"> Name: </label>
                                                                 <div class="col-sm-4">
-                                                                    <input class="form-control" name="name" type="text" placeholder="First Name" data-parsley-range="[4, 10]" data-parsley-group="order" data-parsley-required />
+                                                                    <input class="form-control" name="firstName" type="text" placeholder="First Name" required />
                                                                 </div>
                                                                 <div class="col-sm-4">
-                                                                    <input class="form-control" name="name" type="text" placeholder="Last Name" data-parsley-range="[4, 10]" data-parsley-group="order" data-parsley-required />
+                                                                    <input class="form-control" name="lastName" type="text" placeholder="Last Name" required />
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="col-sm-2 control-label"> Login Details : </label>
                                                                 <div class="col-sm-4">
-                                                                    <input class="form-control" name="name" type="email" placeholder="Email" data-parsley-group="order" data-parsley-required />
+                                                                    <input class="form-control" name="email" type="email" placeholder="Email" />
                                                                 </div>
                                                                 <div class="col-sm-4">
-                                                                    <input class="form-control" name="name" type="password" id="passwordinput" placeholder="Password" data-parsley-minlength="6" data-parsley-group="order" data-parsley-required />
+                                                                    <input class="form-control" name="password" type="password" id="password" placeholder="Password" data-parsley-minlength="4" />
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
-                                                                    <div class="row">
-                                                                            <div class="col-md-4">
-                                                                                    <label>Gender: </label>
-                                                                                    <select class="form-control" id="source">
-                                                                                        <option value="MALE">Male</option>
-                                                                                        <option value="FEMALE">Female</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                                <div class="col-md-4">
-                                                                                        <label>Marital Status: </label>
-                                                                                        <select class="form-control" id="source">
-                                                                                            <option value="SINGLE">Single</option>
-                                                                                            <option value="MARRIED">Married</option>
-                                                                                            <option value="DEVORCED">Devorced</option>
-                                                                                            
-                                                                                        </select>
-                                                                                    </div>
+                                                                <div class="row">
                                                                         <div class="col-md-4">
-                                                                            <label>Phone #:</label>
-                                                                            <input type="text" placeholder="+99-99-9999-9999" data-mask="+99-99-9999-9999" class="form-control" />
+                                                                            <label>Gender: </label>
+                                                                            <select class="form-control" name="gender" id="gender">
+                                                                                <option value="MALE">Male</option>
+                                                                                <option value="FEMALE">Female</option>
+                                                                            </select>
                                                                         </div>
-                                                                        {{-- <div class="col-md-4">
-                                                                            <label>Date of birth:</label>
-                                                                            <input type="text" placeholder="99/99/9999" data-mask="99/99/9999" class="form-control" />
-                                                                        </div> --}}
-                                                                        
+                                                                        <div class="col-md-4">
+                                                                            <label>Marital Status: </label>
+                                                                            <select class="form-control" name="meritalStatus" id="meritalStatus">
+                                                                                <option value="SINGLE">Single</option>
+                                                                                <option value="MARRIED">Married</option>
+                                                                                <option value="DEVORCED">Devorced</option>
+                                                                                
+                                                                            </select>
+                                                                        </div>
+                                                                    <div class="col-md-4">
+                                                                        <label>Phone #:</label>
+                                                                        <input type="text" placeholder="+99-99-9999-9999" data-mask="+99-99-9999-9999" class="form-control" />
                                                                     </div>
+                                                                    {{-- <div class="col-md-4">
+                                                                        <label>Date of birth:</label>
+                                                                        <input type="text" placeholder="99/99/9999" data-mask="99/99/9999" class="form-control" />
+                                                                    </div> --}}
+                                                                    
                                                                 </div>
+                                                            </div>
                                                                 <div class="form-group">
                                                                         <div class="row">
                                                                                
@@ -96,12 +96,12 @@
                                                                         <div class="row">
                                                                             <div class="col-sm-4">
                                                                                 <label>Probation (Months): </label>
-                                                                                <input class="form-control" type="number" name="name" type="number" id="passwordinput" data-parsley-minlength="6" data-parsley-group="order" data-parsley-required />
+                                                                                <input class="form-control" type="number" name="probation" type="number" id="probation"   />
                                                                             </div>
                                                                             <div class="col-md-4">
                                                                                     {{-- 'SPASS', 'WP', 'PR', 'CITIZENSHIP', 'EP' --}}
                                                                                 <label>ID type: </label>
-                                                                                <select class="form-control" id="source">
+                                                                                <select class="form-control" name="idType" id="idType">
                                                                                     <option value="SPASS">SPASS</option>
                                                                                     <option value="WP">WP</option>
                                                                                     <option value="PR">PR</option>
@@ -112,28 +112,28 @@
                                                                             </div>
                                                                             <div class="col-sm-4">
                                                                                 <label>NRIC/FIN/WP: </label>
-                                                                                <input class="form-control" name="name" type="password" id="passwordinput" data-parsley-minlength="6" data-parsley-group="order" data-parsley-required />
+                                                                                <input class="form-control" name="wp" type="text" id="wp" />
                                                                             </div>
                                                                             
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
-                                                                            <div class="row">
-                                                                                   
-                                                                                <div class="col-md-4">
-                                                                                    <label>Leave calculated from:</label>
-                                                                                    <input type="date"  class="form-control" />
-                                                                                </div>
-                                                                                <div class="col-md-4">
-                                                                                    <label>FIN/WPN Expiry date:</label>
-                                                                                    <input type="date"  class="form-control" />
-                                                                                </div>
-                                                                                <div class="col-md-4">
-                                                                                    <label>Birth date:</label>
-                                                                                    <input type="date"  class="form-control" />
-                                                                                </div>
+                                                                        <div class="row">
+                                                                                
+                                                                            <div class="col-md-4">
+                                                                                <label>Leave calculated from:</label>
+                                                                                <input type="date"  class="form-control" />
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <label>FIN/WPN Expiry date:</label>
+                                                                                <input type="date"  class="form-control" />
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <label>Birth date:</label>
+                                                                                <input type="date"  class="form-control" />
                                                                             </div>
                                                                         </div>
+                                                                    </div>
                                                 </div>
                                             </div>
                                             
@@ -172,74 +172,108 @@
                                             </fieldset>				
                                         
                                         <div class="clearfix"></div>
-                                     
-                        
                     </div>
                     <!--/ Wizard Container 1 -->
                     <!-- Wizard Container 2 -->
                     <div class="wizard-title"> General information </div>
                     <div class="wizard-container">
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <h4 class="text-primary"> <i class="fa fa-user"></i> General information </h4>
-                                <p class="text-muted"> General information about applicant </p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>First Name: <span class="text-danger">*</span> </label>
-                                    <input type="text" name="First name" class="form-control" placeholder="First Name" data-parsley-group="information" data-parsley-required />
+                            
+                        <fieldset class="col-md-12">    	
+                                <legend>
+                                        <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <h4 class="text-primary"> <i class="fa fa-user"></i> Step-2 General Information </h4>
+                                                    {{-- <p class="text-muted"> Enter Your Login Details </p> --}}
+                                                </div>
+                                            </div>
+                                </legend>
+                                
+                                <div class="panel panel-default">
+                                    <div class="panel-body">    
+                                        <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                            <label>Department: </label>
+                                                            <select class="form-control" name="department" id="department">
+                                                                <option value="">Select Department</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                                <label>Section: </label>
+                                                                <select class="form-control" name="section" id="section">
+                                                                    <option value="">Select Section</option>
+                                                                </select>
+                                                            </div>
+                                                        <div class="col-md-3">
+                                                            <label>Sesignation: </label>
+                                                            <select class="form-control" name="designation" id="designation">
+                                                                <option value="">Select Designation</option>
+                                                            </select>
+                                                        </div>
+                                                        {{-- 'PH', 'MC', 'LOCAL', 'SINGAPUR' --}}
+                                                        <div class="col-md-3">
+                                                            <label>Holiday Type: </label>
+                                                            <select class="form-control" name="holidayType" id="holidayType">
+                                                                <option value="PH">PH</option>
+                                                                <option value="MC">MC</option>
+                                                                <option value="LOCAL">LOCAL</option>
+                                                                <option value="SINGAPUR">SINGAPUR</option>
+                                                            </select>
+                                                        </div>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <label>Working Day Per Hour: </label>
+                                                        <input class="form-control" type="number" name="workingDayPerhour" id="workingDayPerhour" type="number" />                                                            
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label>Days Per Week: </label>
+                                                        <input class="form-control" type="number" name="daysPerWeek" id="daysPerWeek" type="number" />                                                            
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label>Total Hours Per Year: </label>
+                                                        <input class="form-control" type="number" name="hoursPerYear" id="hoursPerYear" type="number" />                                                            
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label>Rate Per Hour: </label>
+                                                        <input class="form-control" type="number" name="ratePerHour" id="ratePerHour" type="number" />                                                            
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{-- 'FIXED', 'HOURLY', 'DAILY', 'NONE' --}}
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <label>Salary Type: </label>
+                                                        <select class="form-control" name="salaryType" id="salaryType">
+                                                            <option value="">Select salary type</option>
+                                                            <option value="FIXED">FIXED</option>
+                                                            <option value="HOURLY">HOURLY</option>
+                                                            <option value="DAILY">DAILY</option>
+                                                            <option value="NONE">NONE</option>
+                                                        </select>
+                                                    </div>
+                                                    {{-- 'FULLTIME', 'PARTTIME', 'FLEXI', 'NONE' --}}
+                                                    <div class="col-md-3">
+                                                        <label>Salary Type: </label>
+                                                        <select class="form-control" name="jobType" id="jobType">
+                                                            <option value="">Select job type</option>
+                                                            <option value="FULLTIME">FULLTIME</option>
+                                                            <option value="PARTTIME">PARTTIME</option>
+                                                            <option value="FLEXI">FLEXI</option>
+                                                            <option value="NONE">NONE</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                    
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <label>Last Name: <span class="text-danger">*</span> </label>
-                                    <input type="text" name="Last name" class="form-control" placeholder="Last Name" data-parsley-group="information" data-parsley-required />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Phone #:</label>
-                                    <input type="text" placeholder="+99-99-9999-9999" data-mask="+99-99-9999-9999" class="form-control" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Date of birth:</label>
-                                    <input type="text" placeholder="99/99/9999" data-mask="99/99/9999" class="form-control" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label>Select State: </label>
-                                    <select class="form-control" id="source">
-                                        <option value="AK">Alaska</option>
-                                        <option value="HI">Hawaii</option>
-                                        <option value="CA">California</option>
-                                        <option value="NV">Nevada</option>
-                                        <option value="OR">Oregon</option>
-                                        <option value="WA">Washington</option>
-                                        <option value="AZ">Arizona</option>
-                                        <option value="CO">Colorado</option>
-                                        <option value="ID">Idaho</option>
-                                        <option value="MT">Montana</option>
-                                        <option value="NE">Nebraska</option>
-                                        <option value="NM">New Mexico</option>
-                                        <option value="ND">North Dakota</option>
-                                        <option value="UT">Utah</option>
-                                        <option value="WY">Wyoming</option>
-                                        <option value="AL">Alabama</option>
-                                        <option value="AR">Arkansas</option>
-                                        <option value="IL">Illinois</option>
-                                        <option value="IA">Iowa</option>
-                                        <option value="KS">Kansas</option>
-                                        <option value="KY">Kentucky</option>
-                                        <option value="LA">Louisiana</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+                            </fieldset>	
+                            <div class="clearfix"></div>
                     </div>
                     <!--/ Wizard Container 2 -->
                     <!-- Wizard Container 3 -->
