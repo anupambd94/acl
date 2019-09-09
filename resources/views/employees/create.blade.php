@@ -205,7 +205,7 @@
                                                                 </select>
                                                             </div>
                                                         <div class="col-md-3">
-                                                            <label>Sesignation: </label>
+                                                            <label>Designation: </label>
                                                             <select class="form-control" name="designation" id="designation">
                                                                 <option value="">Select Designation</option>
                                                             </select>
@@ -258,7 +258,7 @@
                                                     </div>
                                                     {{-- 'FULLTIME', 'PARTTIME', 'FLEXI', 'NONE' --}}
                                                     <div class="col-md-3">
-                                                        <label>Salary Type: </label>
+                                                        <label>Job Type: </label>
                                                         <select class="form-control" name="jobType" id="jobType">
                                                             <option value="">Select job type</option>
                                                             <option value="FULLTIME">FULLTIME</option>
@@ -279,165 +279,143 @@
                     <!-- Wizard Container 3 -->
                     <div class="wizard-title"> Personal Information </div>
                     <div class="wizard-container">
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <h4 class="text-primary"> <i class="fa fa-book"></i> Education </h4>
-                                <p class="text-muted"> Where and when did you get your degree </p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>University: </label>
-                                    <input type="text" name="University" class="form-control" placeholder="University Name" data-parsley-group="payment" data-parsley-required />
-                                </div>
-                                <div class="col-md-6">
-                                    <label> Country: </label>
-                                    <input type="text" name="University-Country" class="form-control" placeholder="Choose a Country" data-parsley-group="payment" data-parsley-required />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label> Degree level: </label>
-                                    <input type="text" name="Bachelor, Master etc.." class="form-control" placeholder="Bachelor, Master etc.." data-parsley-group="payment" data-parsley-required />
-                                </div>
-                                <div class="col-md-3">
-                                    <label> From: </label>
-                                    <div class="row">
-                                        <div class="col-sm-8">
-                                            <select name="month" class="form-control" data-parsley-group="payment" data-parsley-required>
-                                                <option value="">Month</option>
-                                                <option value="1">January</option>
-                                                <option value="2">February</option>
-                                                <option value="3">March</option>
-                                                <option value="4">April</option>
-                                                <option value="5">May</option>
-                                                <option value="6">June</option>
-                                                <option value="7">July</option>
-                                                <option value="8">August</option>
-                                                <option value="9">September</option>
-                                                <option value="10">October</option>
-                                                <option value="11">November</option>
-                                                <option value="12">December</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" name="University-Country" class="form-control" placeholder="Year" data-parsley-group="payment" data-parsley-required />
-                                        </div>
+                        
+                        
+                        <fieldset class="col-md-12">    	
+                            <legend>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <h4 class="text-primary"> <i class="fa fa-book"></i> Current Address </h4>
+                                        <p class="text-muted"> Your Current Address </p>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <label> To: </label>
-                                    <div class="row">
-                                        <div class="col-sm-8">
-                                            <select name="month" class="form-control" data-parsley-group="payment" data-parsley-required>
-                                                <option value="">Month</option>
-                                                <option value="1">January</option>
-                                                <option value="2">February</option>
-                                                <option value="3">March</option>
-                                                <option value="4">April</option>
-                                                <option value="5">May</option>
-                                                <option value="6">June</option>
-                                                <option value="7">July</option>
-                                                <option value="8">August</option>
-                                                <option value="9">September</option>
-                                                <option value="10">October</option>
-                                                <option value="11">November</option>
-                                                <option value="12">December</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" name="University-Country" class="form-control" placeholder="Year" data-parsley-group="payment" data-parsley-required />
-                                        </div>
-                                    </div>
+                            </legend>
+                            
+                            <div class="panel panel-default">
+                                <div class="panel-body">    
+                                    <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Adddress 1: </label>
+                                                    <textarea class="form-control" type="text" name="address1" id="address1" cols="30" rows="3" required></textarea>                                                           
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Address 2: </label>
+                                                    <textarea class="form-control" type="text" name="address2" id="address2" cols="30" rows="3"></textarea>                                                           
+                                                                                                                
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label>City: </label>
+                                                    <input class="form-control" type="text" name="city" id="ciry"/>                                                            
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label>State: </label>
+                                                    <input class="form-control" type="text" name="state" id="state" />                                                            
+                                                </div>
+                                                <div class="col-md-3">
+                                                        <label>Country: </label>
+                                                        <select class="form-control" name="country" id="country">
+                                                            <option value="">Select Country</option>
+                                                        </select>
+                                                </div>
+                                                    <div class="col-md-3">
+                                                    <label>Postal Code: </label>
+                                                    <input class="form-control" type="number" name="postCode" id="postCode" />                                                            
+                                                </div>
+                                            </div>
+                                        </div>     
                                 </div>
                             </div>
-                        </div>
+                        </fieldset>
+                        <fieldset class="col-md-12">    	
+                                <legend>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <h4 class="text-primary"> <i class="fa fa-book"></i> Permanent Address </h4>
+                                        <p class="text-muted"> Your Permanent Address </p>
+                                    </div>
+                                </div>
+                                </legend>
+                                
+                                <div class="panel panel-default">
+                                    <div class="panel-body">    
+                                        <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label>Adddress 1: </label>
+                                                        <textarea class="form-control" type="text" name="paddress1" id="paddress1" cols="30" rows="3" required></textarea>                                                           
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label>Address 2: </label>
+                                                        <textarea class="form-control" type="text" name="paddress2" id="paddress2" cols="30" rows="3"></textarea>                                                           
+                                                                                                                  
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <label>City: </label>
+                                                        <input class="form-control" type="text" name="pcity" id="pciry"/>                                                            
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label>State: </label>
+                                                        <input class="form-control" type="text" name="pstate" id="pstate" />                                                            
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                            <label>Country: </label>
+                                                            <select class="form-control" name="pcountry" id="pcountry">
+                                                                <option value="">Select Country</option>
+                                                            </select>
+                                                    </div>
+                                                        <div class="col-md-3">
+                                                        <label>Postal Code: </label>
+                                                        <input class="form-control" type="number" name="postCode" id="postCode" />                                                            
+                                                    </div>
+                                                </div>
+                                            </div>     
+                                    </div>
+                                </div>
+                            </fieldset>                                                
+                            <fieldset class="col-md-12">    	
+                                <legend>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <h4 class="text-primary"> <i class="fa fa-book"></i> Education </h4>
+                                        <p class="text-muted"> Your Highest Qualification </p>
+                                    </div>
+                                </div>
+                                </legend>
+                                <div class="panel panel-default">
+                                    <div class="panel-body">    
+                                        <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <label>Highest Degree: </label>
+                                                        <input class="form-control" type="text" name="degree" id="degree" required/>                                                            
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label>Cirtificate 1: </label>
+                                                        <input class="form-control" type="text" name="cirtificate1" id="cirtificate1" />                                                            
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                            <label>Cirtificate 2: </label>
+                                                            <input class="form-control" type="text" name="cirtificate2" id="cirtificate2" />                                                            
+                                                    </div>
+                                                        <div class="col-md-3">
+                                                        <label>Special qualification/Telent: </label>
+                                                        <input class="form-control" type="number" name="qualification" id="qualification" />                                                            
+                                                    </div>
+                                                </div>
+                                            </div>     
+                                    </div>
+                                </div>
+                            </fieldset>  
                     </div>
                     <!--/ Wizard Container 3 -->
-                    <!-- Wizard Container 4 -->
-                    <div class="wizard-title"> Work experience </div>
-                    <div class="wizard-container">
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <h4 class="text-primary"> <i class="fa fa-cog"></i> Work experience </h4>
-                                <p class="text-muted"> Let us know about your work experience </p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Company: </label>
-                                    <input type="text" name="Work experience" class="form-control" placeholder="Work experience" data-parsley-group="experience" data-parsley-required />
-                                </div>
-                                <div class="col-md-6">
-                                    <label> Country: </label>
-                                    <input type="text" name="Country" class="form-control" placeholder="Choose a Country" data-parsley-group="experience" data-parsley-required />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label> Position: </label>
-                                    <input type="text" name="Your Position" class="form-control" placeholder="Your Position" data-parsley-group="experience" data-parsley-required />
-                                </div>
-                                <div class="col-md-3">
-                                    <label> From: </label>
-                                    <div class="row">
-                                        <div class="col-sm-8">
-                                            <select name="month" class="form-control" data-parsley-group="experience" data-parsley-required>
-                                                <option value="">Month</option>
-                                                <option value="1">January</option>
-                                                <option value="2">February</option>
-                                                <option value="3">March</option>
-                                                <option value="4">April</option>
-                                                <option value="5">May</option>
-                                                <option value="6">June</option>
-                                                <option value="7">July</option>
-                                                <option value="8">August</option>
-                                                <option value="9">September</option>
-                                                <option value="10">October</option>
-                                                <option value="11">November</option>
-                                                <option value="12">December</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" name="University-Country" class="form-control" placeholder="Year" data-parsley-group="experience" data-parsley-required />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label> To: </label>
-                                    <div class="row">
-                                        <div class="col-sm-8">
-                                            <select name="month" class="form-control" data-parsley-group="experience" data-parsley-required>
-                                                <option value="">Month</option>
-                                                <option value="1">January</option>
-                                                <option value="2">February</option>
-                                                <option value="3">March</option>
-                                                <option value="4">April</option>
-                                                <option value="5">May</option>
-                                                <option value="6">June</option>
-                                                <option value="7">July</option>
-                                                <option value="8">August</option>
-                                                <option value="9">September</option>
-                                                <option value="10">October</option>
-                                                <option value="11">November</option>
-                                                <option value="12">December</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" name="University-Country" class="form-control" placeholder="Year" data-parsley-group="experience" data-parsley-required />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Wizard Container 4 -->
+                   
                 </form>
                 <!--/ END Form Wizard -->
             </div>

@@ -1564,7 +1564,6 @@ body.contentpane .content_part {
 }
 
 .form-horizontal input,
-.form-horizontal textarea,
 .form-horizontal .uneditable-input {
     width: 206px;
 }
