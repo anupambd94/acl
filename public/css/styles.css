@@ -6322,3 +6322,14 @@ body.contentpane a:focus {
     cursor: pointer;
     font-size: 15px;
 }
+
+select{
+    padding:8px 5px;
+    border-radius:5px;
+    color:#333;
+    width:250px;
+  }
+  .font-awesome .fa{
+    font-family: "Font Awesome 5 Free", Open Sans;
+    font-weight:501;
+  }

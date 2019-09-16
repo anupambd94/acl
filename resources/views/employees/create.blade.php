@@ -192,18 +192,42 @@
                                     <div class="panel-body">    
                                         <div class="form-group">
                                                 <div class="row">
-                                                    <div class="col-md-3">
-                                                            <label>Department: </label>
-                                                            <select class="form-control" name="department" id="department">
-                                                                <option value="">Select Department</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-3">
+                                                    <div class="col-md-3" id="departmentSelectBox">
+                                                        <label>Department: </label>
+                                                        
+                                                        <select class="form-control" name="department" id="department">
+                                                            <option value="">Select Department</option>
+                                                            <option value="addNew" class="fa">&oplus; Add new Department                                                         
+                                                            </option>
+                                                        </select>
+                                                     
+                                                    </div>
+                                                    <div class="col-md-3" id="departmentAddBox">
+                                                        <label>Add New Department: </label>
+                                                        <input class="form-control" type="text" name="newDepartment" id="newDepartment" placeholder="Enter department name"/>                                                            
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-outline-secondary" type="button" id="addDepartment"><i class="fa fa-plus-circle"></i>&nbsp;Add</button>
+                                                            <button class="btn btn-outline-danger bg-danger" type="button" id="closeAddDepartment" style="background: #B51313;"><i class="fa fa-times-circle" ></i>&nbsp;Cancel</button>
+                                                        
+                                                        </div>   
+                                                                     
+                                                    </div>
+
+                                                        <div class="col-md-3" id="sectionSelectBox">
                                                                 <label>Section: </label>
                                                                 <select class="form-control" name="section" id="section">
                                                                     <option value="">Select Section</option>
+                                                                    <option value="addNew" class="fa">&oplus; Add new Section</option>
                                                                 </select>
                                                             </div>
+                                                            <div class="col-md-3" id="sectionAddBox">
+                                                                <label>Add New Section: </label>
+                                                                <input class="form-control" type="text" name="newSection" id="newSection" placeholder="Enter section name"/>                                                            
+                                                                <div class="input-group-append">
+                                                                    <button class="btn btn-outline-secondary" type="button" id="addSection"><i class="fa fa-plus-circle"></i>&nbsp;Add</button>
+                                                                </div>                
+                                                            </div>
+
                                                         <div class="col-md-3">
                                                             <label>Designation: </label>
                                                             <select class="form-control" name="designation" id="designation">
@@ -372,7 +396,7 @@
                                                     </div>
                                                         <div class="col-md-3">
                                                         <label>Postal Code: </label>
-                                                        <input class="form-control" type="number" name="postCode" id="postCode" />                                                            
+                                                        <input class="form-control" type="number" name="ppostCode" id="ppostCode" />                                                            
                                                     </div>
                                                 </div>
                                             </div>     
@@ -426,6 +450,108 @@
 
 @section('script')
     <script>
+
+        $(document).ready(function(){
+            // hiding the adding forms on pase load 
+            $("#departmentAddBox").hide();
+            $("#sectionAddBox").hide();
+
+
+            // chacking the add new option is selected or not 
+            function IsAddNew(param) {
+                if(param == "addNew"){
+                    return true;
+                }
+                return false;
+            }
+            // for creating the id of Select box 
+            function getHidingPartIdName(param) {
+                var Id = param+"SelectBox";
+                return Id;
+            }
+            //for creating the id of add box
+            function getShowingPartIdName(param) {
+                var Id = param+"AddBox";
+                return Id;
+            }
+
+            // for adding new data 
+            function AddNewIfNeeded(Id){
+                var myId = "#"+Id;
+                var addNew = IsAddNew($(myId).val());
+                
+                if(addNew){
+                    var hideId = getHidingPartIdName(myId);
+                    var showId = getShowingPartIdName(myId);
+                    $(hideId).hide();
+                    $(showId).show();
+                }
+            }
+            // for hiding the adding form after added new data 
+
+            function hideAddNewPart(Id){
+                var myId = "#"+Id;
+                    var hideId = getHidingPartIdName(myId);
+                    var showId = getShowingPartIdName(myId);
+                    $(showId).hide();
+                    $(hideId).show();
+                    $(myId).prop('selectedIndex',"");
+                
+            }
+
+            // for Add new departments
+            $("#department").on("change",function(){
+                AddNewIfNeeded($(this).attr('id'));
+            });
+            $("#addDepartment").on("click",function(){
+                $("#newDepartment").val("");
+                hideAddNewPart("department");
+            });
+            $("#closeAddDepartment").on("click",function(){
+                $("#newDepartment").val("");
+                hideAddNewPart("department");
+            });
+
+            // for add new sections
+            $("#section").on("change",function(){
+                AddNewIfNeeded($(this).attr('id'));
+            });
+            $("#addSection").on("click",function(){
+                $("#newSection").val("");
+                hideAddNewPart("section");
+            });
+            $("#closeAddSection").on("click",function(){
+                $("#newSection").val("");
+                hideAddNewPart("section");
+            });
+            
+        });
+        
+        
+        // $(document).on("change","#department", function(){
+        //     // var selectedValue = $(this).val();
+        //     // console.log(selectedValue);
+        //     function IsAddNew(param) {
+        //      if(param == "addNew"){
+        //          return true;
+        //      }
+        //      return false;
+        //     }
+        //     function getHidingPartIdName(param) {
+        //      var Id = param+"SelectBox";
+        //      return Id;
+        //     }
+
+        //     var addNew = IsAddNew($(this).val());
+        //     if(addNew){
+        //         var hideId = getHidingPartIdName($(this).val());
+        //     console.log(hideId);
+
+        //     }
+
+        // });
+        
+
         $(".imgAdd").click(function(){
         $(this).closest(".row").find('.imgAdd').before('<div class="col-sm-2 imgUp"><div class="imagePreview"></div><label class="btn btn-primary">Upload<input type="file" class="uploadFile img" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;"></label><i class="fa fa-times del"></i></div>');
         });
