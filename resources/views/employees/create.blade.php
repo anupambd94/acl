@@ -1,6 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
+
+@if(isset($departments))
+    @foreach ($departments as $department)
+    @php
+        $departmentId = $department->department_id;
+        $departmentName = $department->department_name;
+    @endphp
+
+    @endforeach
+@endif
+@if(isset($designations))
+    @foreach ($designations as $designation)
+    @php
+        $designationId = $designation->designation_id;
+        $designationName = $designation->designation_name;
+    @endphp
+
+    @endforeach
+@endif
 <div class="row">
     <div class="col-md-12">
         <section class="panel">
@@ -196,9 +215,11 @@
                                                         <label>Department: </label>
                                                         
                                                         <select class="form-control" name="department" id="department">
-                                                            <option value="">Select Department</option>
+                                                            <option value="" disabled selected>Select Department</option>
+                                                            <option value={{$departmentId}}>{{$departmentName}}</option>
                                                             <option value="addNew" class="fa">&oplus; Add new Department                                                         
                                                             </option>
+
                                                         </select>
                                                      
                                                     </div>
@@ -216,8 +237,8 @@
                                                         <div class="col-md-3" id="sectionSelectBox">
                                                                 <label>Section: </label>
                                                                 <select class="form-control" name="section" id="section">
-                                                                    <option value="">Select Section</option>
-                                                                    <option value="addNew" class="fa">&oplus; Add new Section</option>
+                                                                    <option value="" disabled selected>Select Section</option>
+                                                                    {{-- <option value="addNew" class="fa">&oplus; Add new Section</option> --}}
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-3" id="sectionAddBox">
@@ -225,14 +246,28 @@
                                                                 <input class="form-control" type="text" name="newSection" id="newSection" placeholder="Enter section name"/>                                                            
                                                                 <div class="input-group-append">
                                                                     <button class="btn btn-outline-secondary" type="button" id="addSection"><i class="fa fa-plus-circle"></i>&nbsp;Add</button>
+                                                                    <button class="btn btn-outline-danger bg-danger" type="button" id="closeAddSection" style="background: #B51313;"><i class="fa fa-times-circle" ></i>&nbsp;Cancel</button>
+
                                                                 </div>                
                                                             </div>
 
-                                                        <div class="col-md-3">
+                                                        <div class="col-md-3" id="designationSelectBox">
                                                             <label>Designation: </label>
                                                             <select class="form-control" name="designation" id="designation">
                                                                 <option value="">Select Designation</option>
+                                                                <option value={{$designationId}}>{{$designationName}}</option>
+                                                                <option value="addNew" class="fa">&oplus; Add new Designation</option>
+
                                                             </select>
+                                                        </div>
+                                                        <div class="col-md-3" id="designationAddBox">
+                                                            <label>Add New Designation: </label>
+                                                            <input class="form-control" type="text" name="newDesignation" id="newDesignation" placeholder="Enter Designation"/>                                                            
+                                                            <div class="input-group-append">
+                                                                <button class="btn btn-outline-secondary" type="button" id="addDesignation"><i class="fa fa-plus-circle"></i>&nbsp;Add</button>
+                                                                <button class="btn btn-outline-danger bg-danger" type="button" id="closeAddDesignation" style="background: #B51313;"><i class="fa fa-times-circle" ></i>&nbsp;Cancel</button>
+
+                                                            </div>                
                                                         </div>
                                                         {{-- 'PH', 'MC', 'LOCAL', 'SINGAPUR' --}}
                                                         <div class="col-md-3">
@@ -452,9 +487,42 @@
     <script>
 
         $(document).ready(function(){
+
+            // Code for geting Sections
+    $(document).on('change', '#department', function () {
+        var department_id = $(this).val();
+        // console.log(department_id);
+        var op = " ";
+        var div = $(this).parent();
+
+        $.ajax({
+            type: 'get',
+            url: '{{ url('/getSections') }}',
+            data: { 'departmentId': department_id },
+            success: function (data) {
+                // console.log('success');
+                // console.log(data);
+                op += '<option value="">Select Section</option>';
+                for (var i = 0; i < data.length; i++) {
+                    op += '<option value="' + data[i].section_id + '">' + data[i].section_name + '</option>';
+                    // console.log(op);
+                }
+                op += '<option value="addNew" class="fa">&oplus; Add new Section</option>';
+                $('#section').html(" ");
+                $('#section').append(op);
+            },
+            error: function () {
+                console.log('error');
+            }
+        });
+    });
+    //ending getting Sections
+
+
             // hiding the adding forms on pase load 
             $("#departmentAddBox").hide();
             $("#sectionAddBox").hide();
+            $("#designationAddBox").hide();
 
 
             // chacking the add new option is selected or not 
@@ -523,6 +591,19 @@
             $("#closeAddSection").on("click",function(){
                 $("#newSection").val("");
                 hideAddNewPart("section");
+            });
+
+            // for add new designation
+            $("#designation").on("change",function(){
+                AddNewIfNeeded($(this).attr('id'));
+            });
+            $("#addDesignation").on("click",function(){
+                $("#newDesignation").val("");
+                hideAddNewPart("designation");
+            });
+            $("#closeAddDesignation").on("click",function(){
+                $("#newDesignation").val("");
+                hideAddNewPart("designation");
             });
             
         });

@@ -8,6 +8,9 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Session;
 
+use App\Departments;
+use App\Sections;
+use App\Designations;
 class EmployeeController extends Controller
 {
     /**
@@ -23,7 +26,6 @@ class EmployeeController extends Controller
     public function index()
     {
         $roles = Role::all();
-
             if (!Auth::user()->hasPermissionTo('Employee Management')) {
                 abort('401');
             } else {
@@ -42,11 +44,12 @@ class EmployeeController extends Controller
     public function create()
     {
         $permissions = Permission::all();
-
+        $departments = $data = Departments::select('department_id','department_name')->get();
+        $designations = $data = Designations::select('designation_id','designation_name')->get();
         if (!Auth::user()->hasPermissionTo('Employee Management')) {
             abort('401');
         } else {
-        return view('employees.create', ['permissions'=>$permissions]);
+        return view('employees.create', ['permissions'=>$permissions, 'departments'=>$departments, 'designations'=>$designations]);
         }
     }
 
@@ -135,4 +138,10 @@ class EmployeeController extends Controller
             return view('employees.index')->with('roles', $roles);
         }
     }
+
+    public function getSection(Request $request){
+
+        $data = Sections::select('section_id','section_name')->where('department_id',$request->departmentId)->get();
+        return response()->json($data);
+     }
 }

@@ -30,7 +30,7 @@ Route::get('/createrole_role_permission',function(){
     // auth()->user()->assignRole('Super Admin');
     // auth()->user()->givePermissionTo('Supper Permission');
 });
-Route::get('/', 'PostController@index')->name('home');
+// Route::get('/', 'PostController@index')->name('home');
 
 Route::resource('users', 'UserController');
 
@@ -45,4 +45,6 @@ Route::resource('departments', 'EmployeeDepartmentController');
 Route::resource('attendances', 'EmployeeAttendanceController');
 Route::resource('leaves', 'EmployeeLeaveTypeController');
 Route::resource('paydeads', 'EmployeePayHeadController');
+
+Route::get('/getSections', 'EmployeeController@getSection')->name('getSections');
 
