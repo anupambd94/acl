@@ -40,7 +40,7 @@
 															<div id="toolbar" class="btn-toolbar">
 																<div class="btn-wrapper" id="toolbar-new">
 																	<span  class="btn btn-small btn-success">
-																	<span class="fa fa-plus"></span><a href="{{route('employees.create')}}">New</a></span>
+																	<span class="fa fa-plus"></span><a href="{{route('employee_create')}}">New</a></span>
 																</div>
 
 																<div class="btn-wrapper" id="toolbar-edit">
@@ -148,73 +148,6 @@
 
 
 														</tr>
-
-
-														<tr class="row1">
-
-															<td align="center" class="hidden-phone">2</td>
-
-															<td><input type="checkbox" id="cb1" name="cid[]" value="60" onclick="Joomla.isChecked(this.checked);"></td>
-
-															<td align="center">
-																<a href="/vbizz-dashboard/employee?task=edit&amp;cid[0]=60">test</a>
-															</td>
-
-															<td align="center" class="hidden-phone">435</td>
-
-															<td align="center">Designing</td>
-
-															<td align="center" class="hidden-phone">Tipař</td>
-
-
-															<td align="center" class="hidden-phone">
-																<a href="mailto:test@test.test">
-																	<div> test@test.test</div>
-																</a>
-															</td>
-
-															<td align="center" class="hidden-phone">$ 111,00</td>
-
-
-															<td align="center" class="hidden-phone"><a href="javascript:void(0);" class="send_mail btn" empid="60">Send Email</a></td>
-
-
-														</tr>
-
-
-														<tr class="row0">
-
-															<td align="center" class="hidden-phone">3</td>
-
-															<td><input type="checkbox" id="cb2" name="cid[]" value="58" onclick="Joomla.isChecked(this.checked);"></td>
-
-															<td align="center">
-																<a href="/vbizz-dashboard/employee?task=edit&amp;cid[0]=58">Test Employee</a>
-															</td>
-
-															<td align="center" class="hidden-phone">58585</td>
-
-															<td align="center">Pojištění</td>
-
-															<td align="center" class="hidden-phone">Sjednatel</td>
-
-
-															<td align="center" class="hidden-phone">
-																<a href="mailto:testemployee@vbizz.com">
-																	<div> testemployee@vbizz.com</div>
-																</a>
-															</td>
-
-															<td align="center" class="hidden-phone">$ 2.500,00</td>
-
-
-															<td align="center" class="hidden-phone"><a href="javascript:void(0);" class="send_mail btn" empid="58">Send Email</a></td>
-
-
-														</tr>
-
-
-
 													</tbody>
 													<tfoot>
 														<tr>

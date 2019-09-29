@@ -47,4 +47,5 @@ Route::resource('leaves', 'EmployeeLeaveTypeController');
 Route::resource('paydeads', 'EmployeePayHeadController');
 
 Route::get('/getSections', 'EmployeeController@getSection')->name('getSections');
-
+Route::get('employee_create', 'EmployeeController@create')->name('employee_create');
+Route::post('employee_create', 'EmployeeController@store');

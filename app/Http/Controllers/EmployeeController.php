@@ -6,11 +6,19 @@ use Illuminate\Http\Request;
 use Auth;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Validator;
 use Session;
 
+//Using Database Tables
+// use App\Employees;
 use App\Departments;
 use App\Sections;
 use App\Designations;
+
+
+// using Requests
+use App\Http\Requests\EmployeeCreate;
+
 class EmployeeController extends Controller
 {
     /**
@@ -29,7 +37,9 @@ class EmployeeController extends Controller
             if (!Auth::user()->hasPermissionTo('Employee Management')) {
                 abort('401');
             } else {
-                return view('employees.index')->with('roles', $roles);
+                
+                // return view('employees.index',)->with('roles', $roles);
+                return view('employees.index',compact('roles', 'users', 'userCount'));
             }
        
         
@@ -43,15 +53,18 @@ class EmployeeController extends Controller
      */
     public function create()
     {
+        $roles = Role::all();
         $permissions = Permission::all();
         $departments = $data = Departments::select('department_id','department_name')->get();
         $designations = $data = Designations::select('designation_id','designation_name')->get();
         if (!Auth::user()->hasPermissionTo('Employee Management')) {
             abort('401');
         } else {
-        return view('employees.create', ['permissions'=>$permissions, 'departments'=>$departments, 'designations'=>$designations]);
+        return view('employees.create', ['permissions'=>$permissions, 'departments'=>$departments, 'designations'=>$designations, 'roles'=>$roles]);
         }
     }
+
+    
 
     /**
      * Store a newly created resource in storage.
@@ -59,14 +72,52 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EmployeeCreate $request)
     {
         $roles = Role::all();
 
             if (!Auth::user()->hasPermissionTo('Employee Management')) {
                 abort('401');
             } else {
-                return view('employees.index')->with('roles', $roles);
+
+                // $status = "Initial";
+                // $class = "";
+                // $data = $request;
+                // // $data->setAttribute('country', $countryId);
+                // $password = Hash::make($data['password']);
+                // $key = Hash::make('bdecomit');
+                // $toDate = Carbon::now();
+        
+                // $register = Blooddonarusers::create([
+                // 'FullName'=>$data['FullName'],
+                // 'Username'=>$data['Username'],
+                // 'email'=>$data['Email'],
+                // 'PasswordHash'=>$password,
+                // 'PasswordSalt'=>$key,
+                // 'MobileNumber'=>$data['MobileNumber'],
+                // 'Gender'=>$data['gender'],
+                // 'DateOfBirth'=>$data['date_order'],
+                // 'BloodGroupId'=>$data['bloodGroupId'],
+                // 'CountryId'=>$data['countryId'],
+                // 'CityId'=>$data['City'],
+                // 'LocationId'=>$data['Location'],
+                // 'CreationDate'=>$toDate ,
+                // 'IsActive'=>1,
+                // 'IsAdmin'=>0,
+                // ]);
+        
+                // if($register){
+                //     $status = "Thank you for register";
+                //     $class = "success";
+                // }else{
+                //     $status = "not reigstered";
+                //     $class = "danger";
+                // }
+        
+        
+                // return redirect('/donar-register')->with('status',$status);
+                // return view('employees.index')->with('roles', $roles);
+                return response()->json($request);
             }
     }
 

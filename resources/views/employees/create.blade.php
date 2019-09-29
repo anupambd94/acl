@@ -28,12 +28,12 @@
             </div>
             <div class="panel-body">
                 <!-- START Form Wizard -->
-                <form class="form-horizontal form-bordered" action="#" id="wizard-validate">
-                        
+                <form class="form-horizontal form-bordered" method="POST" action="{{ route('employee_create') }}" id="wizard-validate">
+                {{ csrf_field() }}
+
                     <!-- Wizard Container 1 -->
                     <div class="wizard-title"> Basic Information</div>
                     <div class="wizard-container">
-                            
                                     <fieldset class="col-md-9">    	
                                             <legend>
                                                     <div class="form-group">
@@ -46,20 +46,26 @@
                                             
                                             <div class="panel panel-default">
                                                 <div class="panel-body">
-                                                        
+
                                                             <div class="form-group ">
-                                                                <label class="control-label"> Name: </label>
+                                                                <label class="control-label"> Name: <span style="color:red;">*</span> </label>
                                                                 <div class="col-sm-4">
-                                                                    <input class="form-control" name="firstName" type="text" placeholder="First Name" required />
+                                                                    <input class="form-control" name="firstName" type="text" placeholder="First Name" required data-parsley-group="order" data-parsley-required=""/>
                                                                 </div>
                                                                 <div class="col-sm-4">
-                                                                    <input class="form-control" name="lastName" type="text" placeholder="Last Name" required />
+                                                                    <input class="form-control" name="lastName" type="text" placeholder="Last Name" required data-parsley-group="order" data-parsley-required=""/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group ">
+                                                                <label class="control-label"> Username: <span style="color:red;">*</span></label>
+                                                                <div class="col-sm-4">
+                                                                    <input class="form-control" name="username" type="text" placeholder="Username" required data-parsley-group="order" data-parsley-required=""/>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label class="col-sm-2 control-label"> Login Details : </label>
+                                                                <label class="col-sm-2 control-label"> Login Details : <span style="color:red;">*</span></label>
                                                                 <div class="col-sm-4">
-                                                                    <input class="form-control" name="email" type="email" placeholder="Email" />
+                                                                    <input class="form-control" name="email" type="email" placeholder="Email" data-parsley-group="order" data-parsley-required=""/>
                                                                 </div>
                                                                 <div class="col-sm-4">
                                                                     <input class="form-control" name="password" type="password" id="password" placeholder="Password" data-parsley-minlength="4" />
@@ -85,13 +91,8 @@
                                                                         </div>
                                                                     <div class="col-md-4">
                                                                         <label>Phone #:</label>
-                                                                        <input type="text" placeholder="+99-99-9999-9999" data-mask="+99-99-9999-9999" class="form-control" />
+                                                                        <input type="text" placeholder="+99-99-9999-9999" name="phone" data-mask="+99-99-9999-9999" class="form-control" />
                                                                     </div>
-                                                                    {{-- <div class="col-md-4">
-                                                                        <label>Date of birth:</label>
-                                                                        <input type="text" placeholder="99/99/9999" data-mask="99/99/9999" class="form-control" />
-                                                                    </div> --}}
-                                                                    
                                                                 </div>
                                                             </div>
                                                                 <div class="form-group">
@@ -99,15 +100,15 @@
                                                                                
                                                                             <div class="col-md-4">
                                                                                 <label>Expected join date:</label>
-                                                                                <input type="date"  class="form-control" />
+                                                                                <input type="date" name="joinDate"  class="form-control" />
                                                                             </div>
                                                                             <div class="col-md-4">
                                                                                 <label>Confirmation date:</label>
-                                                                                <input type="date"  class="form-control" />
+                                                                                <input type="date" name="confirmationDate" class="form-control" />
                                                                             </div>
                                                                             <div class="col-md-4">
                                                                                 <label>Termination date:</label>
-                                                                                <input type="date"  class="form-control" />
+                                                                                <input type="date" name="TerminationDate" class="form-control" />
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -141,15 +142,15 @@
                                                                                 
                                                                             <div class="col-md-4">
                                                                                 <label>Leave calculated from:</label>
-                                                                                <input type="date"  class="form-control" />
+                                                                                <input type="date" name="leaveStartDate"  class="form-control" />
                                                                             </div>
                                                                             <div class="col-md-4">
                                                                                 <label>FIN/WPN Expiry date:</label>
-                                                                                <input type="date"  class="form-control" />
+                                                                                <input type="date" name="wpExpiryDate"  class="form-control" />
                                                                             </div>
                                                                             <div class="col-md-4">
                                                                                 <label>Birth date:</label>
-                                                                                <input type="date"  class="form-control" />
+                                                                                <input type="date" name="birthDate" class="form-control" />
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -174,12 +175,11 @@
                                                                 <div class="form-group">
                                                                     <label class="col-sm-offset-2 col-sm-10 "> <i class="fa fa-photo"></i> Upload Photo </label>
                                                                     <div class="col-sm-12">
-                                                                        {{-- <input class="form-control" name="name" type="text" placeholder="Type your Name" data-parsley-range="[4, 10]" data-parsley-group="order" data-parsley-required /> --}}
-                                                                        <div class="imgUp">
+                                                                     <div class="imgUp">
                                                                                 <div class="imagePreview"></div>
                                                                             <label class="btn btn-primary">
                                                                                 Upload
-                                                                                <input type="file" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;">
+                                                                                <input type="file" class="uploadFile img" name="photo" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;">
                                                                             </label>
                                                                         </div><!-- col-2 -->
                                                                     </div>
@@ -212,9 +212,9 @@
                                         <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-md-3" id="departmentSelectBox">
-                                                        <label>Department: </label>
+                                                        <label>Department: <span style="color:red;">*</span></label>
                                                         
-                                                        <select class="form-control" name="department" id="department">
+                                                        <select class="form-control" name="department" id="department" required data-parsley-required="">
                                                             <option value="" disabled selected>Select Department</option>
                                                             <option value={{$departmentId}}>{{$departmentName}}</option>
                                                             <option value="addNew" class="fa">&oplus; Add new Department                                                         
@@ -252,7 +252,7 @@
                                                             </div>
 
                                                         <div class="col-md-3" id="designationSelectBox">
-                                                            <label>Designation: </label>
+                                                            <label>Designation: <span style="color:red;">*</span></label>
                                                             <select class="form-control" name="designation" id="designation">
                                                                 <option value="">Select Designation</option>
                                                                 <option value={{$designationId}}>{{$designationName}}</option>
@@ -324,6 +324,18 @@
                                                             <option value="PARTTIME">PARTTIME</option>
                                                             <option value="FLEXI">FLEXI</option>
                                                             <option value="NONE">NONE</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label>Role: </label>
+                                                        <select class="form-control" name="roleId" id="roleId">
+                                                            <option value="">Select job type</option>
+                                                            @foreach ($roles as $role)
+                                                                <option value="{{$role->id}}">
+                                                                {{$role->name}}
+                                                                </option>
+                                                            @endforeach
+                                                            <option value="FULLTIME">FULLTIME</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -467,6 +479,21 @@
                                                         <label>Special qualification/Telent: </label>
                                                         <input class="form-control" type="number" name="qualification" id="qualification" />                                                            
                                                     </div>
+                                                </div>
+                                            </div>     
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-body">    
+                                        <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                   </div>
+                                                    <div class="col-md-4">
+                                                    <button type="submit">SUBMIT</button>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                     </div>
                                                 </div>
                                             </div>     
                                     </div>
