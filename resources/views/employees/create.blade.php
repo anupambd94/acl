@@ -22,6 +22,20 @@
 @endif
 <div class="row">
     <div class="col-md-12">
+    @if ($errors->any())
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>
+                        {{ $error }}
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
         <section class="panel">
             <div class="panel-heading">
                 <h3 class="panel-title">Employee Details </h3>
@@ -91,7 +105,8 @@
                                                                         </div>
                                                                     <div class="col-md-4">
                                                                         <label>Phone #:</label>
-                                                                        <input type="text" placeholder="+99-99-9999-9999" name="phone" data-mask="+99-99-9999-9999" class="form-control" />
+                                                                        <!-- <input type="text" placeholder="+99-99-9999-9999" name="phone" data-mask="+99-99-9999-9999" class="form-control" /> -->
+                                                                        <input type="text" placeholder="+99-99-9999-9999" name="phone" class="form-control" />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -285,7 +300,7 @@
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-md-3">
-                                                        <label>Working Day Per Hour: </label>
+                                                        <label>Working Hours Per Day: </label>
                                                         <input class="form-control" type="number" name="workingDayPerhour" id="workingDayPerhour" type="number" />                                                            
                                                     </div>
                                                     <div class="col-md-3">
@@ -498,6 +513,17 @@
                                             </div>     
                                     </div>
                                 </div>
+                                @if(session('status'))
+                                <div class="row register_button animated bounceInUp heartBeat fadeOutDown">
+                                    <div class="col-md-offset-6 col-md-7">
+
+                                        <div class="form-group">
+                                            <div class="alert alertt-success">{{session('status')}}</div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                @endif
                             </fieldset>  
                     </div>
                     <!--/ Wizard Container 3 -->

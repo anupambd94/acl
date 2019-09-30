@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Auth;
 use Spatie\Permission\Models\Role;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Session;
 
 //Using Database Tables
-// use App\Employees;
+use App\Employees;
 use App\Departments;
 use App\Sections;
 use App\Designations;
@@ -80,44 +81,59 @@ class EmployeeController extends Controller
                 abort('401');
             } else {
 
-                // $status = "Initial";
-                // $class = "";
-                // $data = $request;
-                // // $data->setAttribute('country', $countryId);
-                // $password = Hash::make($data['password']);
-                // $key = Hash::make('bdecomit');
-                // $toDate = Carbon::now();
+                $status = "Initial";
+                $class = "";
+                $data = $request;
+                // $data->setAttribute('country', $countryId);
+                $password = Hash::make($data['password']);
+                $key = Hash::make('bdecomit');
+                $toDate = Carbon::now();
         
-                // $register = Blooddonarusers::create([
-                // 'FullName'=>$data['FullName'],
-                // 'Username'=>$data['Username'],
-                // 'email'=>$data['Email'],
-                // 'PasswordHash'=>$password,
-                // 'PasswordSalt'=>$key,
-                // 'MobileNumber'=>$data['MobileNumber'],
-                // 'Gender'=>$data['gender'],
-                // 'DateOfBirth'=>$data['date_order'],
-                // 'BloodGroupId'=>$data['bloodGroupId'],
-                // 'CountryId'=>$data['countryId'],
-                // 'CityId'=>$data['City'],
-                // 'LocationId'=>$data['Location'],
-                // 'CreationDate'=>$toDate ,
-                // 'IsActive'=>1,
-                // 'IsAdmin'=>0,
-                // ]);
+                $register = Employees::create([
+                'first_name'=>$data['firstName'],
+                'last_name'=>$data['lastName'],
+                'username'=>$data['username'],
+                'email'=>$data['email'],
+                'password'=>$password,
+                'mobile'=>$data['phone'],
+                'nric_fin_wp'=>$data['wp'],
+                'gender'=>$data['gender'],
+                'merital_status'=>$data['meritalStatus'],// ['SINGLE', 'MARRIED','DIVORCED']);
+                'birth_date'=>$data['birthDate'],
+                'expected_join_date'=>$data['joinDate'],
+                'confirmatin_date'=>$data['confirmationDate'],
+                'termination_date'=>$data['TerminationDate'],
+                'probation_periods'=>$data['probation'],
+                'leave_start_date'=>$data['leaveStartDate'],
+                'pin_expire_date'=>$data['wpExpiryDate'],
+                'id_types'=>$data['idType'],// ['SPASS', 'WP', 'PR', 'CITIZENSHIP', 'EP']);
+                'holiday_types'=>$data['holidayType'],// ['PH', 'MC', 'LOCAL', 'SINGAPUR']);
+                'job_types'=>$data['jobType'],// ['FULLTIME', 'PARTTIME', 'FLEXI', 'NONE'])->default('NONE');
+                'salary_types'=>$data['salaryType'],// ['FIXED', 'HOURLY', 'DAILY', 'NONE'])->default('NONE');
+                'days_per_week'=>$data['daysPerWeek'],
+                'total_hours_per_year'=>$data['hoursPerYear'],
+                'rate_per_hour'=>$data['ratePerHour'],
+                'profile_image'=>$data['photo'],
+                'department_id'=>1,
+                'section_id'=>1,
+                'designation_id'=>1,
+                'currentaddress_id'=>1,
+                'permanentaddress_id'=>1,
+                'IsActive'=>1
+                ]);
         
-                // if($register){
-                //     $status = "Thank you for register";
-                //     $class = "success";
-                // }else{
-                //     $status = "not reigstered";
-                //     $class = "danger";
-                // }
+                if($register){
+                    $status = "Thank you for register";
+                    $class = "success";
+                }else{
+                    $status = "not reigstered";
+                    $class = "danger";
+                }
         
         
-                // return redirect('/donar-register')->with('status',$status);
+                return redirect('employee_create')->with('status',$status);
                 // return view('employees.index')->with('roles', $roles);
-                return response()->json($request);
+                // return response()->json($request);
             }
     }
 
