@@ -62,24 +62,30 @@
 											</div>
 
 											<div class="adminlist filter filter_emp">
-												<div class="filet_left">
+												<!-- <div class="filet_left">
 													<input type="text" name="search" id="search" placeholder="Search" value="" class="text_area">
 													<button class="btn hasTooltip" title="Search" onclick="this.form.submit();"><i class="fa fa-search"></i></button>
 													<button class="btn hasTooltip" title="Clear" ><i class="fa fa-remove"></i></button>
-												</div>
-
+												</div> -->
+												<form action="/search" method="POST" role="search">
+													{{ csrf_field() }}
+													<div class="input-group" style="width:22%;">
+														<input type="text" class="form-control" name="q"
+															placeholder="Search "> 
+														<span class="input-group-btn">
+													<!-- <i class="fa fa-search"></i> -->
+															<button type="submit" class="btn btn-default">
+																<span class="glyphicon glyphicon-search"></span>
+															</button>
+														</span>
+													</div>
+												</form>
 												<div class="filter_right">
 													<select  name="filter_dept" class="inputbox" size="1" onchange="" style="">
-														<option value="">Select Department</option>
-														<option value="5">Designing</option>
-														<option value="6">Styrelse</option>
-														<option value="7">Info</option>
-														<option value="8">Reality</option>
-														<option value="9">Pojištění</option>
-														<option value="10">Менеджеры по продажам</option>
-														<option value="11">Сборщики мебели</option>
-														<option value="12">Диспетчер заказов</option>
-														<option value="13">программисты</option>
+														<option selected disabled value="">Select Department</option>
+														@foreach($departments as $department)
+														<option  value="{{$department->department_id}}">{{$department->department_name}}</option>
+														@endforeach
 													</select>
 													{{-- <div class="chzn-container chzn-container-single chzn-container-single-nosearch" style="width: 195px;" title="" id="filter_dept_chzn"><a class="chzn-single"><span>Select Department</span><div><b></b></div></a>
 														<div class="chzn-drop">
@@ -88,10 +94,11 @@
 														</div>
 													</div> --}}
 													<select  name="filter_desg" class="inputbox" size="1"  style="">
-														<option value="">Select Designation</option>
-														<option value="6">Sjednatel</option>
-														<option value="7">Tipař</option>
-														<option value="8">Старший продавец </option>
+														<option selected disabled value="">Select Designation</option>
+														@foreach($designations as $designation)
+														<option value="{{$designation->designation_id}}">{{$designation->designation_name}}</option>
+														@endforeach
+
 													</select>
 													{{-- <div class="chzn-container chzn-container-single chzn-container-single-nosearch" style="width: 155px;" title="" id="filter_desg_chzn"><a class="chzn-single"><span>Select Designation</span><div><b></b></div></a>
 														<div class="chzn-drop">
@@ -118,7 +125,33 @@
 														</tr>
 													</thead>
 													<tbody>
-														<tr class="row0">
+													@php
+
+														$count = 1;
+														@endphp
+														@foreach($employees as $employee)
+
+														<tr>
+
+															<td>{{$count}}</td>
+															<th scope="row">
+															<input class="form-check-input" type="checkbox" id="checkbox1">
+															<label class="form-check-label" for="checkbox1" class="label-table"></label>
+															</th>
+															<td>{{$employee->first_name}} {{$employee->last_name}}</td>
+															<td class="hidden-phone">{{$employee->employee_id}}</td>
+															<td class="hidden-phone">{{$employee->department}}</td>
+															<td class="hidden-phone">{{$employee->designation}}</td>
+															<td class="hidden-phone">{{$employee->email}}</td>
+															<td align="center" class="hidden-phone">----</td>
+															<td align="center" class="hidden-phone"><a href="javascript:void(0);" class="send_mail btn" empid="{{$employee->employee_id}}">Send Email</a></td>
+														</tr>
+														@php
+														$count++;
+														@endphp
+
+														@endforeach
+														<!-- <tr class="row0">
 
 															<td align="center" class="hidden-phone">1</td>
 
@@ -147,42 +180,12 @@
 															<td align="center" class="hidden-phone"><a href="javascript:void(0);" class="send_mail btn" empid="75">Send Email</a></td>
 
 
-														</tr>
+														</tr> -->
 													</tbody>
-													<tfoot>
-														<tr>
-															<td colspan="10">
-																<div class="pagination pagination-toolbar clearfix" style="text-align: center;">
-
-																	<div class="limit pull-right">
-																		Display #<select id="limit" name="limit" class="inputbox input-mini" size="1" onchange="this.form.submit()" style="">
-																					<option value="5" selected="selected">5</option>
-																					<option value="10">10</option>
-																					<option value="15">15</option>
-																					<option value="20">20</option>
-																					<option value="25">25</option>
-																					<option value="30">30</option>
-																					<option value="50">50</option>
-																					<option value="100">100</option>
-																					<option value="0">All</option>
-																				</select>
-																		{{-- <div class="chzn-container chzn-container-single chzn-container-single-nosearch" style="width: 59px;" title="" id="limit_chzn"><a class="chzn-single"><span>5</span><div><b></b></div></a>
-																			<div class="chzn-drop">
-																				<div class="chzn-search"><input type="text" autocomplete="off" readonly=""></div>
-																				<ul class="chzn-results"></ul>
-																			</div>
-																		</div> --}}
-																	</div>
-
-
-																	<input type="hidden" name="limitstart" value="0">
-
-																</div>
-															</td>
-														</tr>
-													</tfoot>
 
 												</table>
+												{!! $employees->render() !!}
+
 											</div>
 
 

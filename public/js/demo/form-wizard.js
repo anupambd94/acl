@@ -41,7 +41,10 @@ $(document).ready(function() {
 			// If it's the last tab then hide the last button and show the finish instead
 			if($current >= $total) {
 				$('#demo-cls-wz').find('.next').hide();
-				$('#demo-cls-wz').find('.finish').show();
+				var finishButton = $('#demo-cls-wz').find('.finish');
+				finishButton.hide();
+				console.log(finishButton);
+				finishButton.type = 'submit';
 				$('#demo-cls-wz').find('.finish').prop('disabled', false);
 			} else {
 				$('#demo-cls-wz').find('.next').show();

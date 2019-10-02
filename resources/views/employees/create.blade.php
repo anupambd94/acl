@@ -40,6 +40,17 @@
             <div class="panel-heading">
                 <h3 class="panel-title">Employee Details </h3>
             </div>
+            @if(session('status'))
+            <div class="row register_button animated bounceInUp heartBeat fadeOutDown">
+            <div class="col-md-offset-4 col-md-3">
+
+                <div class="form-group">
+                    <div class="alert alert-success" style="text-align:center">Thank you for register</div>
+                </div>
+
+                </div>
+            </div>
+            @endif
             <div class="panel-body">
                 <!-- START Form Wizard -->
                 <form class="form-horizontal form-bordered" method="POST" action="{{ route('employee_create') }}" id="wizard-validate">
@@ -498,7 +509,7 @@
                                             </div>     
                                     </div>
                                 </div>
-                                <div class="panel panel-default">
+                                <!-- <div class="panel panel-default">
                                     <div class="panel-body">    
                                         <div class="form-group">
                                                 <div class="row">
@@ -512,7 +523,7 @@
                                                 </div>
                                             </div>     
                                     </div>
-                                </div>
+                                </div> -->
                                 @if(session('status'))
                                 <div class="row register_button animated bounceInUp heartBeat fadeOutDown">
                                     <div class="col-md-offset-6 col-md-7">
@@ -525,6 +536,12 @@
                                 </div>
                                 @endif
                             </fieldset>  
+                    
+                    
+                            <div class="clearfix"></div>
+                    
+                    
+                    
                     </div>
                     <!--/ Wizard Container 3 -->
                    
@@ -537,6 +554,9 @@
 @endsection
 
 @section('script')
+<script src="{{ asset('js/demo/wizard.js') }}"></script>
+        <!--Form Wizard [ SAMPLE ]-->
+        <script src="{{ asset('js/demo/form-wizard.js') }}"></script>
     <script>
 
         $(document).ready(function(){
@@ -712,4 +732,5 @@
             });
         });
     </script>
+    
 @endsection

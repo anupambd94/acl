@@ -8,6 +8,8 @@ use Auth;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\Paginator;
 use Session;
 
 //Using Database Tables
@@ -35,12 +37,31 @@ class EmployeeController extends Controller
     public function index()
     {
         $roles = Role::all();
+        $departments = Departments::all();
+        $designations = Designations::all();
+
+        // $employees = Employees::all()->paginate(10);
+            $employees = \DB::table('employees')
+            ->join('departments','employees.department_id','=','departments.department_id')
+            ->join('designations','employees.designation_id','=','designations.designation_id')
+            ->select('employees.employee_id','employees.first_name','employees.last_name','employees.email',\DB::raw('departments.department_name AS department'),\DB::raw('designations.designation_name AS designation'))
+            ->paginate(10);
+            // $userInfo = \DB::table('users')
+            // ->join('countries', 'users.CountryId', '=', 'countries.CountryId')
+            // ->join('cities', 'users.CityId', '=', 'cities.CityId')
+            // ->join('locations', 'users.LocationId', '=', 'locations.LocationId')
+            // ->join('bloodgroups', 'users.BloodGroupId', '=', 'bloodgroups.BloodGroupId')
+            // ->select(\DB::raw('id AS BloodDonarId'),'users.DateOfBirth','FullName','email','MobileNumber','BloodGroupName',\DB::raw('cities.Name AS City'),\DB::raw('countries.Name AS Country'),\DB::raw('countries.Code AS CountryCode'),'LocationName', 'Gender', 'users.IsActive',\DB::raw('TIMESTAMPDIFF(YEAR, DATE(DateOfBirth), current_date) AS age'))
+            // ->paginate(20);
+
             if (!Auth::user()->hasPermissionTo('Employee Management')) {
                 abort('401');
             } else {
                 
                 // return view('employees.index',)->with('roles', $roles);
-                return view('employees.index',compact('roles', 'users', 'userCount'));
+                // return response()->json($employees);
+
+                return view('employees.index',compact('roles', 'users', 'userCount','employees','departments','designations'));
             }
        
         
@@ -114,16 +135,16 @@ class EmployeeController extends Controller
                 'total_hours_per_year'=>$data['hoursPerYear'],
                 'rate_per_hour'=>$data['ratePerHour'],
                 'profile_image'=>$data['photo'],
-                'department_id'=>1,
-                'section_id'=>1,
-                'designation_id'=>1,
+                'department_id'=>$data['department'],
+                'section_id'=>$data['section'],
+                'designation_id'=>$data['designation'],
                 'currentaddress_id'=>1,
                 'permanentaddress_id'=>1,
                 'IsActive'=>1
                 ]);
         
                 if($register){
-                    $status = "Thank you for register";
+                    $status = "Employee Successfully Created.";
                     $class = "success";
                 }else{
                     $status = "not reigstered";
@@ -133,7 +154,7 @@ class EmployeeController extends Controller
         
                 return redirect('employee_create')->with('status',$status);
                 // return view('employees.index')->with('roles', $roles);
-                // return response()->json($request);
+                // return $status;
             }
     }
 

@@ -792,9 +792,7 @@
         <!--Form Wizard [ SAMPLE ]-->
         <script src="{{ asset('js/demo/index.js') }}"></script>
         <!--Form Wizard [ SAMPLE ]-->
-        <script src="{{ asset('js/demo/wizard.js') }}"></script>
-        <!--Form Wizard [ SAMPLE ]-->
-        <script src="{{ asset('js/demo/form-wizard.js') }}"></script>
+        
 
         <script src="{{ asset('plugins/pace/pace.min.js') }}"></script>
         @yield('script')
