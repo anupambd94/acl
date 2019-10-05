@@ -16,14 +16,14 @@ class CreateCurrentaddressTable extends Migration
         if (!Schema::hasTable('currentaddress')){
             Schema::create('currentaddress', function (Blueprint $table) {
                 $table->integer('currentaddress_id',true);
-                $table->text('address_1');
+                $table->text('address_1')->nullable();
                 $table->text('address_2')->nullable();
-                $table->text('city');
-                $table->text('state');
-                $table->integer('country_id')->index('country_id');
-                $table->text('postal_code');
+                $table->text('city')->nullable();
+                $table->text('state')->nullable();
+                $table->integer('country_id')->index('country_id')->nullable();
+                $table->text('postal_code')->nullable();
                 // $table->timestamp('CreationDate')->default(DB::raw('CURRENT_TIMESTAMP'));
-                $table->boolean('IsActive');
+                $table->boolean('IsActive')->nullable();
                 $table->rememberToken();
                 $table->timestamps();
             });

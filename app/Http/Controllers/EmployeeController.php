@@ -17,7 +17,8 @@ use App\Employees;
 use App\Departments;
 use App\Sections;
 use App\Designations;
-
+use App\Currentaddress;
+use App\Permanentaddress;
 
 // using Requests
 use App\Http\Requests\EmployeeCreate;
@@ -109,7 +110,48 @@ class EmployeeController extends Controller
                 $password = Hash::make($data['password']);
                 $key = Hash::make('bdecomit');
                 $toDate = Carbon::now();
-        
+                $id = \DB::getPdo()->lastInsertId();
+                $hasImage =  $request->hasFile('image2');
+                if ($request->hasFile('image2')) {
+                    $data = $request->input('2');
+                    $photo = $request->file('image2')->getClientOriginalName();
+                    $destination = public_path() . '/uploads/';
+                    $request->file('image2')->move($destination, $photo);
+                    $data['image2'] = $photo;
+                    }
+//Insert Employee Permanent Address
+                    $EmployeepermanentAddress = new Permanentaddress();
+                    $EmployeepermanentAddress->address_1 = $data['paddress1'];
+                    $EmployeepermanentAddress->address_2 = $data['paddress2'];
+                    $EmployeepermanentAddress->city = $data['pcity'];
+                    $EmployeepermanentAddress->state = $data['pstate'];
+                    $EmployeepermanentAddress->country_id = $data['pcountry'];
+                    $EmployeepermanentAddress->postal_code = $data['ppostal_code'];
+                    $EmployeepermanentAddress->IsActive = 1;
+
+                    if ($EmployeepermanentAddress->save()) {
+                        $PermanentAddressId = $EmployeepermanentAddress->id;
+                    }else{
+                        $PermanentAddressId = 0 ;
+                    }
+
+//Insert Employee Current Address
+                    $EmployeeCurrentAddress = new Currentaddress();
+                    $EmployeeCurrentAddress->address_1 = $data['address1'];
+                    $EmployeeCurrentAddress->address_2 = $data['address2'];
+                    $EmployeeCurrentAddress->city = $data['city'];
+                    $EmployeeCurrentAddress->state = $data['state'];
+                    $EmployeeCurrentAddress->country_id = $data['country'];
+                    $EmployeeCurrentAddress->postal_code = $data['postal_code'];
+                    $EmployeeCurrentAddress->IsActive = 1;
+
+                    if ($EmployeeCurrentAddress->save()) {
+                        $currentAddressId = $EmployeeCurrentAddress->id;
+                    }else{
+                        $currentAddressId = 0 ;
+                    }                    
+                    
+
                 $register = Employees::create([
                 'first_name'=>$data['firstName'],
                 'last_name'=>$data['lastName'],
@@ -134,12 +176,12 @@ class EmployeeController extends Controller
                 'days_per_week'=>$data['daysPerWeek'],
                 'total_hours_per_year'=>$data['hoursPerYear'],
                 'rate_per_hour'=>$data['ratePerHour'],
-                'profile_image'=>$data['photo'],
+                'profile_image'=>$data['image'],
                 'department_id'=>$data['department'],
                 'section_id'=>$data['section'],
                 'designation_id'=>$data['designation'],
-                'currentaddress_id'=>1,
-                'permanentaddress_id'=>1,
+                'currentaddress_id'=>$currentAddressId,
+                'permanentaddress_id'=>$PermanentAddressId,
                 'IsActive'=>1
                 ]);
         
@@ -150,8 +192,9 @@ class EmployeeController extends Controller
                     $status = "not reigstered";
                     $class = "danger";
                 }
-        
-        
+                    // $image = file_get_contents($path);
+                    // $file = Input::file('image');
+                // return response()->json($request);        
                 return redirect('employee_create')->with('status',$status);
                 // return view('employees.index')->with('roles', $roles);
                 // return $status;
@@ -230,6 +273,54 @@ class EmployeeController extends Controller
     public function getSection(Request $request){
 
         $data = Sections::select('section_id','section_name')->where('department_id',$request->departmentId)->get();
-        return response()->json($data);
+        if($data){
+            return response()->json($data);
+        }
+     }
+
+     public function addDepartment(Request $request){
+        $NewDepartment = new Departments();
+
+        $NewDepartment->department_name = $request->departmentName;
+        $NewDepartment->IsActive = 1;
+        if ($NewDepartment->save()) {
+            $newDepartmentId = $NewDepartment->id;
+        }else{
+            $newDepartmentId = 0 ;
+        } 
+
+        return response()->json(array('departmentId'=> $newDepartmentId));
+
+     }
+
+     public function addSection(Request $request){
+        $NewSection = new Sections();
+
+        $NewSection->section_name= $request->section_name;
+        $NewSection->department_id= $request->department_id;
+        $NewSection->IsActive = 1;
+        if ($NewSection->save()) {
+            $newSectiontId = $NewSection->id;
+        }else{
+            $newSectiontId = 0 ;
+        } 
+
+        return response()->json(array('sectionId'=> $newSectiontId));
+     }
+
+     public function addDesignation(Request $request){
+        $NewDesignation = new Designations();
+
+        $NewDesignation->designation_name= $request->designationName;
+        $NewDesignation->IsActive = 1;
+        if ($NewDesignation->save()) {
+            $newDesignationId = $NewDesignation->id;
+        }else{
+            $newDesignationId = 0 ;
+        } 
+
+
+        return response()->json(array('designationId'=> $newDesignationId));
+
      }
 }

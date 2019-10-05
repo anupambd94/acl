@@ -16,14 +16,14 @@ class CreatePermanentaddressTable extends Migration
         if (!Schema::hasTable('permanentaddress')){
             Schema::create('permanentaddress', function (Blueprint $table) {
                 $table->integer('permanentaddress_id',true);
-                $table->text('address_1');
+                $table->text('address_1')->nullable();
                 $table->text('address_2')->nullable();
-                $table->text('city');
-                $table->text('state');
-                $table->integer('country_id');
-                $table->text('postal_code');
+                $table->text('city')->nullable();
+                $table->text('state')->nullable();
+                $table->integer('country_id')->nullable();
+                $table->text('postal_code')->nullable();
                 // $table->timestamp('CreationDate')->default(DB::raw('CURRENT_TIMESTAMP'));
-                $table->boolean('IsActive');
+                $table->boolean('IsActive')->nullable();
                 $table->rememberToken();
                 $table->timestamps();
             });

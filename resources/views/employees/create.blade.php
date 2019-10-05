@@ -53,7 +53,7 @@
             @endif
             <div class="panel-body">
                 <!-- START Form Wizard -->
-                <form class="form-horizontal form-bordered" method="POST" action="{{ route('employee_create') }}" id="wizard-validate">
+                <form class="form-horizontal form-bordered" method="POST" action="{{ route('employee_create') }}" id="wizard-validate" files = "true"  enctype="multipart/form-data">
                 {{ csrf_field() }}
 
                     <!-- Wizard Container 1 -->
@@ -205,11 +205,14 @@
                                                                                 <div class="imagePreview"></div>
                                                                             <label class="btn btn-primary">
                                                                                 Upload
-                                                                                <input type="file" class="uploadFile img" name="photo" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;">
+                                                                                
+                                                                                <input type="file" class="uploadFile img" name="image" style="width: 0px;height: 0px;overflow: hidden;">
+                                                                            
                                                                             </label>
                                                                         </div><!-- col-2 -->
                                                                     </div>
                                                                 </div>
+                                                                <input type="file" name="image2" id="image2">
                                                                
                                                     </div>
                                                 </div>
@@ -242,7 +245,9 @@
                                                         
                                                         <select class="form-control" name="department" id="department" required data-parsley-required="">
                                                             <option value="" disabled selected>Select Department</option>
-                                                            <option value={{$departmentId}}>{{$departmentName}}</option>
+                                                            @foreach ($departments as $department)
+                                                            <option value={{$department->department_id}}>{{$department->department_name}}</option>
+                                                            @endforeach
                                                             <option value="addNew" class="fa">&oplus; Add new Department                                                         
                                                             </option>
 
@@ -281,7 +286,9 @@
                                                             <label>Designation: <span style="color:red;">*</span></label>
                                                             <select class="form-control" name="designation" id="designation">
                                                                 <option value="">Select Designation</option>
-                                                                <option value={{$designationId}}>{{$designationName}}</option>
+                                                                @foreach ($designations as $designation)
+                                                            <option value={{$designation->designation_id}}>{{$designation->designation_name}}</option>
+                                                            @endforeach
                                                                 <option value="addNew" class="fa">&oplus; Add new Designation</option>
 
                                                             </select>
@@ -565,7 +572,8 @@
     $(document).on('change', '#department', function () {
         var department_id = $(this).val();
         // console.log(department_id);
-        var op = " ";
+        if(department_id != "addNew"){
+            var op = " ";
         var div = $(this).parent();
 
         $.ajax({
@@ -588,6 +596,8 @@
                 console.log('error');
             }
         });
+        }
+        
     });
     //ending getting Sections
 
@@ -645,7 +655,48 @@
                 AddNewIfNeeded($(this).attr('id'));
             });
             $("#addDepartment").on("click",function(){
-                $("#newDepartment").val("");
+
+                var deptName = $("#newDepartment").val();
+                console.log(deptName);
+                if(deptName != ""){
+
+                    var op = " ";
+                    var div = $('#department').parent();
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+
+                    $.ajax({
+                        type: 'post',
+                        url: '{{ url('/addDepartment') }}',
+                        data: { 'departmentName': deptName },
+                        success: function (data) {
+                            // console.log('success');
+                            console.log(data);
+                            op += '<option selected value="'+data['departmentId']+'"> '+deptName+' </option>';
+                            // for (var i = 0; i < data.length; i++) {
+                            //     op += '<option value="' + data[i].section_id + '">' + data[i].section_name + '</option>';
+                            //     // console.log(op);
+                            // }
+                            op += '<option value="addNew" class="fa">&oplus; Add new Department</option>';
+                            $('#department').html(" ");
+                            $('#department').append(op);
+
+                            console.log($('#department').val());
+                        },
+                        error: function () {
+                            console.log('error');
+                        }
+                    });
+
+                }
+                
+
+                // $("#newDepartment").val("");
                 hideAddNewPart("department");
             });
             $("#closeAddDepartment").on("click",function(){
@@ -658,7 +709,48 @@
                 AddNewIfNeeded($(this).attr('id'));
             });
             $("#addSection").on("click",function(){
-                $("#newSection").val("");
+                
+
+                var departmentId = $("#department").val();
+                var sectionName = $("#newSection").val();
+                console.log(departmentId + " : "+sectionName);
+                if(sectionName != ""){
+
+                    var op = " ";
+                    var div = $('#section').parent();
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+
+                    $.ajax({
+                        type: 'post',
+                        url: '{{ url('/addSection') }}',
+                        data: { 'department_id': departmentId, 'section_name': sectionName},
+                        success: function (data) {
+                            // console.log('success');
+                            // console.log(data);
+                            op += '<option selected value="'+data['sectionId']+'"> '+sectionName+' </option>';
+                            // for (var i = 0; i < data.length; i++) {
+                            //     op += '<option value="' + data[i].section_id + '">' + data[i].section_name + '</option>';
+                            //     // console.log(op);
+                            // }
+                            op += '<option value="addNew" class="fa">&oplus; Add new Section</option>';
+                            $('#section').html(" ");
+                            $('#section').append(op);
+
+                            // console.log($('#department').val());
+                        },
+                        error: function () {
+                            console.log('error');
+                        }
+                    });
+
+                }
+
                 hideAddNewPart("section");
             });
             $("#closeAddSection").on("click",function(){
@@ -671,7 +763,45 @@
                 AddNewIfNeeded($(this).attr('id'));
             });
             $("#addDesignation").on("click",function(){
-                $("#newDesignation").val("");
+                
+                var designationName = $("#newDesignation").val();
+                console.log(designationName);
+                if(designationName != ""){
+
+                    var op = " ";
+                    var div = $('#designation').parent();
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+
+                    $.ajax({
+                        type: 'post',
+                        url: '{{ url('/addDesignation') }}',
+                        data: { 'designationName': designationName },
+                        success: function (data) {
+                            // console.log('success');
+                            console.log(data);
+                            op += '<option selected value="'+data['designationId']+'"> '+designationName+' </option>';
+                            // for (var i = 0; i < data.length; i++) {
+                            //     op += '<option value="' + data[i].section_id + '">' + data[i].section_name + '</option>';
+                            //     // console.log(op);
+                            // }
+                            op += '<option value="addNew" class="fa">&oplus; Add new Designation</option>';
+                            $('#designation').html(" ");
+                            $('#designation').append(op);
+
+                            console.log($('#designation').val());
+                        },
+                        error: function () {
+                            console.log('error');
+                        }
+                    });
+
+                }
                 hideAddNewPart("designation");
             });
             $("#closeAddDesignation").on("click",function(){
@@ -681,7 +811,8 @@
             
         });
         
-        
+     
+      
         // $(document).on("change","#department", function(){
         //     // var selectedValue = $(this).val();
         //     // console.log(selectedValue);
@@ -706,16 +837,17 @@
         // });
         
 
-        $(".imgAdd").click(function(){
-        $(this).closest(".row").find('.imgAdd').before('<div class="col-sm-2 imgUp"><div class="imagePreview"></div><label class="btn btn-primary">Upload<input type="file" class="uploadFile img" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;"></label><i class="fa fa-times del"></i></div>');
-        });
-        $(document).on("click", "i.del" , function() {
-            $(this).parent().remove();
-        });
+        // $(".imgAdd").click(function(){
+        // $(this).closest(".row").find('.imgAdd').before('<div class="col-sm-2 imgUp"><div class="imagePreview"></div><label class="btn btn-primary">Upload<input type="file" class="uploadFile img" style="width:0px;height:0px;overflow:hidden;"></label><i class="fa fa-times del"></i></div>');
+        // });
+        // $(document).on("click", "i.del" , function() {
+        //     $(this).parent().remove();
+        // });
         $(function() {
             $(document).on("change",".uploadFile", function()
             {
                     var uploadFile = $(this);
+                    
                 var files = !!this.files ? this.files : [];
                 if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
         
