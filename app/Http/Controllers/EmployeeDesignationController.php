@@ -1,8 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Auth;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\Paginator;
+
+//Using Database Tables
+// use App\Employees;
+// use App\Departments;
+// use App\Sections;
+use App\Designations;
+// use App\Currentaddress;
+// use App\Permanentaddress;
 
 class EmployeeDesignationController extends Controller
 {
@@ -13,7 +28,18 @@ class EmployeeDesignationController extends Controller
      */
     public function index()
     {
-        return view('designations.index');
+        $designations = \DB::table('designations')
+        ->select('designation_id','designation_name','IsActive')->paginate(10);
+
+        if (!Auth::user()->hasPermissionTo('Employee Management')) {
+            abort('401');
+        } else {
+            
+            // return view('employees.index',)->with('roles', $roles);
+            // return response()->json($employees);
+
+            return view('designations.index',compact('roles','designations'));
+        }
     }
 
     /**

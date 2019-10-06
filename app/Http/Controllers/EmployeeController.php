@@ -273,6 +273,7 @@ class EmployeeController extends Controller
     public function getSection(Request $request){
 
         $data = Sections::select('section_id','section_name')->where('department_id',$request->departmentId)->get();
+        // var_dump($data);
         if($data){
             return response()->json($data);
         }

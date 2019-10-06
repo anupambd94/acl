@@ -212,7 +212,7 @@
                                                                         </div><!-- col-2 -->
                                                                     </div>
                                                                 </div>
-                                                                <input type="file" name="image2" id="image2">
+                                                                <!-- <input type="file" name="image2" id="image2"> -->
                                                                
                                                     </div>
                                                 </div>
@@ -594,6 +594,14 @@
             },
             error: function () {
                 console.log('error');
+                op += '<option value="">Select Section</option>';
+                // for (var i = 0; i < data.length; i++) {
+                //     op += '<option value="' + data[i].section_id + '">' + data[i].section_name + '</option>';
+                //     // console.log(op);
+                // }
+                op += '<option value="addNew" class="fa">&oplus; Add new Section</option>';
+                $('#section').html(" ");
+                $('#section').append(op);
             }
         });
         }
@@ -687,6 +695,16 @@
                             $('#department').append(op);
 
                             console.log($('#department').val());
+                            var op = " ";
+                            
+                            op += '<option value="">Select Section</option>';
+                            // for (var i = 0; i < data.length; i++) {
+                            //     op += '<option value="' + data[i].section_id + '">' + data[i].section_name + '</option>';
+                            //     // console.log(op);
+                            // }
+                            op += '<option value="addNew" class="fa">&oplus; Add new Section</option>';
+                            $('#section').html(" ");
+                            $('#section').append(op);
                         },
                         error: function () {
                             console.log('error');

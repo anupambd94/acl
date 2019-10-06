@@ -54,7 +54,8 @@
         <option value="">Status</option>
         <option value="publish">Published</option>
         <option value="unpublish">Unpublished</option>
-    </select><div class="chzn-container chzn-container-single chzn-container-single-nosearch" style="width: 111px;" title="" id="filter_status_chzn"><a class="chzn-single"><span>Status</span><div><b></b></div></a><div class="chzn-drop"><div class="chzn-search"><input type="text" autocomplete="off" readonly=""></div><ul class="chzn-results"></ul></div></div>
+    </select>
+    <!-- <div class="chzn-container chzn-container-single chzn-container-single-nosearch" style="width: 111px;" title="" id="filter_status_chzn"><a class="chzn-single"><span>Status</span><div><b></b></div></a><div class="chzn-drop"><div class="chzn-search"><input type="text" autocomplete="off" readonly=""></div><ul class="chzn-results"></ul></div></div> -->
     </div>
     </div>
     
@@ -69,161 +70,36 @@
                     <th width="10" class="hidden-phone center"><a href="#" onclick="Joomla.tableOrdering('id','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="Id">Id<span class="icon-arrow-down-3"></span></a></th>
                 </tr>
             </thead>
-                        <tbody><tr class="row0">
+                <tbody>
+                @php
+                $count = 1;
+                @endphp
+
+                @foreach($designations as $designation)
+                        <tr class="row0">
                 
-                    <td align="center" class="hidden-phone">1</td>
+                    <td align="center" class="hidden-phone">{{$count}}</td>
                     
                     <td><input type="checkbox" id="cb0" name="cid[]" value="13" onclick="Joomla.isChecked(this.checked);"></td>
                     
                     
                     <td align="center">
-                                                <a href="/vbizz-dashboard/edept/edit/13">программисты</a>
-                                        </td>
+                            <a href="/vbizz-dashboard/edept/edit/13">{{$designation->designation_name}}</a>
+                    </td>
                     <td class="publish_unpublish center"><a class="btn btn-micro active hasTooltip" href="javascript:void(0);" onclick="return listItemTask('cb0','unpublish')" title="" data-original-title="Unpublish Item"><span class="icon-publish" aria-hidden="true"></span></a></td>
                                     
-                    <td class="center hidden-phone">13</td>
+                    <td class="center hidden-phone">{{$designation->designation_id}}</td>
                    
                 </tr>
                
-                    
-                            <tr class="row1">
-                
-                    <td align="center" class="hidden-phone">2</td>
-                    
-                    <td><input type="checkbox" id="cb1" name="cid[]" value="12" onclick="Joomla.isChecked(this.checked);"></td>
-                    
-                    
-                    <td align="center">
-                                                <a href="/vbizz-dashboard/edept/edit/12">Диспетчер заказов</a>
-                                        </td>
-                    <td class="publish_unpublish center"><a class="btn btn-micro active hasTooltip" href="javascript:void(0);" onclick="return listItemTask('cb1','unpublish')" title="" data-original-title="Unpublish Item"><span class="icon-publish" aria-hidden="true"></span></a></td>
-                                    
-                    <td class="center hidden-phone">12</td>
-                   
-                </tr>
-               
-                    
-                            <tr class="row0">
-                
-                    <td align="center" class="hidden-phone">3</td>
-                    
-                    <td><input type="checkbox" id="cb2" name="cid[]" value="11" onclick="Joomla.isChecked(this.checked);"></td>
+                @php
+                $count++;
+                @endphp
+
+                @endforeach
                     
                     
-                    <td align="center">
-                                                <a href="/vbizz-dashboard/edept/edit/11">Сборщики мебели</a>
-                                        </td>
-                    <td class="publish_unpublish center"><a class="btn btn-micro active hasTooltip" href="javascript:void(0);" onclick="return listItemTask('cb2','unpublish')" title="" data-original-title="Unpublish Item"><span class="icon-publish" aria-hidden="true"></span></a></td>
-                                    
-                    <td class="center hidden-phone">11</td>
-                   
-                </tr>
-               
-                    
-                            <tr class="row1">
-                
-                    <td align="center" class="hidden-phone">4</td>
-                    
-                    <td><input type="checkbox" id="cb3" name="cid[]" value="10" onclick="Joomla.isChecked(this.checked);"></td>
-                    
-                    
-                    <td align="center">
-                                                <a href="/vbizz-dashboard/edept/edit/10">Менеджеры по продажам</a>
-                                        </td>
-                    <td class="publish_unpublish center"><a class="btn btn-micro active hasTooltip" href="javascript:void(0);" onclick="return listItemTask('cb3','unpublish')" title="" data-original-title="Unpublish Item"><span class="icon-publish" aria-hidden="true"></span></a></td>
-                                    
-                    <td class="center hidden-phone">10</td>
-                   
-                </tr>
-               
-                    
-                            <tr class="row0">
-                
-                    <td align="center" class="hidden-phone">5</td>
-                    
-                    <td><input type="checkbox" id="cb4" name="cid[]" value="9" onclick="Joomla.isChecked(this.checked);"></td>
-                    
-                    
-                    <td align="center">
-                                                <a href="/vbizz-dashboard/edept/edit/9">Pojištění</a>
-                                        </td>
-                    <td class="publish_unpublish center"><a class="btn btn-micro active hasTooltip" href="javascript:void(0);" onclick="return listItemTask('cb4','unpublish')" title="" data-original-title="Unpublish Item"><span class="icon-publish" aria-hidden="true"></span></a></td>
-                                    
-                    <td class="center hidden-phone">9</td>
-                   
-                </tr>
-               
-                    
-                            <tr class="row1">
-                
-                    <td align="center" class="hidden-phone">6</td>
-                    
-                    <td><input type="checkbox" id="cb5" name="cid[]" value="8" onclick="Joomla.isChecked(this.checked);"></td>
-                    
-                    
-                    <td align="center">
-                                                <a href="/vbizz-dashboard/edept/edit/8">Reality</a>
-                                        </td>
-                    <td class="publish_unpublish center"><a class="btn btn-micro active hasTooltip" href="javascript:void(0);" onclick="return listItemTask('cb5','unpublish')" title="" data-original-title="Unpublish Item"><span class="icon-publish" aria-hidden="true"></span></a></td>
-                                    
-                    <td class="center hidden-phone">8</td>
-                   
-                </tr>
-               
-                    
-                            <tr class="row0">
-                
-                    <td align="center" class="hidden-phone">7</td>
-                    
-                    <td><input type="checkbox" id="cb6" name="cid[]" value="7" onclick="Joomla.isChecked(this.checked);"></td>
-                    
-                    
-                    <td align="center">
-                                                <a href="/vbizz-dashboard/edept/edit/7">Info</a>
-                                        </td>
-                    <td class="publish_unpublish center"><a class="btn btn-micro active hasTooltip" href="javascript:void(0);" onclick="return listItemTask('cb6','unpublish')" title="" data-original-title="Unpublish Item"><span class="icon-publish" aria-hidden="true"></span></a></td>
-                                    
-                    <td class="center hidden-phone">7</td>
-                   
-                </tr>
-               
-                    
-                            <tr class="row1">
-                
-                    <td align="center" class="hidden-phone">8</td>
-                    
-                    <td><input type="checkbox" id="cb7" name="cid[]" value="6" onclick="Joomla.isChecked(this.checked);"></td>
-                    
-                    
-                    <td align="center">
-                                                <a href="/vbizz-dashboard/edept/edit/6">Styrelse</a>
-                                        </td>
-                    <td class="publish_unpublish center"><a class="btn btn-micro active hasTooltip" href="javascript:void(0);" onclick="return listItemTask('cb7','unpublish')" title="" data-original-title="Unpublish Item"><span class="icon-publish" aria-hidden="true"></span></a></td>
-                                    
-                    <td class="center hidden-phone">6</td>
-                   
-                </tr>
-               
-                    
-                            <tr class="row0">
-                
-                    <td align="center" class="hidden-phone">9</td>
-                    
-                    <td><input type="checkbox" id="cb8" name="cid[]" value="5" onclick="Joomla.isChecked(this.checked);"></td>
-                    
-                    
-                    <td align="center">
-                                                <a href="/vbizz-dashboard/edept/edit/5">Designing</a>
-                                        </td>
-                    <td class="publish_unpublish center"><a class="btn btn-micro active hasTooltip" href="javascript:void(0);" onclick="return listItemTask('cb8','unpublish')" title="" data-original-title="Unpublish Item"><span class="icon-publish" aria-hidden="true"></span></a></td>
-                                    
-                    <td class="center hidden-phone">5</td>
-                   
-                </tr>
-               
-                    
-                    
-            </tbody><tfoot>
+            <!-- </tbody><tfoot>
                 <tr>
                   <td colspan="10">
     <div class="pagination pagination-toolbar clearfix" style="text-align: center;">
@@ -248,9 +124,11 @@
     </div>
     </td>
                 </tr>
-            </tfoot>
+            </tfoot> -->
       
         </table>
+        {!! $designations->render() !!}
+
     </div>
     
     <input type="hidden" name="option" value="com_vbizz">
