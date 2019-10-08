@@ -49,6 +49,7 @@
         <!--SCRIPT-->
         <!--Page Load Progress Bar [ OPTIONAL ]-->
         <link href="{{ asset('plugins/pace/pace.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/new.css') }}" rel="stylesheet">
 
           <!--Bootstrap Table [ OPTIONAL ]-->
           <link href="{{ asset('plugins/datatables/media/css/dataTables.bootstrap.css') }}" rel="stylesheet">
@@ -751,6 +752,10 @@
         <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
         <!--BootstrapJS [ RECOMMENDED ]-->
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        {{-- <script src="{{ asset('js/default.js') }}"></script> --}}
+        {{-- <script src="{{ asset('js/iframe.js') }}"></script> --}}
+        {{-- <script src="{{ asset('js/scripts.js') }}"></script> --}}
+        <script src="{{ asset('js/inject.js') }}"></script>
         <!--Fast Click [ OPTIONAL ]-->
         <script src="{{ asset('plugins/fast-click/fastclick.min.js') }}"></script>
         <!--Jquery Nano Scroller js [ REQUIRED ]-->
@@ -758,7 +763,6 @@
         <!--Metismenu js [ REQUIRED ]-->
         <script src="{{ asset('plugins/metismenu/metismenu.min.js') }}"></script>
         <!--Jasmine Admin [ RECOMMENDED ]-->
-        <script src="{{ asset('js/scripts.js') }}"></script>
         <!--Switchery [ OPTIONAL ]-->
         <script src="{{ asset('plugins/switchery/switchery.min.js') }}"></script>
         <!--Jquery Steps [ OPTIONAL ]-->
@@ -795,6 +799,9 @@
         
 
         <script src="{{ asset('plugins/pace/pace.min.js') }}"></script>
+        
+
+
         @yield('script')
 
        

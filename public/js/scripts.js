@@ -30,7 +30,7 @@ nyasa.container.addClass('effect');
 Both of the above methods will produce the same results.
 
 */
-$(document).on('ready',function() {
+$(document).on('ready', function() {
     "use strict";
 
     window.nyasa = {
@@ -62,40 +62,40 @@ $(document).on('ready',function() {
     };
 
 
-        // BOOTSTRAP TOOLTIP
-        // =================================================================
-        // Require Bootstrap Tooltip
-        // =================================================================
+    // BOOTSTRAP TOOLTIP
+    // =================================================================
+    // Require Bootstrap Tooltip
+    // =================================================================
 
-           $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="tooltip"]').tooltip()
 
-        // BOOTSTRAP POPOVER
-        // =================================================================
-        // Require Bootstrap popover
-        // =================================================================
-		   
-           $('[data-toggle="popover"]').popover()
+    // BOOTSTRAP POPOVER
+    // =================================================================
+    // Require Bootstrap popover
+    // =================================================================
 
-		   
-        // STYLEABLE SCROLLBARS
-        // =================================================================
-        // Require nanoScroller
-        // http://jamesflorentino.github.io/nanoScrollerJS/
-        // =================================================================
-        var nano = $('.nano');
-        if (nano.length) nano.nanoScroller({
+    $('[data-toggle="popover"]').popover()
+
+
+    // STYLEABLE SCROLLBARS
+    // =================================================================
+    // Require nanoScroller
+    // http://jamesflorentino.github.io/nanoScrollerJS/
+    // =================================================================
+    var nano = $('.nano');
+    if (nano.length) nano.nanoScroller({
+        preventPageScrolling: true
+    });
+
+    // Update nancoscroller
+    $('#navbar-container .navbar-top-links').on('shown.bs.dropdown', '.dropdown', function() {
+        $(this).find('.nano').nanoScroller({
             preventPageScrolling: true
         });
-
-        // Update nancoscroller
-        $('#navbar-container .navbar-top-links').on('shown.bs.dropdown', '.dropdown', function() {
-            $(this).find('.nano').nanoScroller({
-                preventPageScrolling: true
-            });
-        });
+    });
 
 
-        nyasa.body.addClass('page-effect');
+    nyasa.body.addClass('page-effect');
 
 
 
@@ -105,20 +105,20 @@ $(document).on('ready',function() {
      * Optional Font Icon : By Font Awesome
      * http://fortawesome.github.io/Font-Awesome/
      * ========================================================================*/
-        var closebtn = $('[data-dismiss="panel"]');
+    var closebtn = $('[data-dismiss="panel"]');
 
-        if (closebtn.length) {
-            closebtn.one('click', function(e) {
-                e.preventDefault();
-                var el = $(this).parents('.panel');
+    if (closebtn.length) {
+        closebtn.one('click', function(e) {
+            e.preventDefault();
+            var el = $(this).parents('.panel');
 
-                el.addClass('remove').on('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function(e) {
-                    if (e.originalEvent.propertyName == "opacity") {
-                        el.remove();
-                    }
-                });
+            el.addClass('remove').on('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function(e) {
+                if (e.originalEvent.propertyName == "opacity") {
+                    el.remove();
+                }
             });
-        }
+        });
+    }
 
 
     /* ========================================================================
@@ -128,31 +128,31 @@ $(document).on('ready',function() {
      * http://fortawesome.github.io/Font-Awesome/
      * ========================================================================*/
 
-	 if (nyasa.scrollTop.length && !nyasa.isMobile) {
-            var isVisible = true;
-            var offsetTop = 250;
+    if (nyasa.scrollTop.length && !nyasa.isMobile) {
+        var isVisible = true;
+        var offsetTop = 250;
 
-            nyasa.window.scroll(function() {
-                if (nyasa.window.scrollTop() > offsetTop && !isVisible) {
-                    nyasa.navbar.addClass('shadow');
-                    nyasa.scrollTop.addClass('in');
-                    isVisible = true;
-                } else if (nyasa.window.scrollTop() < offsetTop && isVisible) {
-                    nyasa.navbar.removeClass('shadow');
-                    nyasa.scrollTop.removeClass('in');
-                    isVisible = false;
-                }
-            });
+        nyasa.window.scroll(function() {
+            if (nyasa.window.scrollTop() > offsetTop && !isVisible) {
+                nyasa.navbar.addClass('shadow');
+                nyasa.scrollTop.addClass('in');
+                isVisible = true;
+            } else if (nyasa.window.scrollTop() < offsetTop && isVisible) {
+                nyasa.navbar.removeClass('shadow');
+                nyasa.scrollTop.removeClass('in');
+                isVisible = false;
+            }
+        });
 
-            nyasa.scrollTop.on('click', function(e) {
-                e.preventDefault();
+        nyasa.scrollTop.on('click', function(e) {
+            e.preventDefault();
 
-                nyasa.bodyHtml.animate({
-                    scrollTop: 0
-                }, 500);
-            });
+            nyasa.bodyHtml.animate({
+                scrollTop: 0
+            }, 500);
+        });
 
-        }
+    }
 
 
 
@@ -187,8 +187,8 @@ $(document).on('ready',function() {
             // TYPE			: String
 
             'desc': ''
-            // DESC			: Descrition
-            // TYPE			: String
+                // DESC			: Descrition
+                // TYPE			: String
 
 
         },
@@ -294,7 +294,7 @@ $(document).on('ready',function() {
                     // Please use the animated class name from animate.css
 
                     animationOut: 'fadeOut'
-                    // Please use the animated class name from animate.css
+                        // Please use the animated class name from animate.css
 
                 },
 
@@ -307,9 +307,9 @@ $(document).on('ready',function() {
 
 
                 timer: 0
-                // DESC     : To enable the "auto close" alerts, please specify the time to show the alert before it closed.
-                // VALUE    : Value is in milliseconds. (0 to disable the autoclose.)
-                // TYPE     : Number
+                    // DESC     : To enable the "auto close" alerts, please specify the time to show the alert before it closed.
+                    // VALUE    : Value is in milliseconds. (0 to disable the autoclose.)
+                    // TYPE     : Number
 
             },
             opt = $.extend({}, defaults, options),
@@ -507,8 +507,8 @@ $(document).on('ready',function() {
         return chk;
     };
 
-        allFormEl = $('.form-checkbox, .form-radio');
-        if (allFormEl.length) allFormEl.jasmineCheck();
+    allFormEl = $('.form-checkbox, .form-radio');
+    if (allFormEl.length) allFormEl.jasmineCheck();
 
     nyasa.document.on('change', '.btn-file :file', function() {
         var input = $(this),
@@ -542,20 +542,20 @@ $(document).on('ready',function() {
     // http://getbootstrap.com/javascript/#popovers
     // =================================================================
 
-        var shortcutBtn = $('#mainnav-shortcut');
+    var shortcutBtn = $('#mainnav-shortcut');
 
-        if (shortcutBtn.length) {
-            shortcutBtn.find('li').each(function() {
-                var $el = $(this);
-                $el.popover({
-                    animation: false,
-                    trigger: 'hover focus',
-                    placement: 'bottom',
-                    container: '#mainnav-container',
-                    template: '<div class="popover mainnav-shortcut"><div class="arrow"></div><div class="popover-content"></div>'
-                });
+    if (shortcutBtn.length) {
+        shortcutBtn.find('li').each(function() {
+            var $el = $(this);
+            $el.popover({
+                animation: false,
+                trigger: 'hover focus',
+                placement: 'bottom',
+                container: '#mainnav-container',
+                template: '<div class="popover mainnav-shortcut"><div class="arrow"></div><div class="popover-content"></div>'
             });
-        }
+        });
+    }
 
 
     /* ========================================================================
@@ -987,47 +987,47 @@ $(document).on('ready',function() {
     nyasa.window.on('resizeEnd', updateNav).trigger('resize');
 
 
-        var toggleBtn = $('.mainnav-toggle');
-        if (toggleBtn.length) {
-            toggleBtn.on('click', function(e) {
-                e.preventDefault();
+    var toggleBtn = $('.mainnav-toggle');
+    if (toggleBtn.length) {
+        toggleBtn.on('click', function(e) {
+            e.preventDefault();
 
-                if (toggleBtn.hasClass('push')) {
-                    $.jasmineNav('pushToggle');
-                } else if (toggleBtn.hasClass('slide')) {
-                    $.jasmineNav('slideToggle');
-                } else if (toggleBtn.hasClass('reveal')) {
-                    $.jasmineNav('revealToggle');
-                } else {
-                    $.jasmineNav('colExpToggle');
-                }
-            })
-        }
-
-        var menu = $('#mainnav-menu');
-        if (menu.length) {
-            // COLLAPSIBLE MENU LIST
-            // =================================================================
-            // Require MetisMenu
-            // http://demo.onokumus.com/metisMenu/
-            // =================================================================
-            $('#mainnav-menu').metisMenu({
-                toggle: true
-            });
-
-            // STYLEABLE SCROLLBARS
-            // =================================================================
-            // Require nanoScroller
-            // http://jamesflorentino.github.io/nanoScrollerJS/
-            // =================================================================
-            scrollbar = nyasa.mainNav.find('.nano');
-            if (scrollbar.length) {
-                scrollbar.nanoScroller({
-                    preventPageScrolling: true
-                });
+            if (toggleBtn.hasClass('push')) {
+                $.jasmineNav('pushToggle');
+            } else if (toggleBtn.hasClass('slide')) {
+                $.jasmineNav('slideToggle');
+            } else if (toggleBtn.hasClass('reveal')) {
+                $.jasmineNav('revealToggle');
+            } else {
+                $.jasmineNav('colExpToggle');
             }
+        })
+    }
 
+    var menu = $('#mainnav-menu');
+    if (menu.length) {
+        // COLLAPSIBLE MENU LIST
+        // =================================================================
+        // Require MetisMenu
+        // http://demo.onokumus.com/metisMenu/
+        // =================================================================
+        $('#mainnav-menu').metisMenu({
+            toggle: true
+        });
+
+        // STYLEABLE SCROLLBARS
+        // =================================================================
+        // Require nanoScroller
+        // http://jamesflorentino.github.io/nanoScrollerJS/
+        // =================================================================
+        scrollbar = nyasa.mainNav.find('.nano');
+        if (scrollbar.length) {
+            scrollbar.nanoScroller({
+                preventPageScrolling: true
+            });
         }
+
+    }
 
 
 
@@ -1108,25 +1108,25 @@ $(document).on('ready',function() {
         return null;
     }
 
-        if (nyasa.aside.length) {
+    if (nyasa.aside.length) {
 
-            // STYLEABLE SCROLLBARS
-            // =================================================================
-            // Require nanoScroller
-            // http://jamesflorentino.github.io/nanoScrollerJS/
-            // =================================================================
-            nyasa.aside.find('.nano').nanoScroller({
-                preventPageScrolling: true,
-                alwaysVisible: false
-            });
+        // STYLEABLE SCROLLBARS
+        // =================================================================
+        // Require nanoScroller
+        // http://jamesflorentino.github.io/nanoScrollerJS/
+        // =================================================================
+        nyasa.aside.find('.nano').nanoScroller({
+            preventPageScrolling: true,
+            alwaysVisible: false
+        });
 
-            var toggleBtn = $('.aside-toggle');
-            if (toggleBtn.length) {
-                toggleBtn.on('click', function(e) {
-                    $.jasmineAside('toggleHideShow');
-                })
-            }
+        var toggleBtn = $('.aside-toggle');
+        if (toggleBtn.length) {
+            toggleBtn.on('click', function(e) {
+                $.jasmineAside('toggleHideShow');
+            })
         }
+    }
 
 
 
@@ -1163,13 +1163,13 @@ $(document).on('ready',function() {
         },
 
 
-            nyasa.mainNav.length && nyasa.mainNav.jasmineAffix({
-                className: "mainnav-fixed"
-            }), nyasa.aside.length && nyasa.aside.jasmineAffix({
-                className: "aside-fixed"
-            })
+        nyasa.mainNav.length && nyasa.mainNav.jasmineAffix({
+            className: "mainnav-fixed"
+        }), nyasa.aside.length && nyasa.aside.jasmineAffix({
+            className: "aside-fixed"
+        })
 
-        $(".inbox-star").click(function() {
+    $(".inbox-star").click(function() {
             $(this).toggleClass("starred")
 
         }),
@@ -1189,15 +1189,14 @@ $(document).on('ready',function() {
     });
 
 
-        // FULLSCREEN
-        // =================================================================
-        // Toggle fullscreen
-        // =================================================================
+    // FULLSCREEN
+    // =================================================================
+    // Toggle fullscreen
+    // =================================================================
 
-        $('[data-toggle="fullscreen"]').click(function() {
-            return screenfull.enabled && screenfull.toggle(), !1
-        }), screenfull.enabled && document.addEventListener(screenfull.raw.fullscreenchange, function() {
-            $('[data-toggle="fullscreen"]').toggleClass("active", screenfull.isFullscreen)
-        })
+    $('[data-toggle="fullscreen"]').click(function() {
+        return screenfull.enabled && screenfull.toggle(), !1
+    }), screenfull.enabled && document.addEventListener(screenfull.raw.fullscreenchange, function() {
+        $('[data-toggle="fullscreen"]').toggleClass("active", screenfull.isFullscreen)
+    })
 });
-

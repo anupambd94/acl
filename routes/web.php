@@ -50,7 +50,8 @@ Route::get('/getSections', 'EmployeeController@getSection')->name('getSections')
 Route::get('employee_create', 'EmployeeController@create')->name('employee_create');
 Route::post('employee_create', 'EmployeeController@store');
 
-
+Route::get('department_create', 'EmployeeDepartmentController@create')->name('department_create');
+Route::post('department_create', 'EmployeeDepartmentController@store');
 // Routs for ajax calls
 
 Route::post('/addDepartment', 'EmployeeController@addDepartment')->name('addDepartment');

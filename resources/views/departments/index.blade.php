@@ -15,9 +15,13 @@
             <div class="row-fluid">
                 <div class="span12">
                     <div id="toolbar" class="btn-toolbar">
-                                            <div class="btn-wrapper" id="toolbar-new">
-                            <span onclick="Joomla.submitbutton('add')" class="btn btn-small btn-success">
-                            <span class="fa fa-plus"></span> New</span>
+                        <div class="btn-wrapper" id="toolbar-new">
+                            <a href="{{route('department_create')}}">
+                                <span  class="btn btn-small btn-success">
+                                    <span class="fa fa-plus">
+                                    </span> &nbsp; New
+                                </span>
+                            </a>
                         </div>
                                         
                                             <div class="btn-wrapper" id="toolbar-edit">

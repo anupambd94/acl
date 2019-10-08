@@ -15,7 +15,7 @@ use Illuminate\Pagination\Paginator;
 // use App\Employees;
 use App\Departments;
 // use App\Sections;
-// use App\Designations;
+use App\Designations;
 // use App\Currentaddress;
 // use App\Permanentaddress;
 
@@ -50,7 +50,15 @@ class EmployeeDepartmentController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::all();
+        $permissions = Permission::all();
+        $departments = $data = Departments::select('department_id','department_name')->get();
+        $designations = $data = Designations::select('designation_id','designation_name')->get();
+        if (!Auth::user()->hasPermissionTo('Employee Management')) {
+            abort('401');
+        } else {
+        return view('departments.create');
+        }
     }
 
     /**
