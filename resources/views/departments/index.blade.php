@@ -8,6 +8,7 @@
 </header>
 <div class="content_part">
     <form action="/vbizz-dashboard/edept" method="post" name="adminForm" id="adminForm">
+        {{ csrf_field() }}
     
     <div class="subhead">
         <div class="container-fluid">

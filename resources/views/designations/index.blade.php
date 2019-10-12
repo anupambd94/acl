@@ -17,8 +17,8 @@
                 <div class="span12">
                     <div id="toolbar" class="btn-toolbar">
                                             <div class="btn-wrapper" id="toolbar-new">
-                            <span onclick="Joomla.submitbutton('add')" class="btn btn-small btn-success">
-                            <span class="fa fa-plus"></span> New</span>
+                            <a href="{{route('designation_create')}}" class="btn btn-small btn-success">
+                            <span class="fa fa-plus"></span> New</span></a>
                         </div>
                                         
                                             <div class="btn-wrapper" id="toolbar-edit">
@@ -64,7 +64,7 @@
             <thead>
                 <tr>
                     <th width="10" class="hidden-phone">#</th>
-                    <th width="10"><input type="checkbox" name="toggle" value="" onclick="Joomla.checkAll(this);"></th>	
+                    <th width="10"><input type="checkbox" name="toggle" value="" id="master"></th>	
                     <th><a href="#" onclick="Joomla.tableOrdering('name','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="Name">Name</a></th>
                     <th width="40" class="center"><a href="#" onclick="Joomla.tableOrdering('published','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="Status">Status</a></th>
                     <th width="10" class="hidden-phone center"><a href="#" onclick="Joomla.tableOrdering('id','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="Id">Id<span class="icon-arrow-down-3"></span></a></th>
@@ -76,17 +76,28 @@
                 @endphp
 
                 @foreach($designations as $designation)
+                @php
+                if($designation->IsActive == 1){
+                    $icon_status = "icon-publish";
+                    $active = "active";
+                    $title = "Unpublish";
+                }else{
+                    $icon_status = "icon-unpublish";
+                    $active = "";
+                    $title = "Publish";
+                }
+                @endphp
                         <tr class="row0">
-                
+                            
                     <td align="center" class="hidden-phone">{{$count}}</td>
                     
-                    <td><input type="checkbox" id="cb0" name="cid[]" value="13" onclick="Joomla.isChecked(this.checked);"></td>
+                        <td><input type="checkbox" id="cb0" name="cid[]" value="{{$designation->designation_id}}" class="sub_chk"></td>
                     
                     
                     <td align="center">
-                            <a href="/vbizz-dashboard/edept/edit/13">{{$designation->designation_name}}</a>
+                            <a href="">{{$designation->designation_name}}</a>
                     </td>
-                    <td class="publish_unpublish center"><a class="btn btn-micro active hasTooltip" href="javascript:void(0);" onclick="return listItemTask('cb0','unpublish')" title="" data-original-title="Unpublish Item"><span class="icon-publish" aria-hidden="true"></span></a></td>
+                <td class="publish_unpublish center"><a class="btn btn-micro {{$active}} hasTooltip changeStatus" href="javascript:void(0);"  data-designation_id="{{$designation->designation_id}}" title="{{$title}}" data-original-title="{{$title}} Item"><span class="{{$icon_status}}" aria-hidden="true"></span></a></td>
                                     
                     <td class="center hidden-phone">{{$designation->designation_id}}</td>
                    
@@ -131,18 +142,18 @@
 
     </div>
     
-    <input type="hidden" name="option" value="com_vbizz">
+    {{-- <input type="hidden" name="option" value="com_vbizz">
     <input type="hidden" name="task" value="">
     <input type="hidden" name="boxchecked" value="0">
     <input type="hidden" name="view" value="edept">
     <input type="hidden" name="filter_order" value="id">
-    <input type="hidden" name="filter_order_Dir" value="desc">
+    <input type="hidden" name="filter_order_Dir" value="desc"> --}}
     </form>
     </div>
 @endsection
 
 @section('script')
-<script src="/media/jui/js/jquery.min.js?fff1c72eed1a3c56f80a13367de2f480" type="text/javascript"></script>
+{{-- <script src="/media/jui/js/jquery.min.js?fff1c72eed1a3c56f80a13367de2f480" type="text/javascript"></script>
     <script src="/components/com_vbizz/assets/js/jquery-ui.js" type="text/javascript"></script>
     <script src="/media/system/js/mootools-core.js?fff1c72eed1a3c56f80a13367de2f480" type="text/javascript"></script>
     <script src="/media/system/js/core.js?fff1c72eed1a3c56f80a13367de2f480" type="text/javascript"></script>
@@ -158,7 +169,7 @@
     <script src="/components/com_vbizz/assets/js/moment.min.js" type="text/javascript"></script>
     <script src="/components/com_vbizz/assets/js/fullcalendar.min.js" type="text/javascript"></script>
     <script src="/media/jui/js/chosen.jquery.min.js?fff1c72eed1a3c56f80a13367de2f480" type="text/javascript"></script>
-    <script src="/media/jui/js/bootstrap.min.js?fff1c72eed1a3c56f80a13367de2f480" type="text/javascript"></script>
+    <script src="/media/jui/js/bootstrap.min.js?fff1c72eed1a3c56f80a13367de2f480" type="text/javascript"></script> --}}
 
 <script type="text/javascript">
     jQuery(window).ready(function(e) {
@@ -169,6 +180,35 @@
         var new_height = window_height -(copyright+header);
         jQuery('.shwocase').css('min-height',new_height);
     });
-    
+
+    jQuery('#master').on('click', function(e) {
+	if($(this).is(':checked',true))  
+	{
+		$(".sub_chk").prop('checked', true);  
+	}  
+	else  
+	{  
+		$(".sub_chk").prop('checked',false);  
+	}  
+});
+
+jQuery('#master').on('click', function(e) {
+	if($(this).is(':checked',true))  
+	{
+		$(".sub_chk").prop('checked', true);  
+	}  
+	else  
+	{  
+		$(".sub_chk").prop('checked',false);  
+	}  
+});
+    jQuery('.changeStatus').on('click',function(){
+        var designationId = $(this).attr('data-designation_id');
+        var action = $(this).attr('title');
+
+        
+        console.log();
+        console.log();
+    });
     </script>
 @endsection

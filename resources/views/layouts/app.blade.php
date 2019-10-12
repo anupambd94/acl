@@ -30,6 +30,7 @@
         <!--Jasmine Stylesheet [ REQUIRED ]-->
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
         <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
 
         <!--Font Awesome [ OPTIONAL ]-->
@@ -752,6 +753,7 @@
         <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
         <!--BootstrapJS [ RECOMMENDED ]-->
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
         {{-- <script src="{{ asset('js/default.js') }}"></script> --}}
         {{-- <script src="{{ asset('js/iframe.js') }}"></script> --}}
         {{-- <script src="{{ asset('js/scripts.js') }}"></script> --}}

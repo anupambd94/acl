@@ -49,7 +49,12 @@ class EmployeeDesignationController extends Controller
      */
     public function create()
     {
-        //
+        
+        if (!Auth::user()->hasPermissionTo('Employee Management')) {
+            abort('401');
+        } else {
+        return view('designations.create');
+        }
     }
 
     /**
@@ -60,7 +65,44 @@ class EmployeeDesignationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(isset($request->isActive)){
+            $isActive = 1;
+        }else{
+            $isActive = 0;
+        }
+                $status = "Initial";
+                $class = "";
+                // $isActive  = 1;
+                $data = $request;
+                // // $data->setAttribute('country', $countryId);
+                // $password = Hash::make($data['password']);
+                // $key = Hash::make('bdecomit');
+                // $toDate = Carbon::now();
+                // $id = \DB::getPdo()->lastInsertId();
+                // $hasImage =  $request->hasFile('image2');
+                  
+                    
+
+                $register = Designations::create([
+                'designation_name'=>$data['name'],
+                'designation_description'=>$data['description'],
+                'IsActive'=>$isActive
+                ]);
+        
+                if($register){
+                    $status = "Designation ".$data['name']." Successfully Created.";
+                    $class = "success";
+                }else{
+                    $status = "not created";
+                    $class = "danger";
+                }
+                    // $image = file_get_contents($path);
+                    // $file = Input::file('image');
+                    
+                // return response()->json($request);        
+                return redirect('designation_create')->with('status',$status);
+                // return view('employees.index')->with('roles', $roles);
+                // return $status;
     }
 
     /**

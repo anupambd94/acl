@@ -50,10 +50,10 @@ class EmployeeDepartmentController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
-        $permissions = Permission::all();
-        $departments = $data = Departments::select('department_id','department_name')->get();
-        $designations = $data = Designations::select('designation_id','designation_name')->get();
+        // $roles = Role::all();
+        // $permissions = Permission::all();
+        // $departments = $data = Departments::select('department_id','department_name')->get();
+        // $designations = $data = Designations::select('designation_id','designation_name')->get();
         if (!Auth::user()->hasPermissionTo('Employee Management')) {
             abort('401');
         } else {
@@ -69,7 +69,44 @@ class EmployeeDepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(isset($request->isActive)){
+            $isActive = 1;
+        }else{
+            $isActive = 0;
+        }
+                $status = "Initial";
+                $class = "";
+                // $isActive  = 1;
+                $data = $request;
+                // // $data->setAttribute('country', $countryId);
+                // $password = Hash::make($data['password']);
+                // $key = Hash::make('bdecomit');
+                // $toDate = Carbon::now();
+                // $id = \DB::getPdo()->lastInsertId();
+                // $hasImage =  $request->hasFile('image2');
+                  
+                    
+
+                $register = Departments::create([
+                'department_name'=>$data['name'],
+                'department_description'=>$data['description'],
+                'IsActive'=>$isActive
+                ]);
+        
+                if($register){
+                    $status = "Deparment ".$data['name']." Successfully Created.";
+                    $class = "success";
+                }else{
+                    $status = "not reigstered";
+                    $class = "danger";
+                }
+                    // $image = file_get_contents($path);
+                    // $file = Input::file('image');
+                    
+                // return response()->json($request);        
+                return redirect('department_create')->with('status',$status);
+                // return view('employees.index')->with('roles', $roles);
+                // return $status;
     }
 
     /**
@@ -80,7 +117,7 @@ class EmployeeDepartmentController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**

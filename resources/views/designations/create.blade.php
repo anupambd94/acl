@@ -3,11 +3,11 @@
 @section('content')
 <header class="header">
 	<div class="container-title">
-		<h1 class="page-title"></h1><h1 class="page-title">Employee Department (New)</h1>
+		<h1 class="page-title"></h1><h1 class="page-title">Employee Designation (New)</h1>
 	</div>
 </header>
 <div class="content_part">
-    <form  method="post" name="adminForm" id="adminForm" action="{{ route('department_create') }}">
+    <form  method="post" name="adminForm" id="adminForm" action="{{ route('designation_create') }}">
         {{ csrf_field() }}
     
     
@@ -50,7 +50,7 @@
     <fieldset class="adminform">
         <legend>Overview</legend>
         <ul>
-        <li>ACL lets you add n numbers of departments for your company.</li>
+        <li>ACL lets you add n numbers of designations of employee.</li>
         </ul>
     </fieldset>
     </div>
@@ -65,7 +65,7 @@
         <tr>
             <th width="200">
                 <label class="hasTip" title="">
-                Department Name<span style="color:Red;">*  </span></label>
+                Designation Name<span style="color:Red;">*  </span></label>
             </th>
             <td><input class="text_area" type="text" name="name" id="name" value="" required></td>
         </tr>
