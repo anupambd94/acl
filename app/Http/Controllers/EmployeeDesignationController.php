@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -29,16 +30,16 @@ class EmployeeDesignationController extends Controller
     public function index()
     {
         $designations = \DB::table('designations')
-        ->select('designation_id','designation_name','IsActive')->paginate(10);
+            ->select('designation_id', 'designation_name', 'IsActive')->paginate(10);
 
         if (!Auth::user()->hasPermissionTo('Employee Management')) {
             abort('401');
         } else {
-            
+
             // return view('employees.index',)->with('roles', $roles);
             // return response()->json($employees);
 
-            return view('designations.index',compact('roles','designations'));
+            return view('designations.index', compact('roles', 'designations'));
         }
     }
 
@@ -49,11 +50,11 @@ class EmployeeDesignationController extends Controller
      */
     public function create()
     {
-        
+
         if (!Auth::user()->hasPermissionTo('Employee Management')) {
             abort('401');
         } else {
-        return view('designations.create');
+            return view('designations.create');
         }
     }
 
@@ -65,44 +66,44 @@ class EmployeeDesignationController extends Controller
      */
     public function store(Request $request)
     {
-        if(isset($request->isActive)){
+        if (isset($request->isActive)) {
             $isActive = 1;
-        }else{
+        } else {
             $isActive = 0;
         }
-                $status = "Initial";
-                $class = "";
-                // $isActive  = 1;
-                $data = $request;
-                // // $data->setAttribute('country', $countryId);
-                // $password = Hash::make($data['password']);
-                // $key = Hash::make('bdecomit');
-                // $toDate = Carbon::now();
-                // $id = \DB::getPdo()->lastInsertId();
-                // $hasImage =  $request->hasFile('image2');
-                  
-                    
+        $status = "Initial";
+        $class = "";
+        // $isActive  = 1;
+        $data = $request;
+        // // $data->setAttribute('country', $countryId);
+        // $password = Hash::make($data['password']);
+        // $key = Hash::make('bdecomit');
+        // $toDate = Carbon::now();
+        // $id = \DB::getPdo()->lastInsertId();
+        // $hasImage =  $request->hasFile('image2');
 
-                $register = Designations::create([
-                'designation_name'=>$data['name'],
-                'designation_description'=>$data['description'],
-                'IsActive'=>$isActive
-                ]);
-        
-                if($register){
-                    $status = "Designation ".$data['name']." Successfully Created.";
-                    $class = "success";
-                }else{
-                    $status = "not created";
-                    $class = "danger";
-                }
-                    // $image = file_get_contents($path);
-                    // $file = Input::file('image');
-                    
-                // return response()->json($request);        
-                return redirect('designation_create')->with('status',$status);
-                // return view('employees.index')->with('roles', $roles);
-                // return $status;
+
+
+        $register = Designations::create([
+            'designation_name' => $data['name'],
+            'designation_description' => $data['description'],
+            'IsActive' => $isActive
+        ]);
+
+        if ($register) {
+            $status = "Designation " . $data['name'] . " Successfully Created.";
+            $class = "success";
+        } else {
+            $status = "not created";
+            $class = "danger";
+        }
+        // $image = file_get_contents($path);
+        // $file = Input::file('image');
+
+        // return response()->json($request);        
+        return redirect('designation_create')->with('status', $status);
+        // return view('employees.index')->with('roles', $roles);
+        // return $status;
     }
 
     /**
@@ -134,9 +135,32 @@ class EmployeeDesignationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        if ($request->option == 'publish') {
+            foreach ($request->idList as $id) {
+                $result = Designations::where('designation_id', $id)
+                    ->update(array('isActive' => 1));
+            }
+        } else if ($request->option == 'unpublish') {
+            foreach ($request->idList as $id) {
+                $result = Designations::where('designation_id', $id)
+                    ->update(array('isActive' => 0));
+            }
+        } else { }
+
+        if ($result) {
+            $status = 'Profile Updated successfully';
+        } else {
+            $status = 'Not updated.';
+        }
+
+        return response()->json($result);
+
+        // return response()->json($request);        
+        // return redirect('designation_create')->with('status',$status);
+        // return view('employees.index')->with('roles', $roles);
+        // return $status;
     }
 
     /**

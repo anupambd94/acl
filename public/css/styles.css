@@ -2022,7 +2022,7 @@ fieldset.bradio li input[type="radio"]:checked+label:before {
 }
 
 .mail_heaer {
-    width: 100% display: inline-block;
+    width: 100%; display: inline-block;
     height: 30px;
     border: 1px solid #dddddd;
 }
@@ -2035,7 +2035,7 @@ fieldset.bradio li input[type="radio"]:checked+label:before {
 
 .main-mail-header {
     background: #1A2226;
-    color: #fffff;
+    color: #ffffff;
     display: inline-block;
     width: 100%;
     margin-top: 10px;
@@ -3390,7 +3390,7 @@ a.modal.btn {
     border-style: solid;
 }
 
-@charset "utf-8";
+/* @charset "utf-8"; */
 
 /* CSS Document */
 
@@ -6333,3 +6333,8 @@ select{
     font-family: "Font Awesome 5 Free", Open Sans;
     font-weight:501;
   }
+
+.loader_image{
+    width:80px;
+    margin-top: 300px;
+}

@@ -1,7 +1,8 @@
 <?php
-if(version_compare(PHP_VERSION, '7.2.0', '>=')) {
+if (version_compare(PHP_VERSION, '7.2.0', '>=')) {
     error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
 }
+
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 /*
@@ -23,7 +24,7 @@ Auth::routes();
 
 //Route::get('/home', 'HomeController@index');
 //
-Route::get('/createrole_role_permission',function(){
+Route::get('/createrole_role_permission', function () {
     // $role = Role::create(['name'=>'Super Admin']);
     // $permission = Permission::create(['name' => 'Supper Permission']);
 
@@ -50,13 +51,20 @@ Route::get('/getSections', 'EmployeeController@getSection')->name('getSections')
 Route::get('employee_create', 'EmployeeController@create')->name('employee_create');
 Route::post('employee_create', 'EmployeeController@store');
 
-Route::get('department_create', 'EmployeeDepartmentController@create')->name('department_create');
+Route::get('department_create', 'EmployeeDepartmentController@create')
+    ->name('department_create');
 Route::post('department_create', 'EmployeeDepartmentController@store');
+Route::post('department_update', 'EmployeeDepartmentController@update');
 
-Route::get('designation_create', 'EmployeeDesignationController@create')->name('designation_create');
+Route::get('designation_create', 'EmployeeDesignationController@create')
+    ->name('designation_create');
 Route::post('designation_create', 'EmployeeDesignationController@store');
+Route::post('designation_update', 'EmployeeDesignationController@update');
 // Routs for ajax calls
 
-Route::post('/addDepartment', 'EmployeeController@addDepartment')->name('addDepartment');
-Route::post('/addSection', 'EmployeeController@addSection')->name('addSection');
-Route::post('/addDesignation', 'EmployeeController@addDesignation')->name('addDesignation');
+Route::post('/addDepartment', 'EmployeeController@addDepartment')
+    ->name('addDepartment');
+Route::post('/addSection', 'EmployeeController@addSection')
+    ->name('addSection');
+Route::post('/addDesignation', 'EmployeeController@addDesignation')
+    ->name('addDesignation');
