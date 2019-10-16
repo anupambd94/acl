@@ -55,11 +55,16 @@ Route::get('department_create', 'EmployeeDepartmentController@create')
     ->name('department_create');
 Route::post('department_create', 'EmployeeDepartmentController@store');
 Route::post('department_update', 'EmployeeDepartmentController@update');
+// Route::post('department_edit', 'EmployeeDepartmentController@editDepartment');
+Route::get('/edit_department/{id}', 'EmployeeDepartmentController@edit')->name('edit_department');
+Route::post('/edit_department/{id}', 'EmployeeDepartmentController@editDepartment');
 
 Route::get('designation_create', 'EmployeeDesignationController@create')
     ->name('designation_create');
 Route::post('designation_create', 'EmployeeDesignationController@store');
 Route::post('designation_update', 'EmployeeDesignationController@update');
+Route::get('/edit_designation/{id}', 'EmployeeDesignationController@edit')->name('edit_designation');
+Route::post('/edit_designation/{id}', 'EmployeeDesignationController@editDesignation');
 // Routs for ajax calls
 
 Route::post('/addDepartment', 'EmployeeController@addDepartment')

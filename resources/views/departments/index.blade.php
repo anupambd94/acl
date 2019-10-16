@@ -228,43 +228,53 @@
     });
     var selected_checkbox = [];
 function submitbutton(option){
-$.ajaxSetup({
-headers: {
-'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-}
-});
-$(window).scrollTop(1);
-$('#loading').show();
-$('.loader_text').html("Completing process ....");
-$('.container').css("opacity", 0.6);
-$(".container *").children().prop('disabled', true);
-if (selected_checkbox) {
-$.ajax({
-type: 'post',
-url: '/department_update',
-data: {
-'option': option,
-'idList': selected_checkbox
-},
-success: function (data) {
-console.log('success');
-console.log(data);
+    if (option == 'edit') {
+        var department_id = $('#boxChecked').val();
+        var url = '{{ route("edit_department", ":id") }}';
+        url = url.replace(':id', department_id);
+        // console.log(department_id);
+    document.location.href=url;
+    }else{
+        $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+        });
+        $(window).scrollTop(1);
+        $('#loading').show();
+        $('.loader_text').html("Completing process ....");
+        $('.container').css("opacity", 0.6);
+        $(".container *").children().prop('disabled', true);
+        if (selected_checkbox) {
+        $.ajax({
+        type: 'post',
+        url: '/department_update',
+        data: {
+        'option': option,
+        'idList': selected_checkbox
+        },
+        success: function (data) {
+        console.log('success');
+        console.log(data);
+        
+        },
+        complete: function () {
+        $('#loading').hide();
+        $('.container').css("opacity", 1);
+        $(".container *").children().prop('disabled', false);
+        location.reload(true);
+        },
+        error: function () {
+        console.log('error');
+        }
+        });
+        
+        } else {
+        // location.reload(true);
+        }
+    }
 
-},
-complete: function () {
-$('#loading').hide();
-$('.container').css("opacity", 1);
-$(".container *").children().prop('disabled', false);
-location.reload(true);
-},
-error: function () {
-console.log('error');
-}
-});
 
-} else {
-// location.reload(true);
-}
 
 }
 
@@ -274,9 +284,9 @@ $('input[name^="department"]').each(function () {
 if ($(this).is(":checked")) {
 
 selected_checkbox.push($(this).val());
-console.log($(this).val());
+// console.log($(this).val());
 $('#boxChecked').val($(this).val());
-console.log($('#boxChecked').val());
+// console.log($('#boxChecked').val());
 }
 });
 });

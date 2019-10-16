@@ -125,9 +125,45 @@ class EmployeeDesignationController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (!Auth::user()->hasPermissionTo('Employee Management')) {
+            abort('401');
+        } else {
+            $designation = Designations::where('designation_id', $id)->get();
+            // return response()->json($department);
+            return view('designations.edit', compact('designation'));
+        }
     }
 
+    public function editDesignation(Request $request, $id)
+    {
+        if (!Auth::user()->hasPermissionTo('Employee Management')) {
+            abort('401');
+        } else {
+            if (isset($request->isActive)) {
+                $isActive = 1;
+            } else {
+                $isActive = 0;
+            }
+            $result = Designations::where('designation_id', $id)
+                ->update(array(
+                    'designation_name' => $request->name,
+                    'designation_description' => $request->description,
+                    'isActive' => $isActive
+                ));
+            $designation = Designations::where('designation_id', $id)->get();
+            if ($result) {
+                $status = 'Designation Updated successfully';
+            } else {
+                $status = 'Not updated.';
+            }
+
+            return redirect()->back()->with(['status' => $status, 'departmnet' => $designation]);
+            // return response()->json($request);        
+            // return redirect('designation_create')->with('status',$status);
+            // return view('employees.index')->with('roles', $roles);
+            // return $status;
+        }
+    }
     /**
      * Update the specified resource in storage.
      *

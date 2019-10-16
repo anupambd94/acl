@@ -1,14 +1,28 @@
 @extends('layouts.app')
+@if(isset($department))
+@foreach ($department as $info)
+@php
+$id = $info->department_id;
+$name = $info->department_name;
+if($info->IsActive == 1){
+$checked = "checked";
+}else{
+$checked = "";
+}
+$description = $info->department_description;
+@endphp
 
+@endforeach
+@endif
 @section('content')
 <header class="header">
     <div class="container-title">
         <h1 class="page-title"></h1>
-        <h1 class="page-title">Employee Department (New)</h1>
+        <h1 class="page-title">Employee Department (Edit)</h1>
     </div>
 </header>
 <div class="content_part">
-    <form method="post" name="adminForm" id="adminForm" action="{{ route('department_create') }}">
+    <form method="post" name="adminForm" id="adminForm" action="{{route('edit_department',$id)}}">
         {{ csrf_field() }}
 
 
@@ -24,10 +38,6 @@
                     <div class="btn-wrapper" id="toolbar-save">
                         <span onclick="submitbutton('save')" class="btn btn-small">
                             <span class="fa fa-check"></span> Save &amp; Close</span>
-                    </div>
-                    <div class="btn-wrapper" id="toolbar-save-new">
-                        <span onclick="submitbutton('saveNew')" class="btn btn-small">
-                            <span class="fa fa-plus"></span> Save &amp; New</span>
                     </div>
                     <div class="btn-wrapper" id="toolbar-cancel">
                         <span onclick="submitbutton('cancel')" class="btn btn-small">
@@ -68,7 +78,8 @@
                                 <label class="hasTip" title="">
                                     Department Name<span style="color:Red;">* </span></label>
                             </th>
-                            <td><input class="text_area" type="text" name="name" id="name" value="" required></td>
+                            <td><input class="text_area" type="text" name="name" id="name" value="{{$name}}" required>
+                            </td>
                         </tr>
 
                         <tr>
@@ -80,15 +91,16 @@
                 <label for="published0" id="published-lbl" class="radio btn">No</label>
                 <input type="radio" name="published" id="published0" value="0">
                  --}}
-                                    <input type="checkbox" name="isActive" id="isActive" checked data-toggle="toggle">
+                                    <input type="checkbox" name="isActive" id="isActive" {{$checked}}
+                                        data-toggle="toggle">
                                 </fieldset>
                             </td>
                         </tr>
 
                         <tr>
                             <th><label class="hasTip" title="">Description</label></th>
-                            <td><textarea class="text_area" name="description" id="description" rows="4"
-                                    cols="50"></textarea></td>
+                            <td><textarea class="text_area" value="{{$description}}" name="description" id="description"
+                                    rows="4" cols="50">{{$description}}</textarea></td>
                         </tr>
 
                     </tbody>
@@ -107,15 +119,19 @@
 @section('script')
 <script>
     function submitbutton(option){
-if (option == 'cancel') {
-var department_id = $('#boxChecked').val();
-var url = '{{ route("departments.index") }}';
-// console.log(department_id);
-document.location.href=url;
-}else{
-}
-
-}
+    if (option == 'cancel') {
+    var department_id = $('#boxChecked').val();
+    var url = '{{ route("departments.index") }}';
+    // console.log(department_id);
+    document.location.href=url;
+    }else{
+    }
+    
+    }
+$(document).ready(function(){
+var isActive ='<?php echo $checked; ?>';
+console.log(isActive);
+});
 $(function() {
             $(document).on("change","#isActive", function()
             {

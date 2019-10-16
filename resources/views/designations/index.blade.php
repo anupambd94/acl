@@ -238,15 +238,13 @@ jQuery('#master').on('click', function(e) {
     });
     var selected_checkbox = [];
     function submitbutton(option){
-        // console.log(option);
-        // console.log(selected_checkbox);
-        // if (selected_checkbox) {
-        //     $('#boxChecked').val(selected_checkbox);
-        //     var location_id = selected_checkbox;
-        //     // console.log($('#boxChecked').val());
-        // } else {
-        //     var location_id = '';
-        // }
+        if (option == 'edit') {
+        var designation_id = $('#boxChecked').val();
+        var url = '{{ route("edit_designation", ":id") }}';
+        url = url.replace(':id', designation_id);
+        // console.log(department_id);
+        document.location.href=url;
+        }else{
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -289,6 +287,7 @@ jQuery('#master').on('click', function(e) {
 
         } else {
             // location.reload(true);
+        }
         }
 
     }

@@ -70,44 +70,49 @@ class EmployeeDepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        if (isset($request->isActive)) {
-            $isActive = 1;
+        if (!Auth::user()->hasPermissionTo('Employee Management')) {
+            abort('401');
         } else {
-            $isActive = 0;
+
+            if (isset($request->isActive)) {
+                $isActive = 1;
+            } else {
+                $isActive = 0;
+            }
+            $status = "Initial";
+            $class = "";
+            // $isActive  = 1;
+            $data = $request;
+            // // $data->setAttribute('country', $countryId);
+            // $password = Hash::make($data['password']);
+            // $key = Hash::make('bdecomit');
+            // $toDate = Carbon::now();
+            // $id = \DB::getPdo()->lastInsertId();
+            // $hasImage =  $request->hasFile('image2');
+
+
+
+            $register = Departments::create([
+                'department_name' => $data['name'],
+                'department_description' => $data['description'],
+                'IsActive' => $isActive
+            ]);
+
+            if ($register) {
+                $status = "Deparment " . $data['name'] . " Successfully Created.";
+                $class = "success";
+            } else {
+                $status = "not reigstered";
+                $class = "danger";
+            }
+            // $image = file_get_contents($path);
+            // $file = Input::file('image');
+
+            // return response()->json($request);        
+            return redirect('department_create')->with('status', $status);
+            // return view('employees.index')->with('roles', $roles);
+            // return $status;
         }
-        $status = "Initial";
-        $class = "";
-        // $isActive  = 1;
-        $data = $request;
-        // // $data->setAttribute('country', $countryId);
-        // $password = Hash::make($data['password']);
-        // $key = Hash::make('bdecomit');
-        // $toDate = Carbon::now();
-        // $id = \DB::getPdo()->lastInsertId();
-        // $hasImage =  $request->hasFile('image2');
-
-
-
-        $register = Departments::create([
-            'department_name' => $data['name'],
-            'department_description' => $data['description'],
-            'IsActive' => $isActive
-        ]);
-
-        if ($register) {
-            $status = "Deparment " . $data['name'] . " Successfully Created.";
-            $class = "success";
-        } else {
-            $status = "not reigstered";
-            $class = "danger";
-        }
-        // $image = file_get_contents($path);
-        // $file = Input::file('image');
-
-        // return response()->json($request);        
-        return redirect('department_create')->with('status', $status);
-        // return view('employees.index')->with('roles', $roles);
-        // return $status;
     }
 
     /**
@@ -127,7 +132,44 @@ class EmployeeDepartmentController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (!Auth::user()->hasPermissionTo('Employee Management')) {
+            abort('401');
+        } else {
+            $department = Departments::where('department_id', $id)->get();
+            // return response()->json($department);
+            return view('departments.edit', compact('department'));
+        }
+    }
+
+    public function editDepartment(Request $request, $id)
+    {
+        if (!Auth::user()->hasPermissionTo('Employee Management')) {
+            abort('401');
+        } else {
+            if (isset($request->isActive)) {
+                $isActive = 1;
+            } else {
+                $isActive = 0;
+            }
+            $result = Departments::where('department_id', $id)
+                ->update(array(
+                    'department_name' => $request->name,
+                    'department_description' => $request->description,
+                    'isActive' => $isActive
+                ));
+            $department = Departments::where('department_id', $id)->get();
+            if ($result) {
+                $status = 'Department Updated successfully';
+            } else {
+                $status = 'Not updated.';
+            }
+
+            return redirect()->back()->with(['status' => $status, 'departmnet' => $department]);
+            // return response()->json($request);        
+            // return redirect('designation_create')->with('status',$status);
+            // return view('employees.index')->with('roles', $roles);
+            // return $status;
+        }
     }
 
     /**
@@ -139,30 +181,34 @@ class EmployeeDepartmentController extends Controller
      */
     public function update(Request $request)
     {
-        if ($request->option == 'publish') {
-            foreach ($request->idList as $id) {
-                $result = Departments::where('department_id', $id)
-                    ->update(array('isActive' => 1));
-            }
-        } else if ($request->option == 'unpublish') {
-            foreach ($request->idList as $id) {
-                $result = Departments::where('department_id', $id)
-                    ->update(array('isActive' => 0));
-            }
-        } else { }
-
-        if ($result) {
-            $status = 'Profile Updated successfully';
+        if (!Auth::user()->hasPermissionTo('Employee Management')) {
+            abort('401');
         } else {
-            $status = 'Not updated.';
+            if ($request->option == 'publish') {
+                foreach ($request->idList as $id) {
+                    $result = Departments::where('department_id', $id)
+                        ->update(array('isActive' => 1));
+                }
+            } else if ($request->option == 'unpublish') {
+                foreach ($request->idList as $id) {
+                    $result = Departments::where('department_id', $id)
+                        ->update(array('isActive' => 0));
+                }
+            } else { }
+
+            if ($result) {
+                $status = 'Profile Updated successfully';
+            } else {
+                $status = 'Not updated.';
+            }
+
+            return response()->json($status);
+
+            // return response()->json($request);        
+            // return redirect('designation_create')->with('status',$status);
+            // return view('employees.index')->with('roles', $roles);
+            // return $status;
         }
-
-        return response()->json($status);
-
-        // return response()->json($request);        
-        // return redirect('designation_create')->with('status',$status);
-        // return view('employees.index')->with('roles', $roles);
-        // return $status;
     }
 
     /**
