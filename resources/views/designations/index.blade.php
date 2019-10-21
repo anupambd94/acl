@@ -17,7 +17,7 @@
     </div>
 </header>
 <div class="content_part">
-    <form action="/vbizz-dashboard/edept" method="post" name="adminForm" id="adminForm">
+    <form action="" method="post" name="adminForm" id="adminForm">
 
         <div class="subhead">
             <div class="container-fluid">
@@ -120,7 +120,7 @@
 
 
                         <td align="center">
-                            <a href="">{{$designation->designation_name}}</a>
+                            <a href="{{ route('edit_designation', $designation->designation_id) }}">{{$designation->designation_name}}</a>
                         </td>
                         <td class="publish_unpublish center"><a
                                 class="btn btn-micro {{$active}} hasTooltip changeStatus" href="javascript:void(0);"

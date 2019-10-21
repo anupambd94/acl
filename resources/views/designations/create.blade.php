@@ -29,7 +29,7 @@
                         <span class="fa fa-plus"></span> Save &amp; New</span>
                     </div>
                             <div class="btn-wrapper" id="toolbar-cancel">
-                    <span onclick="Joomla.submitbutton('cancel')" class="btn btn-small">
+                    <span onclick="submitbutton('cancel')" class="btn btn-small">
                     <span class="fa fa-close"></span> Close</span>
                 </div>
             </div>
@@ -109,6 +109,16 @@
 //         console.log($(this).val());
 //     });
 // });
+function submitbutton(option){
+if (option == 'cancel') {
+var department_id = $('#boxChecked').val();
+var url = '{{ route("designations.index") }}';
+// console.log(department_id);
+document.location.href=url;
+}else{
+}
+
+}
 $(function() {
             $(document).on("change","#isActive", function()
             {

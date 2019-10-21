@@ -29,6 +29,7 @@
         rel="stylesheet">
     <!--Bootstrap Stylesheet [ REQUIRED ]-->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/multiselect/multi-select.css') }}" rel="stylesheet">
     <!--Jasmine Stylesheet [ REQUIRED ]-->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
@@ -488,7 +489,7 @@
                                 <a href="#" data-toggle="dropdown" class="dropdown-toggle"> Projects <b
                                         class="caret"></b></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#"> Manage Projects </a></li>
+                                    <li><a href="{{route('projects.index')}}"> Manage Projects </a></li>
                                     <li><a href="#"> Manage Task </a></li>
                                 </ul>
                                 <!-- end dropdown-menu -->

@@ -127,7 +127,7 @@
 
 
                         <td align="center">
-                            <a href="/vbizz-dashboard/edept/edit/13">{{$department->department_name}}</a>
+                            <a href="{{ route('edit_department', $department->department_id) }}">{{$department->department_name}}</a>
                         </td>
                         <td class="publish_unpublish center"><a
                                 class="btn btn-micro {{$active}} hasTooltip changeStatus" href="javascript:void(0);"
