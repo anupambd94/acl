@@ -39,8 +39,6 @@ Route::resource('roles', 'RoleController');
 
 Route::resource('permissions', 'PermissionController');
 
-// routs for HRM start
-//******************************************************************* */
 Route::resource('posts', 'PostController');
 Route::resource('employees', 'EmployeeController');
 Route::resource('designations', 'EmployeeDesignationController');
@@ -75,16 +73,3 @@ Route::post('/addSection', 'EmployeeController@addSection')
     ->name('addSection');
 Route::post('/addDesignation', 'EmployeeController@addDesignation')
     ->name('addDesignation');
-
-// routs for HRM end
-//******************************************************************* */
-//---------------------------------------------------------------------
-// routs for Project start
-//******************************************************************* */
-
-Route::resource('projects', 'ProjectsController');
-
-
-// routs for Project end
-//******************************************************************* */
-//---------------------------------------------------------------------

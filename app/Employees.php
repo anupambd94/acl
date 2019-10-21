@@ -40,24 +40,24 @@ class Employees extends Model
     ];
 
     public function photo(){
-        return $this->belongsTo('App\Photos');
+        return $this->belingsTo('App\Photos');
     }
     public function department(){
-        return $this->belongsTo('App\Departments');
+        return $this->belingsTo('App\Departments');
     }
     public function section(){
-        return $this->belongsTo('App\Sections');
+        return $this->belingsTo('App\Sections');
     }
     public function designation(){
-        return $this->belongsTo('App\Designation');
+        return $this->belingsTo('App\Designation');
     }
     public function currentAddress(){
-        return $this->belongsTo('App\CurrentAddress');
+        return $this->belingsTo('App\CurrentAddress');
     }
     public function PermanentAddress(){
-        return $this->belongsTo('App\Departments');
+        return $this->belingsTo('App\Departments');
     }
     public function education(){
-        return $this->belongsTo('App\Educations');
+        return $this->belingsTo('App\Educations');
     }
 }
