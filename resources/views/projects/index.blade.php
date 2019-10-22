@@ -3,145 +3,134 @@
 @section('title', '| Roles')
 
 @section('content')
+<header class="header">
+	<div class="container-title">
+		<h1 class="page-title">Projects</h1>
+	</div>
+</header>
+<div class="content_part">
+<form action="/vbizz-dashboard/projects" method="post" name="adminForm" id="adminForm">
 
-<div class="col-lg-10 col-lg-offset-1">
-    <header class="header">
-        <div class="container-title">
-            <h1 class="page-title">Project (New)</h1>
-        </div>
-    </header>
-    <div class="content_part">
-        <form action="/vbizz-dashboard/projects" method="post" name="adminForm" id="adminForm">
-
-            <div class="row-fluid">
-                <div class="span12">
-                    <div class="btn-toolbar" id="toolbar">
-                                                <div class="btn-wrapper" id="toolbar-apply">
-                                <span onclick="Joomla.submitbutton('apply')" class="btn btn-small btn-success">
-                                <span class="fa fa-check"></span> Save</span>
-                                </div>
-                                <div class="btn-wrapper" id="toolbar-save">
-                                <span onclick="Joomla.submitbutton('save')" class="btn btn-small">
-                                <span class="fa fa-check"></span> Save &amp; Close</span>
-                                </div>
-                                <div class="btn-wrapper" id="toolbar-save-new">
-                                <span onclick="Joomla.submitbutton('saveNew')" class="btn btn-small">
-                                <span class="fa fa-plus"></span> Save &amp; New</span>
-                                </div>
-                                        
-                                            
-                        <div class="btn-wrapper" id="toolbar-cancel">
-                            <span onclick="Joomla.submitbutton('cancel')" class="btn btn-small">
-                            <span class="fa fa-close"></span> Close</span>
+<div class="subhead">
+	<div class="container-fluid">
+        <div id="container-collapse" class="container-collapse"></div>
+        <div class="row-fluid">
+            <div class="span12">
+                <div id="toolbar" class="btn-toolbar">
+						                        <div class="btn-wrapper" id="toolbar-new">
+                            <span onclick="submitbutton('add')" class="btn btn-small btn-success">
+                            <span class="fa fa-plus"></span> New</span>
                         </div>
-                    </div>
+                                            
+						                        <div class="btn-wrapper" id="toolbar-edit">
+                            <span onclick="if (document.adminForm.boxchecked.value==0){alert('Please first make a selection from the list');}else{submitbutton('edit')}" class="btn btn-small">
+                            <span class="fa fa-edit"></span> Edit</span>
+                        </div>
+                                            
+						                        <div class="btn-wrapper" id="toolbar-delete">
+                        <span onclick="if (document.adminForm.boxchecked.value==0){alert('Please first make a selection from the list');}else{submitbutton('remove')}" class="btn btn-small">
+                        <span class="fa fa-remove"></span> Delete</span>
+                        </div>
+                                            
                 </div>
             </div>
-
-            <div class="overview">
-            <fieldset class="adminform">
-                <legend>Overview</legend>
-                <ul>
-                    <li>ACL allows you to add projects with start and end date, with estimated cost and its status.</li><li>You can create and manage multiple project for your company here.</li>
-                </ul>
-            </fieldset>
-            </div>
-
-
-            <div class="col100">
-            <fieldset class="adminform">
-            <legend>Add New Record</legend>
-
-            <table class="adminform table table-striped">
-                <tbody>
-                    
-                            <tr>
-                        <th><label class="hasTip" title="">
-                            Client<span style="color:Red;">*  </span></label>
-                        </th>
-                        <td class="sel_customer"><input id="cust" type="text" readonly="" value="Select Customer">
-                        <a class="btn btn-primary modal" id="modal" rel="{handler: 'iframe', size: {x: 800, y: 500}}" href="http://vbizz.joomlawings.com/index.php?option=com_vbizz&amp;view=customer&amp;layout=modal&amp;tmpl=component" title="Select Customer">
-                        <i class="fa fa-user hasTip" title=""></i>
-                        </a>
-                        </td>
-                        <input id="client" type="hidden" value="" name="client">
-                    </tr>
-                            
-                    <tr class="admintable">
-                        <th width="200"><label class="hasTip" title="">
-                            Project Name<span style="color:Red;">*  </span></label>
-                        </th>
-                        <td><input class="text_area" type="text" name="project_name" id="project_name" value=""></td>
-                    </tr>
-                    
-                    <tr class="admintable">
-                        <th width="200"><label class="hasTip" title="">Start Date<span style="color:Red;">*  </span></label></th>
-                        <td><div class="field-calendar">
-                    <div class="input-append">
-                            <input type="text" id="start_date" name="start_date" value="" data-alt-value="" autocomplete="off">
-                    <button type="button" class="btn btn-secondary" id="start_date_btn" data-inputfield="start_date" data-dayformat="%Y-%m-%d" data-button="start_date_btn" data-firstday="0" data-weekend="0,6" data-today-btn="1" data-week-numbers="1" data-show-time="0" data-show-others="1" data-time-24="24" data-only-months-nav="0" title="Open the calendar"><span class="icon-calendar" aria-hidden="true"></span></button>
-                        </div>
-            <div class="js-calendar" style="direction: ltr; position: absolute; box-shadow: rgba(0, 0, 0, 0.67) 0px 0px 70px 0px; min-width: 0px; padding: 0px; display: none; left: auto; top: auto; z-index: 1060; border-radius: 20px;"><div class="calendar-container"><table class="table" cellspacing="0" cellpadding="0" style="margin-bottom: 0px; visibility: visible;"><thead class="calendar-header"><tr class="calendar-head-row"><td colspan="1" class=" nav" style="text-align: center; font-size: 18px; line-height: 18px;"><a class="js-btn btn-prev-year" style="display:inline;padding:2px 6px;cursor:pointer;text-decoration:none;" unselectable="on">‹</a></td><td colspan="6" class="title"><div unselectable="on"><div style="text-align:center;font-size:18px"><span>2019</span></div></div></td><td colspan="1" class=" nav" style="text-align: center; font-size: 18px; line-height: 18px;"><a class="js-btn btn-next-year" style="display:inline;padding:2px 6px;cursor:pointer;text-decoration:none;" unselectable="on"> ›</a></td></tr><tr class="calendar-head-row"><td colspan="1" class=" nav" style="text-align: center; font-size: 2em; line-height: 1em;"><a class="js-btn btn-prev-month" style="display:inline;padding:2px 6px;cursor:pointer;text-decoration:none;" unselectable="on">‹</a></td><td colspan="6" class="title" style="text-align: center;"><div unselectable="on"><div style="text-align:center;font-size:1.2em"><span>October</span></div></div></td><td colspan="1" class=" nav" style="text-align: center; font-size: 2em; line-height: 1em;"><a class="js-btn btn-next-month" style="display:inline;padding:2px 6px;cursor:pointer;text-decoration:none;" unselectable="on"> ›</a></td></tr><tr class="daynames wk"><td class="day-name wn">wk</td><td class="day-name day-name-week">Sun</td><td class="day-name day-name-week">Mon</td><td class="day-name day-name-week">Tue</td><td class="day-name day-name-week">Wed</td><td class="day-name day-name-week">Thu</td><td class="day-name day-name-week">Fri</td><td class="day-name day-name-week">Sat</td></tr></thead><tbody><tr class="daysrow wk"><td class="day wn">39</td><td class="day disabled othermonth  weekend" style="text-align: center;">29</td><td class="day disabled othermonth " style="text-align: center;">30</td><td class="day" style="text-align: center; cursor: pointer;">1</td><td class="day" style="text-align: center; cursor: pointer;">2</td><td class="day" style="text-align: center; cursor: pointer;">3</td><td class="day" style="text-align: center; cursor: pointer;">4</td><td class="day weekend" style="text-align: center; cursor: pointer;">5</td></tr><tr class="daysrow wk"><td class="day wn">40</td><td class="day weekend" style="text-align: center; cursor: pointer;">6</td><td class="day" style="text-align: center; cursor: pointer;">7</td><td class="day" style="text-align: center; cursor: pointer;">8</td><td class="day" style="text-align: center; cursor: pointer;">9</td><td class="day" style="text-align: center; cursor: pointer;">10</td><td class="day" style="text-align: center; cursor: pointer;">11</td><td class="day weekend" style="text-align: center; cursor: pointer;">12</td></tr><tr class="daysrow wk"><td class="day wn">41</td><td class="day weekend" style="text-align: center; cursor: pointer;">13</td><td class="day" style="text-align: center; cursor: pointer;">14</td><td class="day" style="text-align: center; cursor: pointer;">15</td><td class="day" style="text-align: center; cursor: pointer;">16</td><td class="day" style="text-align: center; cursor: pointer;">17</td><td class="day" style="text-align: center; cursor: pointer;">18</td><td class="day weekend" style="text-align: center; cursor: pointer;">19</td></tr><tr class="daysrow wk"><td class="day wn">42</td><td class="day weekend" style="text-align: center; cursor: pointer;">20</td><td class="day selected today" style="text-align: center; cursor: pointer;">21</td><td class="day" style="text-align: center; cursor: pointer;">22</td><td class="day" style="text-align: center; cursor: pointer;">23</td><td class="day" style="text-align: center; cursor: pointer;">24</td><td class="day" style="text-align: center; cursor: pointer;">25</td><td class="day weekend" style="text-align: center; cursor: pointer;">26</td></tr><tr class="daysrow wk"><td class="day wn">43</td><td class="day weekend" style="text-align: center; cursor: pointer;">27</td><td class="day" style="text-align: center; cursor: pointer;">28</td><td class="day" style="text-align: center; cursor: pointer;">29</td><td class="day" style="text-align: center; cursor: pointer;">30</td><td class="day" style="text-align: center; cursor: pointer;">31</td><td class="day disabled othermonth " style="text-align: center;">1</td><td class="day disabled othermonth  weekend" style="text-align: center;">2</td></tr><tr class="daysrow wk"><td class="day wn">44</td><td class="day disabled othermonth  weekend" style="text-align: center;">3</td><td class="day disabled othermonth " style="text-align: center;">4</td><td class="day disabled othermonth " style="text-align: center;">5</td><td class="day disabled othermonth " style="text-align: center;">6</td><td class="day disabled othermonth " style="text-align: center;">7</td><td class="day disabled othermonth " style="text-align: center;">8</td><td class="day disabled othermonth  weekend" style="text-align: center;">9</td></tr></tbody></table><div class="buttons-wrapper btn-group"><button type="button" data-action="clear" class="js-btn btn btn-clear">Clear</button><button type="button" data-action="today" class="js-btn btn btn-today">Today</button><button type="button" data-action="exit" class="js-btn btn btn-exit">Close</button></div></div></div></div>
-            </td>
-                    </tr>
-                    
-                    <tr class="admintable">
-                        <th width="200"><label class="hasTip" title="">End Date</label></th>
-                        <td><div class="field-calendar">
-                    <div class="input-append">
-                            <input type="text" id="end_date" name="end_date" value="" data-alt-value="" autocomplete="off">
-                    <button type="button" class="btn btn-secondary" id="end_date_btn" data-inputfield="end_date" data-dayformat="%Y-%m-%d" data-button="end_date_btn" data-firstday="0" data-weekend="0,6" data-today-btn="1" data-week-numbers="1" data-show-time="0" data-show-others="1" data-time-24="24" data-only-months-nav="0" title="Open the calendar"><span class="icon-calendar" aria-hidden="true"></span></button>
-                        </div>
-            <div class="js-calendar" style="direction: ltr; position: absolute; box-shadow: rgba(0, 0, 0, 0.67) 0px 0px 70px 0px; min-width: 0px; padding: 0px; display: none; left: auto; top: auto; z-index: 1060; border-radius: 20px;"><div class="calendar-container"><table class="table" cellspacing="0" cellpadding="0" style="margin-bottom: 0px; visibility: visible;"><thead class="calendar-header"><tr class="calendar-head-row"><td colspan="1" class=" nav" style="text-align: center; font-size: 18px; line-height: 18px;"><a class="js-btn btn-prev-year" style="display:inline;padding:2px 6px;cursor:pointer;text-decoration:none;" unselectable="on">‹</a></td><td colspan="6" class="title"><div unselectable="on"><div style="text-align:center;font-size:18px"><span>2019</span></div></div></td><td colspan="1" class=" nav" style="text-align: center; font-size: 18px; line-height: 18px;"><a class="js-btn btn-next-year" style="display:inline;padding:2px 6px;cursor:pointer;text-decoration:none;" unselectable="on"> ›</a></td></tr><tr class="calendar-head-row"><td colspan="1" class=" nav" style="text-align: center; font-size: 2em; line-height: 1em;"><a class="js-btn btn-prev-month" style="display:inline;padding:2px 6px;cursor:pointer;text-decoration:none;" unselectable="on">‹</a></td><td colspan="6" class="title" style="text-align: center;"><div unselectable="on"><div style="text-align:center;font-size:1.2em"><span>October</span></div></div></td><td colspan="1" class=" nav" style="text-align: center; font-size: 2em; line-height: 1em;"><a class="js-btn btn-next-month" style="display:inline;padding:2px 6px;cursor:pointer;text-decoration:none;" unselectable="on"> ›</a></td></tr><tr class="daynames wk"><td class="day-name wn">wk</td><td class="day-name day-name-week">Sun</td><td class="day-name day-name-week">Mon</td><td class="day-name day-name-week">Tue</td><td class="day-name day-name-week">Wed</td><td class="day-name day-name-week">Thu</td><td class="day-name day-name-week">Fri</td><td class="day-name day-name-week">Sat</td></tr></thead><tbody><tr class="daysrow wk"><td class="day wn">39</td><td class="day disabled othermonth  weekend" style="text-align: center;">29</td><td class="day disabled othermonth " style="text-align: center;">30</td><td class="day" style="text-align: center; cursor: pointer;">1</td><td class="day" style="text-align: center; cursor: pointer;">2</td><td class="day" style="text-align: center; cursor: pointer;">3</td><td class="day" style="text-align: center; cursor: pointer;">4</td><td class="day weekend" style="text-align: center; cursor: pointer;">5</td></tr><tr class="daysrow wk"><td class="day wn">40</td><td class="day weekend" style="text-align: center; cursor: pointer;">6</td><td class="day" style="text-align: center; cursor: pointer;">7</td><td class="day" style="text-align: center; cursor: pointer;">8</td><td class="day" style="text-align: center; cursor: pointer;">9</td><td class="day" style="text-align: center; cursor: pointer;">10</td><td class="day" style="text-align: center; cursor: pointer;">11</td><td class="day weekend" style="text-align: center; cursor: pointer;">12</td></tr><tr class="daysrow wk"><td class="day wn">41</td><td class="day weekend" style="text-align: center; cursor: pointer;">13</td><td class="day" style="text-align: center; cursor: pointer;">14</td><td class="day" style="text-align: center; cursor: pointer;">15</td><td class="day" style="text-align: center; cursor: pointer;">16</td><td class="day" style="text-align: center; cursor: pointer;">17</td><td class="day" style="text-align: center; cursor: pointer;">18</td><td class="day weekend" style="text-align: center; cursor: pointer;">19</td></tr><tr class="daysrow wk"><td class="day wn">42</td><td class="day weekend" style="text-align: center; cursor: pointer;">20</td><td class="day selected today" style="text-align: center; cursor: pointer;">21</td><td class="day" style="text-align: center; cursor: pointer;">22</td><td class="day" style="text-align: center; cursor: pointer;">23</td><td class="day" style="text-align: center; cursor: pointer;">24</td><td class="day" style="text-align: center; cursor: pointer;">25</td><td class="day weekend" style="text-align: center; cursor: pointer;">26</td></tr><tr class="daysrow wk"><td class="day wn">43</td><td class="day weekend" style="text-align: center; cursor: pointer;">27</td><td class="day" style="text-align: center; cursor: pointer;">28</td><td class="day" style="text-align: center; cursor: pointer;">29</td><td class="day" style="text-align: center; cursor: pointer;">30</td><td class="day" style="text-align: center; cursor: pointer;">31</td><td class="day disabled othermonth " style="text-align: center;">1</td><td class="day disabled othermonth  weekend" style="text-align: center;">2</td></tr><tr class="daysrow wk"><td class="day wn">44</td><td class="day disabled othermonth  weekend" style="text-align: center;">3</td><td class="day disabled othermonth " style="text-align: center;">4</td><td class="day disabled othermonth " style="text-align: center;">5</td><td class="day disabled othermonth " style="text-align: center;">6</td><td class="day disabled othermonth " style="text-align: center;">7</td><td class="day disabled othermonth " style="text-align: center;">8</td><td class="day disabled othermonth  weekend" style="text-align: center;">9</td></tr></tbody></table><div class="buttons-wrapper btn-group"><button type="button" data-action="clear" class="js-btn btn btn-clear">Clear</button><button type="button" data-action="today" class="js-btn btn btn-today">Today</button><button type="button" data-action="exit" class="js-btn btn btn-exit">Close</button></div></div></div></div>
-            </td>
-                    </tr>
-                    
-                    <tr class="admintable">
-                        <th width="200"><label class="hasTip" title="">Estimated Cost</label></th>
-                        <td><input class="text_area" type="text" name="estimated_cost" id="estimated_cost" value=""> R</td>
-                    </tr>
-                    
-                    <tr>
-                        <th><label class="hasTip" title="">Status<span style="color:Red;">*  </span></label></th>
-                        <td>
-                            <select name="status" style="display: none;">
-                            <option value="ongoing">Ongoing</option>
-                            <option value="completed">Completed</option>
-                            </select><div class="chzn-container chzn-container-single chzn-container-single-nosearch" style="width: 101px;" title=""><a class="chzn-single"><span>Ongoing</span><div><b></b></div></a><div class="chzn-drop"><div class="chzn-search"><input type="text" autocomplete="off" readonly=""></div><ul class="chzn-results"></ul></div></div>
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <th><label class="hasTip" title="">Description</label></th>
-                        <td><textarea class="text_area" name="descriptions" id="descriptions" rows="4" cols="50"></textarea></td>
-                    </tr>
-                    
-                    <tr>
-                        <th><label class="hasTip" title="">Employee<span style="color:Red;">*  </span></label></th>
-                        <td>
-                        <select multiple="multiple" id="my-select" name="my-select[]">
-                            @foreach ($employees as $employee)
-                            <option value="{{$employee->employee_id}}">{{$employee->first_name}}&nbsp;{{$employee->last_name}}</option>
-
-                            @endforeach
-                            </select>
-                        </td>
-                    </tr>
-                    
-                </tbody>
-            </table>
-            </fieldset>
-            </div>
-            <div class="clr"></div>
-            <input type="hidden" name="option" value="com_vbizz">
-            <input type="hidden" name="id" value="">
-            <input type="hidden" name="task" value="">
-            <input type="hidden" name="view" value="projects">
-        </form>
+        </div>
     </div>
+</div>
 
-    
+<div class="adminlist filter">
+<div class="filet_left">
+<input type="text" name="search" id="search" placeholder="Search" value="" class="text_area">
+<button class="btn hasTooltip" title="Search" onclick="this.form.submit();"><i class="fa fa-search"></i></button>
+<button class="btn hasTooltip" title="Clear" onclick="document.getElementById('search').value='';this.form.submit();
+document.getElementById('filter_status').value='';this.form.submit();"><i class="fa fa-remove"></i> <span class="clear_text">Clear</span></button>
+</div>
+<div class="filter_right">
+<select id="filter_status" name="filter_status" class="inputbox" size="1" onchange="submitform( );" style="">
+	<option value="">Status</option>
+	<option value="ongoing">ongoing</option>
+	<option value="completed">completed</option>
+</select>
+<!-- <div class="chzn-container chzn-container-single chzn-container-single-nosearch" style="width: 98px;" title="" id="filter_status_chzn"><a class="chzn-single"><span>Status</span><div><b></b></div></a><div class="chzn-drop"><div class="chzn-search"><input type="text" autocomplete="off" readonly=""></div><ul class="chzn-results"></ul></div></div> -->
+</div>
+</div>
 
+
+<div id="editcell">
+    <table class="adminlist table">
+        <thead>
+            <tr>
+                <th width="10" class="hidden-phone">#</th>
+                <th width="10"><input type="checkbox" name="toggle" value="" onclick="Joomla.checkAll(this);"></th>
+                <th><a href="#" onclick="Joomla.tableOrdering('project_name','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="Project Name">Project Name</a></th>
+				                <th class="hidden-phone"><a href="#" onclick="Joomla.tableOrdering('client','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="Customer">Customer</a></th>
+				                <th class="hidden-phone"><a href="#" onclick="Joomla.tableOrdering('start_date','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="Start Date">Start Date</a></th>
+                <th class="hidden-phone"><a href="#" onclick="Joomla.tableOrdering('end_date','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="End Date">End Date</a></th>
+                <th class="hidden-phone"><a href="#" onclick="Joomla.tableOrdering('status','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="Status">Status</a></th>
+				                <th><a href="#" onclick="Joomla.tableOrdering('estimated_cost','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="Estimated Cost">Estimated Cost</a></th>
+								<th class="hidden-phone"></th>				<th class="hidden-phone"></th>            </tr>
+        </thead>
+            <tbody><tr class="row0">
+            <td align="center" class="hidden-phone">1</td>
+            
+            <td><input type="checkbox" id="cb0" name="cid[]" value="50" onclick="Joomla.isChecked(this.checked);"></td>
+            
+            <td>
+                        	<a href="/vbizz-dashboard/projects?task=edit&amp;cid[0]=50">Logo in Lobby</a>
+                        </td>
+            
+            <td class="hidden-phone">abc </td>			
+            <td class="hidden-phone">04-11-2019</td>
+            
+            <td class="hidden-phone">06-12-2019</td>
+            
+            <td class="hidden-phone">Ongoing</td>
+            
+			            <td>R 1000.00</td>
+			            
+            <td class="hidden-phone"><a href="/vbizz-dashboard/ptask?projectid=50&amp;fp=1">Manage Task</a></td>			
+            				<td class="hidden-phone"><a href="/vbizz-dashboard/milestone?projectid=50">Manage Milestone</a></td>
+			            
+        
+        </tr>
+            </tbody><tfoot>
+            <tr>
+                <td colspan="10">
+<div class="pagination pagination-toolbar clearfix" style="">
+
+			<div class="limit pull-right">
+			Display #<select id="limit" name="limit" class="inputbox input-mini" size="1" onchange="this.form.submit()" style="width:100px;">
+	<option value="5">5</option>
+	<option value="10">10</option>
+	<option value="15">15</option>
+	<option value="20" selected="selected">20</option>
+	<option value="25">25</option>
+	<option value="30">30</option>
+	<option value="50">50</option>
+	<option value="100">100</option>
+	<option value="0">All</option>
+</select>
+<!-- <div class="chzn-container chzn-container-single chzn-container-single-nosearch" style="width: 59px;" title="" id="limit_chzn"><a class="chzn-single"><span>20</span><div><b></b></div></a><div class="chzn-drop"><div class="chzn-search"><input type="text" autocomplete="off" readonly=""></div><ul class="chzn-results"></ul></div></div> -->
+		</div>
+	
+	
+			<input type="hidden" name="limitstart" value="0">
+	
+</div>
+</td>
+            </tr>
+			
+        </tfoot>
+    </table>
+</div>
+
+<input type="hidden" name="option" value="com_vbizz">
+<input type="hidden" name="task" value="">
+<input type="hidden" name="boxchecked" value="0">
+<input type="hidden" name="view" value="projects">
+<input type="hidden" name="filter_order" value="id">
+<input type="hidden" name="filter_order_Dir" value="desc">
+</form>
 </div>
 
 @endsection
