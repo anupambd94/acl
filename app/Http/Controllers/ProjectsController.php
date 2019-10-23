@@ -69,6 +69,16 @@ class ProjectsController extends Controller
         
     }
 
+    public function customer(){
+        return view('projects.customers');
+    
+    }
+
+    public function create_customer(){
+        return view('projects.customers_create');
+
+    }
+
     /**
      * Store a newly created resource in storage.
      *

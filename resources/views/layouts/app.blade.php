@@ -792,7 +792,16 @@
     {{-- <script src="{{ asset('js/default.js') }}"></script> --}}
     {{-- <script src="{{ asset('js/iframe.js') }}"></script> --}}
     {{-- <script src="{{ asset('js/scripts.js') }}"></script> --}}
+
     <script src="{{ asset('js/inject.js') }}"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>  
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <!--Fast Click [ OPTIONAL ]-->
     <script src="{{ asset('plugins/fast-click/fastclick.min.js') }}"></script>
     <!--Jquery Nano Scroller js [ REQUIRED ]-->

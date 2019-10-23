@@ -17,21 +17,21 @@
                 <div class="span12">
                     <div class="btn-toolbar" id="toolbar">
                                                 <div class="btn-wrapper" id="toolbar-apply">
-                                <span onclick="Joomla.submitbutton('apply')" class="btn btn-small btn-success">
+                                <span onclick="submitbutton('apply')" class="btn btn-small btn-success">
                                 <span class="fa fa-check"></span> Save</span>
                                 </div>
                                 <div class="btn-wrapper" id="toolbar-save">
-                                <span onclick="Joomla.submitbutton('save')" class="btn btn-small">
+                                <span onclick="submitbutton('save')" class="btn btn-small">
                                 <span class="fa fa-check"></span> Save &amp; Close</span>
                                 </div>
                                 <div class="btn-wrapper" id="toolbar-save-new">
-                                <span onclick="Joomla.submitbutton('saveNew')" class="btn btn-small">
+                                <span onclick="submitbutton('saveNew')" class="btn btn-small">
                                 <span class="fa fa-plus"></span> Save &amp; New</span>
                                 </div>
                                         
                                             
                         <div class="btn-wrapper" id="toolbar-cancel">
-                            <span onclick="Joomla.submitbutton('cancel')" class="btn btn-small">
+                            <span onclick="submitbutton('cancel')" class="btn btn-small">
                             <span class="fa fa-close"></span> Close</span>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                             Client<span style="color:Red;">*  </span></label>
                         </th>
                         <td class="sel_customer"><input id="cust" type="text" readonly="" value="Select Customer">
-                        <a class="btn btn-primary modal" id="modal" rel="{handler: 'iframe', size: {x: 800, y: 500}}" href="http://vbizz.joomlawings.com/index.php?option=com_vbizz&amp;view=customer&amp;layout=modal&amp;tmpl=component" title="Select Customer">
+                        <a class="btn btn-primary modal" id="modal" title="Select Customer" data-toggle="modal" data-target="#selectCustomer">
                         <i class="fa fa-user hasTip" title=""></i>
                         </a>
                         </td>
@@ -141,21 +141,89 @@
         </form>
     </div>
 
+
+
     
 
 </div>
 
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="selectCustomer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+          <iframe id="customer" src="{{route('projects.customer')}}" width="580" height="380" frameborder="0" allowtransparency="true">
+          
+          </iframe>  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
 @endsection
 @section('script')
+
+
+<script type="text/javascript">
+
+// <---------- Date Time Pickers Start----------> 
+$(function(){
+    $("#start_date").datepicker({
+        dateFormat: 'dd/mm/yy'
+    });
+    $('#start_date_btn').click(function () {
+    $('#start_date').datepicker("show");
+    });
+    $("#end_date").datepicker({
+        dateFormat: 'dd/mm/yy'
+    });
+    $('#end_date_btn').click(function () {
+    $('#end_date').datepicker("show");
+    });
+});
+// <---------- Date Time Pickers Start----------> 
+
+</script> 
 <script src="{{ asset('plugins/datatables/media/js/jquery.dataTables.js') }}"></script>
         <script src="{{ asset('plugins/datatables/media/js/dataTables.bootstrap.js') }}"></script>
         <script src="{{ asset('plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js') }}"></script>
         <script src="{{ asset('js/jquery.multi-select.js') }}" type="text/javascript"></script>
+
 <script>
 $('#my-select').multiSelect();
 $('#my-select').on('change',function(){
     console.log($(this).val());
 });
+
+
+function submitbutton(option){
+    
+if(option == 'addCustomer'){
+	console.log(option);
+}else if (option == 'cancel') {
+// var department_id = $('#boxChecked').val();
+var url = '{{ route("projects.index") }}';
+// console.log(department_id);
+document.location.href=url;
+}else{
+}
+
+
+}
 </script>
 
 @endsection

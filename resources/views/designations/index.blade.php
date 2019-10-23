@@ -231,11 +231,14 @@ jQuery('#master').on('click', function(e) {
 		$(".sub_chk").prop('checked',false);  
 	}  
 });
+
     jQuery('.changeStatus').on('click',function(){
         var designationId = $(this).attr('data-designation_id');
         var action = $(this).attr('title');
 
     });
+
+
     var selected_checkbox = [];
     function submitbutton(option){
         if (option == 'edit') {
@@ -299,7 +302,7 @@ jQuery('#master').on('click', function(e) {
 
                 selected_checkbox.push($(this).val());
                 $('#boxChecked').val($(this).val());
-            console.log($('#boxChecked').val());
+            // console.log($('#boxChecked').val());
             }
         });
     });

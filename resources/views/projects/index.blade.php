@@ -18,8 +18,8 @@
             <div class="span12">
                 <div id="toolbar" class="btn-toolbar">
 						                        <div class="btn-wrapper" id="toolbar-new">
-                            <span onclick="submitbutton('add')" class="btn btn-small btn-success">
-                            <span class="fa fa-plus"></span> New</span>
+                            <span  class="btn btn-small btn-success">
+                            <span class="fa fa-plus"></span> <a href="{{route('projects.create')}}">New</a></span>
                         </div>
                                             
 						                        <div class="btn-wrapper" id="toolbar-edit">
@@ -61,7 +61,7 @@ document.getElementById('filter_status').value='';this.form.submit();"><i class=
         <thead>
             <tr>
                 <th width="10" class="hidden-phone">#</th>
-                <th width="10"><input type="checkbox" name="toggle" value="" onclick="Joomla.checkAll(this);"></th>
+                <th width="10"><input type="checkbox" name="toggle" value="" id="master"></th>
                 <th><a href="#" onclick="Joomla.tableOrdering('project_name','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="Project Name">Project Name</a></th>
 				                <th class="hidden-phone"><a href="#" onclick="Joomla.tableOrdering('client','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="Customer">Customer</a></th>
 				                <th class="hidden-phone"><a href="#" onclick="Joomla.tableOrdering('start_date','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="Start Date">Start Date</a></th>
@@ -73,11 +73,11 @@ document.getElementById('filter_status').value='';this.form.submit();"><i class=
             <tbody><tr class="row0">
             <td align="center" class="hidden-phone">1</td>
             
-            <td><input type="checkbox" id="cb0" name="cid[]" value="50" onclick="Joomla.isChecked(this.checked);"></td>
+            <td><input type="checkbox" id="cb0" name="project[]" value="50" class="sub_chk"></td>
             
             <td>
-                        	<a href="/vbizz-dashboard/projects?task=edit&amp;cid[0]=50">Logo in Lobby</a>
-                        </td>
+                <a href="/vbizz-dashboard/projects?task=edit&amp;cid[0]=50">Logo in Lobby</a>
+            </td>
             
             <td class="hidden-phone">abc </td>			
             <td class="hidden-phone">04-11-2019</td>
@@ -126,7 +126,7 @@ document.getElementById('filter_status').value='';this.form.submit();"><i class=
 
 <input type="hidden" name="option" value="com_vbizz">
 <input type="hidden" name="task" value="">
-<input type="hidden" name="boxchecked" value="0">
+<input type="hidden" name="boxchecked" id="boxchecked" value="0">
 <input type="hidden" name="view" value="projects">
 <input type="hidden" name="filter_order" value="id">
 <input type="hidden" name="filter_order_Dir" value="desc">
@@ -143,6 +143,28 @@ document.getElementById('filter_status').value='';this.form.submit();"><i class=
 $('#my-select').multiSelect();
 $('#my-select').on('change',function(){
     console.log($(this).val());
+});
+$('body').on('change', '#cb0', function () {
+        selected_checkbox = [];
+        $('input[name^="project"]').each(function () {
+            if ($(this).is(":checked")) {
+
+                selected_checkbox.push($(this).val());
+                $('#boxchecked').val($(this).val());
+            console.log($('#boxchecked').val());
+            }
+        });
+    });
+
+jQuery('#master').on('click', function(e) {
+	if($(this).is(':checked',true))  
+	{
+		$(".sub_chk").prop('checked', true);  
+	}  
+	else  
+	{  
+		$(".sub_chk").prop('checked',false);  
+	}  
 });
 </script>
 

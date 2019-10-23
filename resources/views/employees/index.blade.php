@@ -257,11 +257,11 @@
 			height: 400,
 			show: {
 				effect: "blind",
-				//duration: 1000
+				duration: 1000
 			},
 			hide: {
 				effect: "explode",
-				//duration: 1000
+				duration: 1000
 			},
 			open: function(event, ui) {
 				var empid = jQuery('#dialog').data('empid');
