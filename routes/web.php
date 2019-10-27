@@ -86,6 +86,8 @@ Route::resource('projects', 'ProjectsController');
 Route::get('/projects.customer', 'ProjectsController@customer')->name('projects.customer');
 Route::get('/projects.customer_create', 'ProjectsController@create_customer')->name('projects.customer_create');
 
+Route::get('/projects.customer.save', 'ProjectsController@customer')->name('projects.customer.save');
+Route::post('/projects.customer.save', 'ProjectsController@customerSave');
 
 // routs for Project end
 //******************************************************************* */

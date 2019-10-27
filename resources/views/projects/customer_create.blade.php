@@ -5,7 +5,7 @@
     <div class="span12">
         <div class="btn-toolbar" id="toolbar">
                         <div class="btn-wrapper" id="toolbar-save">
-            <span onclick="Joomla.submitbutton('save')" class="btn btn-small">
+            <span onclick="submitbutton('save')" class="btn btn-small">
             <span class="fa fa-check"></span> Save</span>
             </div>
                         <div class="btn-wrapper" id="toolbar-cancel">
@@ -29,6 +29,15 @@
 <div class="col100 leftdiv">
 <fieldset class="adminform">
 <legend>Add New Record</legend>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <table class="adminform table table-striped">
     <tbody>
 	

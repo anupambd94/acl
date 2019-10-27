@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Auth;
@@ -14,6 +15,7 @@ use Illuminate\Pagination\Paginator;
 use Session;
 
 //Using Database Tables
+use App\Customers;
 use App\Employees;
 // use App\Departments;
 // use App\Sections;
@@ -70,7 +72,9 @@ class ProjectsController extends Controller
     }
 
     public function customer(){
-        return view('projects.customers');
+        $customers = \DB::table('customers')->get();
+
+        return view('projects.customers',compact('customers'));
     
     }
 
@@ -88,6 +92,94 @@ class ProjectsController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    public function customerSave(Request $request){
+        $this->validate($request, [
+            'profile_pic' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'name' => 'required',
+            'username' => 'required|unique:customers,username',
+            'email' => 'email:rfc,dns|unique:customers,email',
+        ]);
+        $data = $request;
+        
+          if (!Auth::user()->hasPermissionTo('Project Management')) {
+            abort('401');
+        } else {
+            if (Input::hasFile('profile_pic')) {
+                // Store Customer Image in storage
+                // --------------------------------------
+                $file = $request->file('profile_pic');
+       
+                // //Display File Name
+                // echo 'File Name: '.$file->getClientOriginalName();
+                // echo '<br>';
+            
+                // //Display File Extension
+                // echo 'File Extension: '.$file->getClientOriginalExtension();
+                // echo '<br>';
+            
+                // //Display File Real Path
+                // echo 'File Real Path: '.$file->getRealPath();
+                // echo '<br>';
+            
+                // //Display File Size
+                // echo 'File Size: '.$file->getSize();
+                // echo '<br>';
+            
+                // //Display File Mime Type
+                // echo 'File Mime Type: '.$file->getMimeType();
+                $fileName = $file->getClientOriginalName();
+    
+                //Move Uploaded File
+                $destinationPath = 'uploads/customer/image';
+              }else{
+                $fileName = null;
+    
+              }
+
+          $register = Customers::create([
+            'name'=>$data['name'],
+            'username'=>$data['username'],
+            'email'=>$data['email'],
+            'password'=>$data['password'],
+            'profile_image'=>$fileName,
+            'company'=>$data['company'],
+            'contact'=>$data['phone'],
+            'website'=>$data['website'],
+            'manager'=>$data['instant_messenger'],
+            'manager_id'=>$data['im_id'],
+            'country'=>$data['country_id'],
+            'state'=>$data['state'],
+            'city'=>$data['city'],
+            'address'=>$data['address'],
+            'zip_code'=>$data['zip'],
+            'comments' =>$data['comments']
+            ]);
+    
+            if($register){
+                $status = "Employee Successfully Created.";
+                $class = "success";
+                $customerId = $register->id;
+                $file->move($destinationPath,$file->getClientOriginalName());
+                $employees = \DB::table('employees')->get();
+            }else{
+                $status = "not reigstered";
+                $class = "danger";
+            }
+            $selectedCustomer = array(
+                'id'=> $customerId,
+                'name' => $request->name
+            );
+        }
+                // $image = file_get_contents($path);
+                // $file = Input::file('image');
+            // return response()->json($selectedCustomer);        
+            // return view('projects.create',compact('employees','selectedCustomer'));
+            return redirect()->back();
+
+            // return view('employees.index')->with('roles', $roles);
+            // return $status;
     }
 
     /**

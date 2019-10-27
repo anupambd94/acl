@@ -12,7 +12,7 @@
     </header>
     <div class="content_part">
         <form action="/vbizz-dashboard/projects" method="post" name="adminForm" id="adminForm">
-
+        {{ csrf_field() }}
             <div class="row-fluid">
                 <div class="span12">
                     <div class="btn-toolbar" id="toolbar">
@@ -51,7 +51,15 @@
             <div class="col100">
             <fieldset class="adminform">
             <legend>Add New Record</legend>
-
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <table class="adminform table table-striped">
                 <tbody>
                     
@@ -59,12 +67,21 @@
                         <th><label class="hasTip" title="">
                             Client<span style="color:Red;">*  </span></label>
                         </th>
-                        <td class="sel_customer"><input id="cust" type="text" readonly="" value="Select Customer">
+                        <td class="sel_customer">
+                        @php
+                        $id = "";
+                        $name = "Select Customer";
+                        @endphp
+                        @if(isset($selectedCustomer))
+                            $id = $selectedCustomer['id'];
+                            $name = $selectedCustomer['name'];
+                        @endif
+                        <input id="cust" type="text" readonly="" value="{{$name}}">
                         <a class="btn btn-primary modal" id="modal" title="Select Customer" data-toggle="modal" data-target="#selectCustomer">
                         <i class="fa fa-user hasTip" title=""></i>
                         </a>
                         </td>
-                        <input id="client" type="hidden" value="" name="client">
+                        <input id="client" type="hidden" value="{{$id}}" name="client">
                     </tr>
                             
                     <tr class="admintable">
@@ -222,6 +239,14 @@ document.location.href=url;
 }else{
 }
 
+
+}
+
+function getCustVal(id,name){
+	// console.log(id+ " => " + name);
+    $('#selectCustomer').modal('toggle');
+    $('#cust').val(name);
+    $('#client').val(id);
 
 }
 </script>

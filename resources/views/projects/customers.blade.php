@@ -65,31 +65,31 @@
     <script src="{{ asset('js/inject.js') }}"></script>
 <!--[if lt IE 9]><script src="/media/jui/js/html5.js?fff1c72eed1a3c56f80a13367de2f480"></script><![endif]-->
 	<script>
-jQuery(function($) {
-			 $('.hasTip').each(function() {
-				var title = $(this).attr('title');
-				if (title) {
-					var parts = title.split('::', 2);
-					var mtelement = document.id(this);
-					mtelement.store('tip:title', parts[0]);
-					mtelement.store('tip:text', parts[1]);
-				}
-			});
-			var JTooltips = new Tips($('.hasTip').get(), {"maxTitleChars": 50,"fixed": false});
-		});
-	jQuery(function ($) {
-		initChosen();
-		$("body").on("subform-row-add", initChosen);
+// jQuery(function($) {
+// 			 $('.hasTip').each(function() {
+// 				var title = $(this).attr('title');
+// 				if (title) {
+// 					var parts = title.split('::', 2);
+// 					var mtelement = document.id(this);
+// 					mtelement.store('tip:title', parts[0]);
+// 					mtelement.store('tip:text', parts[1]);
+// 				}
+// 			});
+// 			var JTooltips = new Tips($('.hasTip').get(), {"maxTitleChars": 50,"fixed": false});
+// 		});
+// 	jQuery(function ($) {
+// 		initChosen();
+// 		$("body").on("subform-row-add", initChosen);
 
-		function initChosen(event, container)
-		{
-			container = container || document;
-			$(container).find("select").chosen({"disable_search_threshold":10,"search_contains":true,"allow_single_deselect":true,"placeholder_text_multiple":"Type or select some options","placeholder_text_single":"Select an option","no_results_text":"No results match"});
-		}
-	});
+// 		function initChosen(event, container)
+// 		{
+// 			container = container || document;
+// 			$(container).find("select").chosen({"disable_search_threshold":10,"search_contains":true,"allow_single_deselect":true,"placeholder_text_multiple":"Type or select some options","placeholder_text_single":"Select an option","no_results_text":"No results match"});
+// 		}
+// 	});
 	
-jQuery(function($){ initPopovers(); $("body").on("subform-row-add", initPopovers); function initPopovers (event, container) { $(container || document).find(".hasPopover").popover({"html": true,"trigger": "hover focus","container": "body"});} });
-jQuery(document).ready(function(){jQuery("a.close").on("click", function(){jQuery("#system-message-container").remove();});});
+// jQuery(function($){ initPopovers(); $("body").on("subform-row-add", initPopovers); function initPopovers (event, container) { $(container || document).find(".hasPopover").popover({"html": true,"trigger": "hover focus","container": "body"});} });
+// jQuery(document).ready(function(){jQuery("a.close").on("click", function(){jQuery("#system-message-container").remove();});});
 	</script>
 
 </head>
@@ -141,38 +141,32 @@ document.getElementById('filter_status').value='';this.form.submit();"><i class=
             <th><a href="#" onclick="Joomla.tableOrdering('i.name','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="Name">Name</a></th>
         </tr>
     </thead>
-	    	<tbody><tr class="row0">
+	    	<tbody>
+            @php
+            $count = 1;
+            @endphp
+
+            @foreach($customers as $customer)
+            
+
+            @php
+            $id = $customer->customer_id;
+            $name = $customer->name;
+            @endphp       
+                    
+            <tr class="row0">
     
-            <td align="center">1</td>
+            <td align="center">{{$count}}</td>
         
             <td align="center">
-            	<a href="javascript:void(0)" onclick="if (window.parent) window.parent.getCustVal('85',  'abc ');" id="85">abc </a>
+            	<a href="javascript:void(0)" onclick="if (window.parent) window.parent.getCustVal('{{$id}}',  '{{$name}}');" id="{{$id}}">{{$name}}</a>
             </td>
     	</tr>
-        	<tr class="row1">
-    
-            <td align="center">2</td>
-        
-            <td align="center">
-            	<a href="javascript:void(0)" onclick="if (window.parent) window.parent.getCustVal('81',  'aref ansari');" id="81">aref ansari</a>
-            </td>
-    	</tr>
-        	<tr class="row0">
-    
-            <td align="center">3</td>
-        
-            <td align="center">
-            	<a href="javascript:void(0)" onclick="if (window.parent) window.parent.getCustVal('79',  'Марлен');" id="79">Марлен</a>
-            </td>
-    	</tr>
-        	<tr class="row1">
-    
-            <td align="center">4</td>
-        
-            <td align="center">
-            	<a href="javascript:void(0)" onclick="if (window.parent) window.parent.getCustVal('78',  'Company One');" id="78">Company One</a>
-            </td>
-    	</tr>
+        @php
+        $count++;
+        @endphp
+
+        @endforeach
         	
         </tbody><tfoot>
         <tr>
@@ -221,13 +215,14 @@ document.getElementById('filter_status').value='';this.form.submit();"><i class=
 
 
 <div class="content_part" style="display:none;" id="customerCreate">
-<form action="/component/vbizz/customer" method="post" name="adminForm" id="adminForm" enctype="multipart/form-data">
-
+<!-- <form action="{{route('projects.customer.save')}}" method="post" name="customerCreateForm" id="customerCreateForm" enctype="multipart/form-data"> -->
+{{Form::open(['route' => 'projects.customer.save', id =>'customerCreateForm', 'files' => true])}}
+{{ csrf_field() }}
 <div class="row-fluid">
     <div class="span12">
         <div class="btn-toolbar" id="toolbar">
                         <div class="btn-wrapper" id="toolbar-save">
-            <span onclick="Joomla.submitbutton('save')" class="btn btn-small">
+            <span onclick="submitbutton('save')" class="btn btn-small">
             <span class="fa fa-check"></span> Save</span>
             </div>
                         <div class="btn-wrapper" id="toolbar-cancel">
@@ -251,14 +246,31 @@ document.getElementById('filter_status').value='';this.form.submit();"><i class=
 <div class="col100 leftdiv">
 <fieldset class="adminform">
 <legend>Add New Record</legend>
+@if ($errors->any())
+<script>
+$('#customerList').hide();
+$('#customerCreate').show();
+</script>
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+<!-- Create Post Form -->
 <table class="adminform table table-striped">
     <tbody>
 	
 	<tr>
 		<th><label class="hasTip" title="">Profile Pics</label></th>
-		<td><input type="file" name="profile_pic" id="profile_pic" class="inputbox required" size="50" value="">
+		<td>
+        <!-- <input type="file" name="profile_pic" id="profile_pic" class="inputbox required" size="50" value=""> -->
+        {{Form::file('profile_pic')}}
 		<img src="http://vbizz.joomlawings.com/components/com_vbizz/uploads/profile_pics/noimage.png" style="height:60px;vertical-align:middle;margin-top:5px;" td="">
-	</td>
+	    </td>
 	</tr>
 	
     <tr>
@@ -603,9 +615,7 @@ document.getElementById('filter_status').value='';this.form.submit();"><i class=
     <tr class="tohide" style="display:none;">
         <th><label class="hasTip" title="">State</label></th>
         <td id="states">
-            <select name="state_id" id="state_id">
-            <option value="">Select State</option>
-                        </select>
+        <input class="text_area" type="text" name="state" id="state" value="">
 			<!-- <div class="chzn-container chzn-container-single chzn-container-single-nosearch" style="width: 220px;" title="" id="state_id_chzn"><a class="chzn-single"><span>Select State</span><div><b></b></div></a><div class="chzn-drop"><div class="chzn-search"><input type="text" autocomplete="off" readonly=""></div><ul class="chzn-results"></ul></div></div> -->
         </td>
     </tr>
@@ -650,7 +660,8 @@ document.getElementById('filter_status').value='';this.form.submit();"><i class=
 <input type="hidden" name="task" value="">
 <input type="hidden" name="view" value="customer">
 <input type="hidden" name="tmpl" value="component">
-</form>
+<!-- </form> -->
+{{Form::close()}}
 </div>
 <script>
 function loadIframe(iframeName, url) {
@@ -674,6 +685,10 @@ if(option == 'closeCreateCustomer'){
 	$('#customerList').show();
 	$('#customerCreate').hide();
 	showLess();
+}
+if(option == 'save'){
+	console.log(option);
+    $('#customerCreateForm').submit();
 }
 
 }

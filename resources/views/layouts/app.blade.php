@@ -784,8 +784,11 @@
     <!--JAVASCRIPT-->
     <!--=================================================-->
     <!--jQuery [ REQUIRED ]-->
-    <script src="{{ asset('js/jquery-2.1.1.min.js') }}"></script>
-    <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- <script src="{{ asset('js/jquery-2.1.1.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-ui.min.js') }}"></script> -->
     <!--BootstrapJS [ RECOMMENDED ]-->
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
@@ -795,13 +798,10 @@
 
     <script src="{{ asset('js/inject.js') }}"></script>
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>  
-
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
     <!--Fast Click [ OPTIONAL ]-->
     <script src="{{ asset('plugins/fast-click/fastclick.min.js') }}"></script>
     <!--Jquery Nano Scroller js [ REQUIRED ]-->
@@ -827,7 +827,7 @@
     <script src="{{ asset('plugins/flot-charts/jquery.flot.min.js') }}"></script>
     <script src="{{ asset('plugins/flot-charts/jquery.flot.resize.min.js') }}"></script>
     <script src="{{ asset('plugins/flot-charts/jquery.flot.spline.js') }}"></script>
-    <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
+    <script src="{{ asset('js/moment.js') }}"></script>
     <script src="{{ asset('plugins/moment-range/moment-range.js') }}"></script>
     <script src="{{ asset('plugins/flot-charts/jquery.flot.tooltip.min.js') }}"></script>
     <!--Flot Order Bars Chart [ OPTIONAL ]-->
@@ -845,6 +845,9 @@
 
 
     <script src="{{ asset('plugins/pace/pace.min.js') }}"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>  
 
 
 
