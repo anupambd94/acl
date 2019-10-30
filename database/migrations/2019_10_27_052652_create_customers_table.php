@@ -13,8 +13,9 @@ class CreateCustomersTable extends Migration
      */
     public function up()
     {
+        Schema::enableForeignKeyConstraints();
         Schema::create('customers', function (Blueprint $table) {
-            $table->increments('customer_id');
+            $table->integer('customer_id',true);
             $table->string('name');
             $table->string('username')->unique();
             $table->string('email')->unique();

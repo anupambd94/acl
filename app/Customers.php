@@ -26,6 +26,9 @@ class Customers extends Model
 
 
     ];
+    public function projects(){
+        return $this->hasMany('App\Projects');
+    }
     public function getImageAttribute()
     {
     return $this->profile_image;

@@ -1,5 +1,5 @@
 <div class="content_part">
-<form action="/component/vbizz/customer" method="post" name="adminForm" id="adminForm" enctype="multipart/form-data">
+<form action="" method="post" name="adminForm" id="adminForm" enctype="multipart/form-data">
 
 <div class="row-fluid">
     <div class="span12">

@@ -28,12 +28,14 @@
     <link href="http://fonts.googleapis.com/css?family=Roboto:500,400italic,100,700italic,300,700,500italic,400"
         rel="stylesheet">
     <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/multiselect/multi-select.css') }}" rel="stylesheet">
     <!--Jasmine Stylesheet [ REQUIRED ]-->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 
     <!--Font Awesome [ OPTIONAL ]-->
@@ -721,11 +723,11 @@
                             </div>
                         </div>
                         @endif
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-md-8 col-md-offset-2">
                                 @include ('errors.list') {{-- Including error file --}}
                             </div>
-                        </div>
+                        </div> -->
 
                         @yield('content')
                     </div>
@@ -784,12 +786,14 @@
     <!--JAVASCRIPT-->
     <!--=================================================-->
     <!--jQuery [ REQUIRED ]-->
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 
     <!-- <script src="{{ asset('js/jquery-2.1.1.min.js') }}"></script>
     <script src="{{ asset('js/jquery-ui.min.js') }}"></script> -->
     <!--BootstrapJS [ RECOMMENDED ]-->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     {{-- <script src="{{ asset('js/default.js') }}"></script> --}}
@@ -799,9 +803,7 @@
     <script src="{{ asset('js/inject.js') }}"></script>
 
 
-  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
-<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
-<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+  
     <!--Fast Click [ OPTIONAL ]-->
     <script src="{{ asset('plugins/fast-click/fastclick.min.js') }}"></script>
     <!--Jquery Nano Scroller js [ REQUIRED ]-->

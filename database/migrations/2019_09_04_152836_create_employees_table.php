@@ -36,9 +36,9 @@ class CreateEmployeesTable extends Migration
                 $table->enum('holiday_types', ['PH', 'MC', 'LOCAL', 'SINGAPUR'])->nullable();
                 $table->enum('job_types', ['FULLTIME', 'PARTTIME', 'FLEXI', 'NONE'])->nullable()->default('NONE');
                 $table->enum('salary_types', ['FIXED', 'HOURLY', 'DAILY', 'NONE'])->nullable()->default('NONE');
-                $table->integer('days_per_week')->nullable()->nullable();
-                $table->integer('total_hours_per_year')->nullable()->nullable();
-                $table->integer('rate_per_hour')->nullable()->nullable();
+                $table->integer('days_per_week')->nullable();
+                $table->integer('total_hours_per_year')->nullable();
+                $table->integer('rate_per_hour')->nullable();
                 $table->text('profile_image')->nullable();
                 $table->integer('photo_id')->index('photo_id')->nullable();
                 $table->integer('department_id')->index('department_id')->nullable();

@@ -17,8 +17,8 @@ use Session;
 //Using Database Tables
 use App\Customers;
 use App\Employees;
-// use App\Departments;
-// use App\Sections;
+use App\Projects;
+use App\Tasks;
 // use App\Designations;
 // use App\Currentaddress;
 // use App\Permanentaddress;
@@ -91,7 +91,69 @@ class ProjectsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $employees = \DB::table('employees')->get();
+            
+
+            if (!Auth::user()->hasPermissionTo('Project Management')) {
+                abort('401');
+            } else {
+                $this->validate($request, [
+                    'client' => 'required',
+                    'start_date' => 'required',
+                    'project_name' => 'required|unique:projects,project_name',
+                    'email' => 'email:rfc,dns|unique:customers,email',
+                ]);
+                $data = $request;
+                $startdate = Carbon::createFromFormat('d/m/Y', $data['start_date']);
+                $enddate = Carbon::createFromFormat('d/m/Y', $data['end_date']);
+                // Insert Project
+                $Project = new Projects();
+                $Project->project_name = $data['project_name'];
+                $Project->cost = $data['estimated_cost'];
+                $Project->customer_id = $data['client'];
+                $Project->description = $data['descriptions'];
+                $Project->IsActive = 1;
+        
+                if ($Project->save()) {
+                    $ProjectId = $Project->project_id;
+                }else{
+                    $ProjectId = 0 ;
+                }
+        
+                // Insert Project
+                $Task = new Tasks();
+                $Task->start_date = $startdate;
+                $Task->end_date = $enddate;
+                // $Task->project_id = $ProjectId;
+                $Task->project_id = $ProjectId;
+                $Task->project_status = $data['status'];
+                $Task->IsActive = 1;
+        
+                if ($Task->save()) {
+                    $TaskId = $Task->task_id;
+                }else{
+                    $TaskId = 0 ;
+                }
+                // my-select
+                $employees = Employees::find($request->employeeList);
+                $Task->employees()->attach($employees);
+                if($Task){
+                    $status = "Project Successfully Created.";
+                    $class = "success";
+                    // $customerId = $register->id;
+                    // $file->move($destinationPath,$file->getClientOriginalName());
+                    // $employees = \DB::table('employees')->get();
+                }else{
+                    $status = "not created";
+                    $class = "danger";
+                }
+                
+                    // return response()->json($ProjectId);                //
+                    return redirect()->back()->with('status',$status);
+                    // return view('projects.create',compact('employees'));
+            }
+        
+
     }
 
     public function customerSave(Request $request){

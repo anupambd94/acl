@@ -11,14 +11,19 @@
         </div>
     </header>
     <div class="content_part">
-        <form action="/vbizz-dashboard/projects" method="post" name="adminForm" id="adminForm">
+        <form action="{{ route('projects.store') }}" method="post" name="adminForm" id="adminForm">
         {{ csrf_field() }}
             <div class="row-fluid">
                 <div class="span12">
                     <div class="btn-toolbar" id="toolbar">
-                                                <div class="btn-wrapper" id="toolbar-apply">
+                                                <!-- <div class="btn-wrapper" id="toolbar-apply">
                                 <span onclick="submitbutton('apply')" class="btn btn-small btn-success">
                                 <span class="fa fa-check"></span> Save</span>
+                                </div> -->
+                                <div class="btn-wrapper" id="toolbar-apply">
+                                    <button type="submit" class="btn btn-small btn-success">
+                                        <span class="fa fa-check"></span> Save</span>
+                                    </button>
                                 </div>
                                 <div class="btn-wrapper" id="toolbar-save">
                                 <span onclick="submitbutton('save')" class="btn btn-small">
@@ -59,6 +64,17 @@
                         @endforeach
                     </ul>
                 </div>
+            @endif
+            @if(session('status'))
+            <div class="row register_button animated bounceInUp heartBeat fadeOutDown">
+            <div class="col-md-offset-4 col-md-3">
+
+                <div class="form-group">
+                    <div class="alert alert-success" style="text-align:center">{{session('status')}}</div>
+                </div>
+
+                </div>
+            </div>
             @endif
             <table class="adminform table table-striped">
                 <tbody>
@@ -137,7 +153,7 @@
                     <tr>
                         <th><label class="hasTip" title="">Employee<span style="color:Red;">*  </span></label></th>
                         <td>
-                        <select multiple="multiple" id="my-select" name="my-select[]">
+                        <select multiple="multiple" id="my-select" name="employeeList[]">
                             @foreach ($employees as $employee)
                             <option value="{{$employee->employee_id}}">{{$employee->first_name}}&nbsp;{{$employee->last_name}}</option>
 
@@ -151,7 +167,7 @@
             </fieldset>
             </div>
             <div class="clr"></div>
-            <input type="hidden" name="option" value="com_vbizz">
+            <input type="hidden" name="option" value="project_create">
             <input type="hidden" name="id" value="">
             <input type="hidden" name="task" value="">
             <input type="hidden" name="view" value="projects">
@@ -231,6 +247,8 @@ function submitbutton(option){
     
 if(option == 'addCustomer'){
 	console.log(option);
+}else if (option == 'apply') {
+
 }else if (option == 'cancel') {
 // var department_id = $('#boxChecked').val();
 var url = '{{ route("projects.index") }}';

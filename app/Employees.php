@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Employees extends Model
 {
+    protected $primaryKey = 'employee_id';
     protected $fillable = [
                'first_name',
                 'last_name',
@@ -59,5 +60,9 @@ class Employees extends Model
     }
     public function education(){
         return $this->belongsTo('App\Educations');
+    }
+    public function tasks()
+    {
+        return $this->belongsToMany(Taks::class);
     }
 }
