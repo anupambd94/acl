@@ -32,21 +32,22 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-        // $roles = Role::all();
-        // $employees = Employees::all();
-        // $designations = Designations::all();
-
-        // // $employees = Employees::all()->paginate(10);
-            $employees = \DB::table('employees')->get();
-            
-
             if (!Auth::user()->hasPermissionTo('Project Management')) {
                 abort('401');
             } else {
-                // return view('projects.index');
-                // return response()->json($employees);
+                $projects = \DB::table('projects')
+                ->join('tasks','projects.project_id','=','tasks.project_id')
+                ->join('customers','projects.customer_id','=','customers.customer_id')
+                ->select('projects.project_id','projects.project_name','projects.cost','tasks.task_id','tasks.start_date','tasks.end_date','tasks.project_status','customers.customer_id',\DB::raw('customers.name AS customer_name'))
+                ->paginate(10);
 
-                return view('projects.index',compact('employees'));
+
+
+                
+                // return view('projects.index');
+                // return response()->json($projects);
+
+                return view('projects.index',compact('projects'));
             }
     }
 
@@ -57,12 +58,12 @@ class ProjectsController extends Controller
      */
     public function create()
     {
-        $employees = \DB::table('employees')->get();
             
 
             if (!Auth::user()->hasPermissionTo('Project Management')) {
                 abort('401');
             } else {
+            $employees = \DB::table('employees')->get();
                 // return view('projects.index');
                 // return response()->json($employees);
 

@@ -68,32 +68,57 @@ document.getElementById('filter_status').value='';this.form.submit();"><i class=
                 <th class="hidden-phone"><a href="#" onclick="Joomla.tableOrdering('end_date','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="End Date">End Date</a></th>
                 <th class="hidden-phone"><a href="#" onclick="Joomla.tableOrdering('status','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="Status">Status</a></th>
 				                <th><a href="#" onclick="Joomla.tableOrdering('estimated_cost','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="Estimated Cost">Estimated Cost</a></th>
-								<th class="hidden-phone"></th>				<th class="hidden-phone"></th>            </tr>
+								<!-- <th class="hidden-phone"></th>				
+                                <th class="hidden-phone"></th>             -->
+                                </tr>
         </thead>
-            <tbody><tr class="row0">
+            <tbody>
+            @php
+            $count = 1;
+            @endphp
+
+            @foreach($projects as $project)
+            <!-- @php
+            if($department->IsActive == 1){
+            $icon_status = "icon-publish";
+            $active = "active";
+            $title = "Unpublish";
+            }else{
+            $icon_status = "icon-unpublish";
+            $active = "";
+            $title = "Publish";
+            }
+            @endphp -->
+            <tr class="row0">
             <td align="center" class="hidden-phone">1</td>
             
             <td><input type="checkbox" id="cb0" name="project[]" value="50" class="sub_chk"></td>
             
             <td>
-                <a href="/vbizz-dashboard/projects?task=edit&amp;cid[0]=50">Logo in Lobby</a>
+                <a href="">{{$project->project_name}}</a>
             </td>
             
-            <td class="hidden-phone">abc </td>			
-            <td class="hidden-phone">04-11-2019</td>
+            <td class="hidden-phone">{{$project->customer_name}} </td>			
+            <td class="hidden-phone">{{\Carbon\Carbon::parse($project->start_date)->format('d/m/Y')}}</td>
             
-            <td class="hidden-phone">06-12-2019</td>
+            <td class="hidden-phone">{{\Carbon\Carbon::parse($project->end_date)->format('d/m/Y')}}</td>
             
-            <td class="hidden-phone">Ongoing</td>
+            <td class="hidden-phone">{{$project->project_status}}</td>
             
-			            <td>R 1000.00</td>
+			            <td>{{$project->cost}}</td>
 			            
-            <td class="hidden-phone"><a href="/vbizz-dashboard/ptask?projectid=50&amp;fp=1">Manage Task</a></td>			
+            <!-- <td class="hidden-phone"><a href="/vbizz-dashboard/ptask?projectid=50&amp;fp=1">Manage Task</a></td>			
             				<td class="hidden-phone"><a href="/vbizz-dashboard/milestone?projectid=50">Manage Milestone</a></td>
-			            
+			             -->
         
         </tr>
-            </tbody><tfoot>
+        @php
+        $count++;
+        @endphp
+
+        @endforeach
+            </tbody>
+            <!-- <tfoot>
             <tr>
                 <td colspan="10">
 <div class="pagination pagination-toolbar clearfix" style="">
@@ -110,7 +135,7 @@ document.getElementById('filter_status').value='';this.form.submit();"><i class=
 	<option value="100">100</option>
 	<option value="0">All</option>
 </select>
-<!-- <div class="chzn-container chzn-container-single chzn-container-single-nosearch" style="width: 59px;" title="" id="limit_chzn"><a class="chzn-single"><span>20</span><div><b></b></div></a><div class="chzn-drop"><div class="chzn-search"><input type="text" autocomplete="off" readonly=""></div><ul class="chzn-results"></ul></div></div> -->
+<div class="chzn-container chzn-container-single chzn-container-single-nosearch" style="width: 59px;" title="" id="limit_chzn"><a class="chzn-single"><span>20</span><div><b></b></div></a><div class="chzn-drop"><div class="chzn-search"><input type="text" autocomplete="off" readonly=""></div><ul class="chzn-results"></ul></div></div>
 		</div>
 	
 	
@@ -120,8 +145,9 @@ document.getElementById('filter_status').value='';this.form.submit();"><i class=
 </td>
             </tr>
 			
-        </tfoot>
+        </tfoot> -->
     </table>
+    {!! $projects->render() !!}
 </div>
 
 <input type="hidden" name="option" value="com_vbizz">
