@@ -216,7 +216,7 @@ document.getElementById('filter_status').value='';this.form.submit();"><i class=
 
 <div class="content_part" style="display:none;" id="customerCreate">
 <!-- <form action="{{route('projects.customer.save')}}" method="post" name="customerCreateForm" id="customerCreateForm" enctype="multipart/form-data"> -->
-{{Form::open(['route' => 'projects.customer.save', id =>'customerCreateForm', 'files' => true])}}
+{{Form::open(['route' => 'projects.customer.save', 'id' =>'customerCreateForm', 'files' => true])}}
 {{ csrf_field() }}
 <div class="row-fluid">
     <div class="span12">
