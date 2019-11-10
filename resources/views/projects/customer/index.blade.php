@@ -71,7 +71,7 @@ jQuery(document).ready(function(){jQuery("a.close").on("click", function(){jQuer
             <div class="span12">
                 <div id="toolbar" class="btn-toolbar">
                                         <div class="btn-wrapper" id="toolbar-new">
-                        <span onclick="Joomla.submitbutton('add')" class="btn btn-small btn-success">
+                        <span onclick="submitbutton('add')" class="btn btn-small btn-success">
                         <span class="fa fa-plus"></span> New</span>
                     </div>
                                        

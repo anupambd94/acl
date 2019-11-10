@@ -92,3 +92,26 @@ Route::post('/projects.customer.save', 'ProjectsController@customerSave');
 // routs for Project end
 //******************************************************************* */
 //---------------------------------------------------------------------
+
+//---------------------------------------------------------------------
+// routs for Inventory start
+//******************************************************************* */
+
+Route::resource('categories', 'CategoriesController');
+Route::resource('items', 'ItemsController');
+Route::get('/items.pending', 'ItemsController@pendingItems')->name('items.pending');
+Route::get('/items.stock', 'ItemsController@stock')->name('items.stock');
+Route::get('/items.stock.new', 'ItemsController@stock_create')->name('items.stock.new');
+// Route::get('/items.stock.edit{id}', 'ItemsController@stock_edit')->name('items.stock');
+Route::get('/items.assets', 'ItemsController@assets')->name('items.assets');
+Route::get('/items.assets.new', 'ItemsController@assets_create')->name('items.assets.new');
+// Route::get('/items.assets', 'ItemsController@assets')->name('items.assets');
+
+// Route::get('/projects.customer_create', 'ProjectsController@create_customer')->name('projects.customer_create');
+
+// Route::get('/projects.customer.save', 'ProjectsController@customer')->name('projects.customer.save');
+// Route::post('/projects.customer.save', 'ProjectsController@customerSave');
+
+// routs for Inventory end
+//******************************************************************* */
+//---------------------------------------------------------------------

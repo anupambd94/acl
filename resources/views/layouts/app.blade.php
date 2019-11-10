@@ -538,11 +538,11 @@
                                 <a href="#" data-toggle="dropdown" class="dropdown-toggle"> Inventory <b
                                         class="caret"></b></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#"> Category </a></li>
-                                    <li><a href="#">Items in queue for validation </a></li>
-                                    <li><a href="#"> Items </a></li>
-                                    <li><a href="#">Manages Stock </a></li>
-                                    <li><a href="#"> Assets </a></li>
+                                    <li><a href="{{route('categories.index')}}"> Category </a></li>
+                                    <li><a href="{{route('items.pending')}}">Items in queue for validation </a></li>
+                                    <li><a href="{{route('items.index')}}"> Items </a></li>
+                                    <li><a href="{{route('items.stock')}}">Manages Stock </a></li>
+                                    <li><a href="{{route('items.assets')}}"> Assets </a></li>
                                 </ul>
                                 <!-- end dropdown-menu -->
                             </li>

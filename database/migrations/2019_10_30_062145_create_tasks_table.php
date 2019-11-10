@@ -20,7 +20,7 @@ class CreateTasksTable extends Migration
             $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();
             $table->integer('project_id');
-            $table->enum('proejct_status', ['pending', 'ongoing', 'complete'])->nullable();
+            $table->enum('project_status', ['pending', 'ongoing', 'complete'])->nullable();
             $table->boolean('IsActive');
             $table->rememberToken();
             $table->timestamps();
