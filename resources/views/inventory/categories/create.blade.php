@@ -7,14 +7,16 @@
 	</div>
 </header>
 <div class="content_part">
-    <form action="/vbizz-dashboard/category" method="post" name="adminForm" id="adminForm">
-    
+    <form action="{{ route('category_create') }}" method="post" name="adminForm" id="adminForm">
+    {{ csrf_field() }}    
     <div class="row-fluid">
         <div class="span12">
             <div class="btn-toolbar" id="toolbar">
-                        <div class="btn-wrapper" id="toolbar-apply">
-                    <span onclick="Joomla.submitbutton('apply')" class="btn btn-small btn-success">
-                    <span class="fa fa-check"></span> Save</span>
+                <div class="btn-wrapper" id="toolbar-apply">
+                    <button type="submit" class="btn btn-small btn-success">
+                        <span class="fa fa-check"></span> Save</span>
+                    </button>
+
                 </div>
                 <div class="btn-wrapper" id="toolbar-save">
                     <span onclick="Joomla.submitbutton('save')" class="btn btn-small">
@@ -38,6 +40,26 @@
     <div class="overview">
     <fieldset class="adminform">
         <legend>Overview</legend>
+        @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            @if(session('status'))
+            <div class="row register_button animated bounceInUp heartBeat fadeOutDown">
+            <div class="col-md-offset-4 col-md-3">
+
+                <div class="form-group">
+                    <div class="alert alert-success" style="text-align:center">{{session('status')}}</div>
+                </div>
+
+                </div>
+            </div>
+            @endif
         <ul>
             <li>Manage your Inventory Stock by adding/removing products or items to/from the warehouse.</li>
         </ul>
@@ -54,39 +76,27 @@
             <tr>
                 <th width="200">
                     <label class="hasTip" title="">
-                        Title<span style="color:Red;">*  </span>				</label>
+                        Category Name<span style="color:Red;">*  </span>				</label>
                 </th>
-                <td><input class="text_area" type="text" name="title" id="title" value=""></td>
+                <td><input class="text_area" type="text" name="category_name" id="category_name" value=""></td>
             </tr>
             
             <tr>
                 <th><label class="hasTip" title="">Select Parent</label></th>
                 <td id="parent">
                     <select name="parent" id="parent" style="">
-                        <option value="">Select Parent</option>
+                        <option value="" disabled selected>Select Parent</option>
+                        @foreach ($categories as $category)
+                        <option value={{$category->category_id}}>{{$category->category_name}}</option>
+                        @endforeach
                     </select>
-                    {{-- <div class="chzn-container chzn-container-single chzn-container-single-nosearch" style="width: 220px;" title="" id="parent_chzn"><a class="chzn-single"><span>Select Parent</span><div><b></b></div></a><div class="chzn-drop"><div class="chzn-search"><input type="text" autocomplete="off" readonly=""></div><ul class="chzn-results"></ul></div></div> --}}
                 </td>
             </tr>
             
-            {{-- <tr>
-                <th><label class="hasTip" title="">Set the publish status</label></th>
-                <td><fieldset class="radio btn-group" style="margin-bottom:9px;">
-                    <label for="status1" id="status-lbl" class="radio btn">Yes</label>
-                    <input type="radio" name="status" id="status1" value="1">
-                    <label for="status0" id="status-lbl" class="radio btn active btn-danger">No</label>
-                    <input type="radio" name="status" id="status0" value="0" checked="checked">
-                    </fieldset></td>
-            </tr> --}}
             <tr>
                 <th><label class="hasTip" title="">Active</label></th>
                 <td>
                     <fieldset class="radio btn-group">
-                        {{-- <label for="published1" id="published-lbl" class="radio btn active btn-success">Yes</label>
-    <input type="radio" name="published" id="published1" value="1" checked="checked">
-    <label for="published0" id="published-lbl" class="radio btn">No</label>
-    <input type="radio" name="published" id="published0" value="0">
-     --}}
                         <input type="checkbox" name="isActive" id="isActive" checked data-toggle="toggle">
                     </fieldset>
                 </td>

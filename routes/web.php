@@ -97,7 +97,15 @@ Route::post('/projects.customer.save', 'ProjectsController@customerSave');
 // routs for Inventory start
 //******************************************************************* */
 
+// For Category 
 Route::resource('categories', 'CategoriesController');
+Route::get('category_create', 'CategoriesController@create')
+    ->name('category_create');
+Route::post('category_create', 'CategoriesController@store');
+Route::post('category_update', 'CategoriesController@update');
+Route::get('/edit_category/{id}', 'CategoriesController@edit')->name('edit_category');
+Route::post('/edit_category/{id}', 'CategoriesController@editCategory');
+
 Route::resource('items', 'ItemsController');
 Route::get('/items.pending', 'ItemsController@pendingItems')->name('items.pending');
 Route::get('/items.stock', 'ItemsController@stock')->name('items.stock');
