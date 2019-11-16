@@ -14,7 +14,16 @@ class CreateItemsTable extends Migration
     public function up()
     {
         Schema::create('items', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('item_id');
+            $table->string('item_name')->unique();
+            $table->integer('item_amount');
+            $table->integer('item_quantity')->nullable();
+            $table->string('barcode')->nullable();
+            $table->enum('transaction', ['For Sale', 'Asset','Rent']);
+            $table->boolean('IsActive');
+            $table->boolean('IsAllowCommission');
+            $table->boolean('IsApproved');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

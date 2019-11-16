@@ -1,9 +1,26 @@
 <?php
 
 namespace App\Http\Controllers;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
+use Auth;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\Paginator;
+use Session;
+
+//Using Database Tables
+// use App\Employees;
+// use App\Departments;
+// use App\Sections;
+// use App\Designations;
+// use App\Currentaddress;
+// use App\Permanentaddress;
 
 use App\Items;
-use Illuminate\Http\Request;
 
 class ItemsController extends Controller
 {
@@ -14,7 +31,20 @@ class ItemsController extends Controller
      */
     public function index()
     {
-        return view('inventory.items.index');
+        if (!Auth::user()->hasPermissionTo('Inventory Management')) {
+            abort('401');
+        } else {
+        $items = \DB::table('items')
+        ->select('item_id', 'item_name', 'item_amount', 'item_quantity', 'transaction')
+        // ->where('is')
+        ->paginate(10);
+            
+            // return view('employees.index',)->with('roles', $roles);
+            // return response()->json($items);
+        
+            return view('inventory.items.index',compact('items'));
+        
+        }
         //
     }
 

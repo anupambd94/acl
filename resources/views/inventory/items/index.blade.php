@@ -67,151 +67,48 @@
                 <th width="10" class="hidden-phone"><a href="#" onclick="Joomla.tableOrdering('i.id','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="Id">Id</a></th>
             </tr>
         </thead>
-                <tbody><tr class="row0">
-                <td align="center" class="hidden-phone">1</td>
+                <tbody>
+                @php
+                    $count = 1;
+                    @endphp
+
+                    @foreach($items as $item)
+                    @php
+                    if($item->IsActive == 1){
+                    $icon_status = "icon-publish";
+                    $active = "active";
+                    $title = "Unpublish";
+                    }else{
+                    $icon_status = "icon-unpublish";
+                    $active = "";
+                    $title = "Publish";
+                    }
+                    @endphp
+                <tr class="row0">
+                <td align="center" class="hidden-phone">{{$count}}</td>
                 
-                <td><input type="checkbox" id="cb0" name="cid[]" value="38" onclick="Joomla.isChecked(this.checked);"></td>
-                
-                <td>
-                                        <a href="/vbizz-dashboard/items?task=edit&amp;cid[0]=38">Facebook</a>
-                                </td>
-                
-                <td class="hidden-phone">Asset</td>
-                
-                <td>R$ 150000.00</td>
-                
-                <td class="hidden-phone">34</td>
-                
-                <td class="hidden-phone">38</td>
-                
-            </tr>
-                    <tr class="row1">
-                <td align="center" class="hidden-phone">2</td>
-                
-                <td><input type="checkbox" id="cb1" name="cid[]" value="37" onclick="Joomla.isChecked(this.checked);"></td>
-                
-                <td>
-                                        <a href="/vbizz-dashboard/items?task=edit&amp;cid[0]=37">Camera Hire</a>
-                                </td>
-                
-                <td class="hidden-phone">Rent</td>
-                
-                <td>R$ 100.00</td>
-                
-                <td class="hidden-phone">1</td>
-                
-                <td class="hidden-phone">37</td>
-                
-            </tr>
-                    <tr class="row0">
-                <td align="center" class="hidden-phone">3</td>
-                
-                <td><input type="checkbox" id="cb2" name="cid[]" value="36" onclick="Joomla.isChecked(this.checked);"></td>
+                <td><input type="checkbox" id="cb0" name="items[]" value="{{$item->item_id}}"></td>
                 
                 <td>
-                                        <a href="/vbizz-dashboard/items?task=edit&amp;cid[0]=36">agv</a>
-                                </td>
+                    <a href="/vbizz-dashboard/items?task=edit&amp;cid[{{$count}}]={{$item->item_id}}">{{$item->item_name}}</a>
+                </td>
                 
-                <td class="hidden-phone">Asset</td>
+                <td class="hidden-phone">{{$item->transaction}}</td>
                 
-                <td>R$ 100000.00</td>
+                <td>R$ {{$item->item_amount}} </td>
                 
-                <td class="hidden-phone">2</td>
+                <td class="hidden-phone">{{$item->item_quantity}}</td>
                 
-                <td class="hidden-phone">36</td>
+                <td class="hidden-phone">{{$item->item_id}}</td>
                 
-            </tr>
-                    <tr class="row1">
-                <td align="center" class="hidden-phone">4</td>
-                
-                <td><input type="checkbox" id="cb3" name="cid[]" value="35" onclick="Joomla.isChecked(this.checked);"></td>
-                
-                <td>
-                                        <a href="/vbizz-dashboard/items?task=edit&amp;cid[0]=35">SPRAYERS</a>
-                                </td>
-                
-                <td class="hidden-phone">For Sale</td>
-                
-                <td>R$ 2000.00</td>
-                
-                <td class="hidden-phone">500</td>
-                
-                <td class="hidden-phone">35</td>
-                
-            </tr>
-                    <tr class="row0">
-                <td align="center" class="hidden-phone">5</td>
-                
-                <td><input type="checkbox" id="cb4" name="cid[]" value="31" onclick="Joomla.isChecked(this.checked);"></td>
-                
-                <td>
-                                        <a href="/vbizz-dashboard/items?task=edit&amp;cid[0]=31">water can</a>
-                                </td>
-                
-                <td class="hidden-phone">For Sale</td>
-                
-                <td>R$ 2000.00</td>
-                
-                <td class="hidden-phone">20</td>
-                
-                <td class="hidden-phone">31</td>
-                
-            </tr>
-                    <tr class="row1">
-                <td align="center" class="hidden-phone">6</td>
-                
-                <td><input type="checkbox" id="cb5" name="cid[]" value="30" onclick="Joomla.isChecked(this.checked);"></td>
-                
-                <td>
-                                        <a href="/vbizz-dashboard/items?task=edit&amp;cid[0]=30">sukuma wiki seedlings</a>
-                                </td>
-                
-                <td class="hidden-phone">For Sale</td>
-                
-                <td>R$ 30000.00</td>
-                
-                <td class="hidden-phone">300</td>
-                
-                <td class="hidden-phone">30</td>
-                
-            </tr>
-                    <tr class="row0">
-                <td align="center" class="hidden-phone">7</td>
-                
-                <td><input type="checkbox" id="cb6" name="cid[]" value="29" onclick="Joomla.isChecked(this.checked);"></td>
-                
-                <td>
-                                        <a href="/vbizz-dashboard/items?task=edit&amp;cid[0]=29">malaria kits</a>
-                                </td>
-                
-                <td class="hidden-phone">For Sale</td>
-                
-                <td>R$ 20000.00</td>
-                
-                <td class="hidden-phone">3000</td>
-                
-                <td class="hidden-phone">29</td>
-                
-            </tr>
-                    <tr class="row1">
-                <td align="center" class="hidden-phone">8</td>
-                
-                <td><input type="checkbox" id="cb7" name="cid[]" value="28" onclick="Joomla.isChecked(this.checked);"></td>
-                
-                <td>
-                                        <a href="/vbizz-dashboard/items?task=edit&amp;cid[0]=28">vbizz</a>
-                                </td>
-                
-                <td class="hidden-phone">For Sale</td>
-                
-                <td>R$ 200.00</td>
-                
-                <td class="hidden-phone">0</td>
-                
-                <td class="hidden-phone">28</td>
-                
-            </tr>
-                </tbody><tfoot>
+                </tr>
+                @php
+                $count++;
+                @endphp
+
+                @endforeach
+                </tbody>
+                <!-- <tfoot>
         <tr>
           <td colspan="9">
     <div class="pagination pagination-toolbar clearfix" style="text-align: center;">
@@ -237,8 +134,11 @@
     </div>
     </td>
         </tr>
-      </tfoot>
+      </tfoot> -->
+
         </table>
+        {!! $items->render() !!}
+
     </div>
     
     <input type="hidden" name="option" value="com_vbizz">

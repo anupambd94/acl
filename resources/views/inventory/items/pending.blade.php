@@ -63,69 +63,47 @@
                 <th width="10" class="hidden-phone"><a href="#" onclick="Joomla.tableOrdering('i.id','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="Id">Id</a></th>
             </tr>
         </thead>
-                <tbody><tr class="row0">
-                <td align="center" class="hidden-phone">1</td>
+        <tbody>
+                @php
+                    $count = 1;
+                    @endphp
+
+                    @foreach($items as $item)
+                    @php
+                    if($item->IsActive == 1){
+                    $icon_status = "icon-publish";
+                    $active = "active";
+                    $title = "Unpublish";
+                    }else{
+                    $icon_status = "icon-unpublish";
+                    $active = "";
+                    $title = "Publish";
+                    }
+                    @endphp
+                <tr class="row0">
+                <td align="center" class="hidden-phone">{{$count}}</td>
                 
-                <td><input type="checkbox" id="cb0" name="cid[]" value="37" onclick="Joomla.isChecked(this.checked);"></td>
+                <td><input type="checkbox" id="cb0" name="items[]" value="{{$item->item_id}}"></td>
                 
                 <td>
-                                        <a href="javascript:void(0);">Camera Hire</a>
-                                </td>
+                    <a href="/vbizz-dashboard/items?task=edit&amp;cid[{{$count}}]={{$item->item_id}}">{{$item->item_name}}</a>
+                </td>
                 
-                <td class="hidden-phone">Rent</td>
+                <td class="hidden-phone">{{$item->transaction}}</td>
                 
-                <td>R$ 100.00</td>
+                <td>R$ {{$item->item_amount}} </td>
                 
-                <td class="hidden-phone">1</td>
+                <td class="hidden-phone">{{$item->item_quantity}}</td>
                 
-                <td class="hidden-phone">37</td>
+                <td class="hidden-phone">{{$item->item_id}}</td>
                 
-            </tr>
-                    <tr class="row1">
-                <td align="center" class="hidden-phone">2</td>
-                
-                <td><input type="checkbox" id="cb1" name="cid[]" value="28" onclick="Joomla.isChecked(this.checked);"></td>
-                
-                <td>
-                                        <a href="javascript:void(0);">vbizz</a>
-                                </td>
-                
-                <td class="hidden-phone">For Sale</td>
-                
-                <td>R$ 200.00</td>
-                
-                <td class="hidden-phone">0</td>
-                
-                <td class="hidden-phone">28</td>
-                
-            </tr>
-                </tbody><tfoot>
-        <tr>
-          <td colspan="9">
-    <div class="pagination pagination-toolbar clearfix" style="text-align: center;">
-    
-                <div class="limit pull-right">
-                Display #<select id="limit" name="limit" class="inputbox input-mini" size="1" onchange="this.form.submit()" style="">
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="15">15</option>
-        <option value="20" selected="selected">20</option>
-        <option value="25">25</option>
-        <option value="30">30</option>
-        <option value="50">50</option>
-        <option value="100">100</option>
-        <option value="0">All</option>
-    </select>
-    {{-- <div class="chzn-container chzn-container-single chzn-container-single-nosearch" style="width: 59px;" title="" id="limit_chzn"><a class="chzn-single"><span>20</span><div><b></b></div></a><div class="chzn-drop"><div class="chzn-search"><input type="text" autocomplete="off" readonly=""></div><ul class="chzn-results"></ul></div></div> --}}
-            </div>
-        
-        
-                <input type="hidden" name="limitstart" value="0">
-        
-    </div>
-    </td>
-        </tr>
-      </tfoot>
+                </tr>
+                @php
+                $count++;
+                @endphp
+
+                @endforeach
+                </tbody>
         </table>
     </div>
     
