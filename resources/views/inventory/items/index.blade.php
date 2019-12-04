@@ -7,7 +7,7 @@
 	</div>
 </header>
 <div class="content_part">
-    <form action="/vbizz-dashboard/items" method="post" name="adminForm" id="adminForm">
+    <form action="" method="post" name="adminForm" id="adminForm">
     
     
     <div class="subhead">

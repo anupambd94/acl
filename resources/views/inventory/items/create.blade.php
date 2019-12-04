@@ -7,22 +7,24 @@
 	</div>
 </header>
 <div class="content_part">
-    <form action="/vbizz-dashboard/items" method="post" name="adminForm" id="adminForm">
-    
+    <form action="{{ route('items.store') }}" method="post" name="adminForm" id="adminForm">
+    {{ csrf_field() }} 
     <div class="row-fluid">
         <div class="span12">
             <div class="btn-toolbar" id="toolbar">
-                        <div class="btn-wrapper" id="toolbar-apply">
-                    <span onclick="submitbutton('apply')" class="btn btn-small btn-success">
-                    <span class="fa fa-check"></span> Save</span>
+            <div class="btn-wrapper" id="toolbar-apply">
+                    <button type="submit" class="btn btn-small btn-success">
+                        <span class="fa fa-check"></span> Save</span>
+                    </button>
+
                 </div>
                 <div class="btn-wrapper" id="toolbar-save">
-                    <span onclick="Joomla.submitbutton('save')" class="btn btn-small">
+                    <span onclick="submitbutton('save')" class="btn btn-small">
                     <span class="fa fa-check"></span> Save &amp; Close</span>
                 </div>
                 
                 <div class="btn-wrapper" id="toolbar-save-new">
-                    <span onclick="Joomla.submitbutton('saveNew')" class="btn btn-small">
+                    <span onclick="submitbutton('saveNew')" class="btn btn-small">
                     <span class="fa fa-plus"></span> Save &amp; New</span>
                 </div>
                     
@@ -38,6 +40,26 @@
     <div class="overview">
     <fieldset class="adminform">
         <legend>Overview</legend>
+        @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            @if(session('status'))
+            <div class="row register_button animated bounceInUp heartBeat fadeOutDown">
+            <div class="col-md-offset-4 col-md-3">
+
+                <div class="form-group">
+                    <div class="alert alert-success" style="text-align:center">{{session('status')}}</div>
+                </div>
+
+                </div>
+            </div>
+            @endif
         <ul>
             <li>An Item is anything that your company buys, sells, or resells in the course of business, such as products in your inventory, a service you provide (such as a consultation fee) shipping and handling charges, a miscellaneous fee (such as a delivery fee).</li><li>vBizz allows you to Add multiple Items to Income/Expense and Invoice. You can setup unlimited number of Items.</li>
         </ul>
@@ -74,11 +96,11 @@
                 <th><label class="hasTip" title="">
                     Transaction<span style="color:Red;">*  </span></label></th>
                 <td>
-                    <select name="tran_type_id" id="tran_type_id" style="">
+                    <select name="transaction_type" id="transaction_type" style="">
                     <option value="">Select Transaction</option>
-                                    <option value="286"> For Sale </option>
-                                    <option value="347"> Asset </option>
-                                    <option value="346"> Rent </option>
+                                    <option value="For Sale"> For Sale </option>
+                                    <option value="Asset"> Asset </option>
+                                    <option value="Rent"> Rent </option>
                                     </select>
                                     {{-- <div class="chzn-container chzn-container-single chzn-container-single-nosearch" style="width: 146px;" title="" id="tran_type_id_chzn"><a class="chzn-single"><span>Select Transaction</span><div><b></b></div></a><div class="chzn-drop"><div class="chzn-search"><input type="text" autocomplete="off" readonly=""></div><ul class="chzn-results"></ul></div></div> --}}
                 </td>
@@ -115,16 +137,32 @@
 
 @section('script')
 <script>
-    function submitbutton(option){
-if (option == 'cancel') {
-var department_id = $('#boxChecked').val();
-var url = '{{ route("items.index") }}';
-// console.log(department_id);
-document.location.href=url;
-}else{
-}
+//     function submitbutton(option){
+// if (option == 'cancel') {
+// var department_id = $('#boxChecked').val();
+// var url = '{{ route("items.index") }}';
+// // console.log(department_id);
+// document.location.href=url;
+// }else{
+// }
 
-}
+// }
+function submitbutton(option){
+    
+    if(option == 'addCustomer'){
+        console.log(option);
+    }else if (option == 'save') {
+    // $('adminForm').submit();
+    }else if (option == 'cancel') {
+    // var department_id = $('#boxChecked').val();
+    var url = '{{ route("items.index") }}';
+    // console.log(department_id);
+    document.location.href=url;
+    }else{
+    }
+    
+    
+    }
 $(function() {
             $(document).on("change","#isActive", function()
             {

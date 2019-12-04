@@ -7,7 +7,7 @@
 	</div>
 </header>
 <div class="content_part">
-    <form action="/vbizz-dashboard/itemqueue" method="post" name="adminForm" id="adminForm">
+    <form action="" method="post" name="adminForm" id="adminForm">
     
     
     <div class="subhead">
@@ -19,12 +19,12 @@
                    
                         
                                             <div class="btn-wrapper" id="toolbar-edit">
-                            <span onclick="if (document.adminForm.boxchecked.value==0){alert('Please first make a selection from the list');}else{ Joomla.submitbutton('validate')}" class="btn btn-small">
+                            <span onclick="if (document.adminForm.boxchecked.value==0){alert('Please first make a selection from the list');}else{ submitbutton('validate')}" class="btn btn-small">
                             <span class="fa fa-edit"></span> Validate</span>
                         </div>
                                             
                                             <div class="btn-wrapper" id="toolbar-delete">
-                        <span onclick="if (document.adminForm.boxchecked.value==0){alert('Please first make a selection from the list');}else{ Joomla.submitbutton('remove')}" class="btn btn-small">
+                        <span onclick="if (document.adminForm.boxchecked.value==0){alert('Please first make a selection from the list');}else{ submitbutton('remove')}" class="btn btn-small">
                         <span class="fa fa-remove"></span> Delete</span>
                         </div>
                                             
@@ -55,7 +55,7 @@
         <thead>
             <tr>
                 <th width="10" class="hidden-phone">#</th>
-                <th width="10"><input type="checkbox" name="toggle" value="" onclick="Joomla.checkAll(this);"></th>
+                <th width="10"><input type="checkbox" name="toggle" value="" id="master" ></th>
                 <th><a href="#" onclick="Joomla.tableOrdering('i.title','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="Title">Title</a></th>
                 <th class="hidden-phone"><a href="#" onclick="Joomla.tableOrdering('t.title','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="Transaction">Transaction</a></th>
                 <th><a href="#" onclick="Joomla.tableOrdering('i.amount','asc','');return false;" class="hasPopover" title="" data-content="Select to sort by this column" data-placement="top" data-original-title="Amount">Amount</a></th>
@@ -83,7 +83,7 @@
                 <tr class="row0">
                 <td align="center" class="hidden-phone">{{$count}}</td>
                 
-                <td><input type="checkbox" id="cb0" name="items[]" value="{{$item->item_id}}"></td>
+                <td><input type="checkbox" id="cb0" name="items[]" class="sub_chk" value="{{$item->item_id}}"></td>
                 
                 <td>
                     <a href="/vbizz-dashboard/items?task=edit&amp;cid[{{$count}}]={{$item->item_id}}">{{$item->item_name}}</a>
@@ -105,11 +105,13 @@
                 @endforeach
                 </tbody>
         </table>
+        {!! $items->render() !!}
+
     </div>
     
     <input type="hidden" name="option" value="com_vbizz">
     <input type="hidden" name="task" value="">
-    <input type="hidden" name="boxchecked" value="0">
+    <input type="hidden" name="boxchecked" value="0" id="boxChecked">
     <input type="hidden" name="filter_order" value="id">
     <input type="hidden" name="filter_order_Dir" value="desc">
     </form>
@@ -117,5 +119,95 @@
 @endsection
 
 @section('script')
+<script type="text/javascript">
+    jQuery(window).ready(function(e) {
+    $('#loading').hide();
+    var window_height = jQuery(window).height();
+    var header = jQuery('.header').height();
+    var copyright = jQuery('.copyright').height();
+    var new_height = window_height -(copyright+header);
+    jQuery('.shwocase').css('min-height',new_height);
+    });
+    
+    jQuery('#master').on('click', function(e) {
+    if($(this).is(':checked',true))
+    {
+    $(".sub_chk").prop('checked', true);
+    }
+    else
+    {
+    $(".sub_chk").prop('checked',false);
+    }
+    });
+    
+    jQuery('.changeStatus').on('click',function(){
+    var departmentId = $(this).attr('data-department_id');
+    var action = $(this).attr('title');
+    
+    });
+    var selected_checkbox = [];
+function submitbutton(option){
+    if (option == 'edit') {
+        // var department_id = $('#boxChecked').val();
+        // var url = '{{ route("edit_department", ":id") }}';
+        // url = url.replace(':id', department_id);
+        // console.log(department_id);
+    // document.location.href=url;s
+    }else{
+        $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+        });
+        $(window).scrollTop(1);
+        $('#loading').show();
+        $('.loader_text').html("Completing process ....");
+        $('.container').css("opacity", 0.6);
+        $(".container *").children().prop('disabled', true);
+        if (selected_checkbox) {
+        $.ajax({
+        type: 'post',
+        url: 'items.update',
+        data: {
+        'option': option,
+        'idList': selected_checkbox
+        },
+        success: function (data) {
+        console.log('success');
+        console.log(data);
+        
+        },
+        complete: function () {
+        $('#loading').hide();
+        $('.container').css("opacity", 1);
+        $(".container *").children().prop('disabled', false);
+        location.reload(true);
+        },
+        error: function () {
+        console.log('error');
+        }
+        });
+        
+        } else {
+        // location.reload(true);
+        }
+    }
 
+
+
+}
+
+$('body').on('change', '#cb0', function () {
+selected_checkbox = [];
+$('input[name^="items"]').each(function () {
+if ($(this).is(":checked")) {
+
+selected_checkbox.push($(this).val());
+console.log(selected_checkbox);
+$('#boxChecked').val($(this).val());
+// console.log($('#boxChecked').val());
+}
+});
+});
+</script>
 @endsection

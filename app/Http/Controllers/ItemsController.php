@@ -36,7 +36,7 @@ class ItemsController extends Controller
         } else {
         $items = \DB::table('items')
         ->select('item_id', 'item_name', 'item_amount', 'item_quantity', 'transaction')
-        // ->where('is')
+        ->where('IsActive','=','1')
         ->paginate(10);
             
             // return view('employees.index',)->with('roles', $roles);
@@ -79,8 +79,22 @@ class ItemsController extends Controller
         //
     }
     public function pendingItems(){
+        if (!Auth::user()->hasPermissionTo('Inventory Management')) {
+            abort('401');
+        } else {
+        $items = \DB::table('items')
+        ->select('item_id', 'item_name', 'item_amount', 'item_quantity', 'transaction')
+        ->where('IsApproved','=','0')
+        // ->where('is')
+        ->paginate(10);
+            
+            // return view('employees.index',)->with('roles', $roles);
+            // return response()->json($items);
         
-        return view('inventory.items.pending');
+            return view('inventory.items.pending',compact('items'));
+        
+        }
+        // return view('inventory.items.pending');
     }
     /**
      * Store a newly created resource in storage.
@@ -90,7 +104,50 @@ class ItemsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (!Auth::user()->hasPermissionTo('Inventory Management')) {
+            abort('401');
+        } else {
+            $this->validate($request, [
+                'title' => 'required',
+                'amount' => 'required',
+                'transaction_type' => 'required',
+            ]);
+        
+            if (isset($request->isActive)) {
+                $isActive = 1;
+            } else {
+                $isActive = 0;
+            }
+            $status = "Initial";
+            $class = "";
+            $data = $request;
+            $register = Items::create([
+                'item_name'=> $data['title'],
+                'item_amount'=> $data['amount'],
+                'item_quantity'=> $data['quantity'],
+                'barcode'=> $data['barcode'],
+                'transaction'=> $data['transaction_type'],
+                'IsAllowCommission'=> $data['allowcommission'],
+                'IsApproved'=> 0,
+                'IsActive'=> 1
+            ]);
+
+            if ($register) {
+                $status = "Item " . $data['title'] ." (".$data['quantity']. ") Successfully Created.";
+                $class = "success";
+            } else {
+                $status = "not reigstered";
+                $class = "danger";
+            }
+            
+            // return response()->json($request);        
+            return redirect()->back()->with('status', $status);
+            // return view('employees.index',)->with('roles', $roles);
+            // return response()->json($request);
+        
+            // return view('inventory.items.index',compact('items'));
+        
+        }
     }
 
     /**
@@ -101,7 +158,7 @@ class ItemsController extends Controller
      */
     public function show(Items $items)
     {
-        //
+        
     }
 
     /**
@@ -122,9 +179,36 @@ class ItemsController extends Controller
      * @param  \App\Items  $items
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Items $items)
+    public function update(Request $request)
     {
-        //
+        if (!Auth::user()->hasPermissionTo('Inventory Management')) {
+            abort('401');
+        } else {
+            if ($request->option == 'validate') {
+                foreach ($request->idList as $id) {
+                    $result = Items::where('item_id', $id)
+                        ->update(array('IsApproved' => 1));
+                }
+            } else if ($request->option == 'remove') {
+                foreach ($request->idList as $id) {
+                    $result = Items::where('item_id', $id)
+                        ->update(array('IsActive' => 0));
+                }
+            } else { }
+
+            if ($result) {
+                $status = 'Profile Updated successfully';
+            } else {
+                $status = 'Not updated.';
+            }
+
+            return response()->json($status);
+
+            // return response()->json($request);        
+            // return redirect('designation_create')->with('status',$status);
+            // return view('employees.index')->with('roles', $roles);
+            // return $status;
+        }
     }
 
     /**

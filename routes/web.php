@@ -108,6 +108,7 @@ Route::post('/edit_category/{id}', 'CategoriesController@editCategory');
 
 Route::resource('items', 'ItemsController');
 Route::get('/items.pending', 'ItemsController@pendingItems')->name('items.pending');
+Route::post('items.update', 'ItemsController@update');
 Route::get('/items.stock', 'ItemsController@stock')->name('items.stock');
 Route::get('/items.stock.new', 'ItemsController@stock_create')->name('items.stock.new');
 // Route::get('/items.stock.edit{id}', 'ItemsController@stock_edit')->name('items.stock');

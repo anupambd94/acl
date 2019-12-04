@@ -1140,6 +1140,12 @@ body.contentpane .content_part {
     padding: 0 5px 0 0;
     color: #5bb75b;
 }
+.alert ul li:before {
+    font-family: 'FontAwesome';
+    content: "\f00d";
+    padding: 0 5px 0 0;
+    color: #972020;
+}
 
 .curr_inc_exp {
     width: 20%;
