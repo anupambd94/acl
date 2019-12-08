@@ -124,3 +124,22 @@ Route::get('/items.assets.new', 'ItemsController@assets_create')->name('items.as
 // routs for Inventory end
 //******************************************************************* */
 //---------------------------------------------------------------------
+
+
+// routs for income start
+//******************************************************************* */
+
+// For Category 
+Route::resource('income', 'IncomeController');
+Route::get('income.invoices', 'IncomeController@invoices')
+    ->name('income.invoices');
+// Route::get('/items.assets', 'ItemsController@assets')->name('items.assets');
+
+// Route::get('/projects.customer_create', 'ProjectsController@create_customer')->name('projects.customer_create');
+
+// Route::get('/projects.customer.save', 'ProjectsController@customer')->name('projects.customer.save');
+// Route::post('/projects.customer.save', 'ProjectsController@customerSave');
+
+// routs for Inventory end
+//******************************************************************* */
+//---------------------------------------------------------------------
