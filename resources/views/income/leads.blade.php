@@ -68,7 +68,7 @@ document.getElementById('filter_status').value='';this.form.submit();"><i class=
                 <div class="filter_right filter_block-b">
                     <div class="vbz_lead lead_so"><label>Lead Source</label>
                         <select id="lead_source" name="lead_source" class="inputbox" size="1" onchange="submitform();"
-                            style="width: 150px; display: none;">
+                            style="width: 150px; ">
                             <option value="" selected="selected">ALL</option>
                             <option value="Advertisement">Advertisement</option>
                             <option value="Cold Call">Cold Call</option>
@@ -83,7 +83,7 @@ document.getElementById('filter_status').value='';this.form.submit();"><i class=
                             <option value="Web Download">Web Download</option>
                             <option value="Chat">Chat</option>
                         </select>
-                        <div class="chzn-container chzn-container-single" style="width: 150px;" title=""
+                        {{-- <div class="chzn-container chzn-container-single" style="width: 150px;" title=""
                             id="lead_source_chzn"><a class="chzn-single"><span>ALL</span>
                                 <div><b></b></div>
                             </a>
@@ -91,11 +91,11 @@ document.getElementById('filter_status').value='';this.form.submit();"><i class=
                                 <div class="chzn-search"><input type="text" autocomplete="off"></div>
                                 <ul class="chzn-results"></ul>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="vbz_lead lead_in"><label>Lead Industry</label>
                         <select id="lead_industry" name="lead_industry" class="inputbox" size="1"
-                            onchange="submitform();" style="width: 150px; display: none;">
+                            onchange="submitform();" style="width: 150px;">
                             <option value="" selected="selected">ALL</option>
                             <option value="ManagementISV">ManagementISV</option>
                             <option value="MSP (Management Service Provider)">MSP (Management Service Provider)</option>
@@ -112,7 +112,7 @@ document.getElementById('filter_status').value='';this.form.submit();"><i class=
                             <option value="Large Enterprise">Large Enterprise</option>
                             <option value="Data/Telecom OEM">Data/Telecom OEM</option>
                         </select>
-                        <div class="chzn-container chzn-container-single" style="width: 150px;" title=""
+                        {{-- <div class="chzn-container chzn-container-single" style="width: 150px;" title=""
                             id="lead_industry_chzn"><a class="chzn-single"><span>ALL</span>
                                 <div><b></b></div>
                             </a>
@@ -120,17 +120,17 @@ document.getElementById('filter_status').value='';this.form.submit();"><i class=
                                 <div class="chzn-search"><input type="text" autocomplete="off"></div>
                                 <ul class="chzn-results"></ul>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="vbz_lead lead_st"><label>Lead Status</label>
                         <select id="lead_status" name="lead_status" class="inputbox" size="1" onchange="submitform();"
-                            style="width: 150px; display: none;">
+                            style="width: 150px;">
                             <option value="" selected="selected">ALL</option>
                             <option value="dsdsa">Hot</option>
                             <option value="Cold">Cold</option>
                             <option value="Cold">Cold</option>
                         </select>
-                        <div class="chzn-container chzn-container-single chzn-container-single-nosearch"
+                        {{-- <div class="chzn-container chzn-container-single chzn-container-single-nosearch"
                             style="width: 150px;" title="" id="lead_status_chzn"><a class="chzn-single"><span>ALL</span>
                                 <div><b></b></div>
                             </a>
@@ -138,7 +138,7 @@ document.getElementById('filter_status').value='';this.form.submit();"><i class=
                                 <div class="chzn-search"><input type="text" autocomplete="off" readonly=""></div>
                                 <ul class="chzn-results"></ul>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 
@@ -379,7 +379,7 @@ document.getElementById('filter_status').value='';this.form.submit();"><i class=
 
                                     <div class="limit pull-right">
                                         Display #<select id="limit" name="limit" class="inputbox input-mini" size="1"
-                                            onchange="this.form.submit()" style="display: none;">
+                                            onchange="this.form.submit()" style="">
                                             <option value="5">5</option>
                                             <option value="10">10</option>
                                             <option value="15">15</option>
@@ -390,7 +390,7 @@ document.getElementById('filter_status').value='';this.form.submit();"><i class=
                                             <option value="100">100</option>
                                             <option value="0">All</option>
                                         </select>
-                                        <div class="chzn-container chzn-container-single chzn-container-single-nosearch"
+                                        {{-- <div class="chzn-container chzn-container-single chzn-container-single-nosearch"
                                             style="width: 59px;" title="" id="limit_chzn"><a
                                                 class="chzn-single"><span>20</span>
                                                 <div><b></b></div>
@@ -400,7 +400,7 @@ document.getElementById('filter_status').value='';this.form.submit();"><i class=
                                                         readonly=""></div>
                                                 <ul class="chzn-results"></ul>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
 
 

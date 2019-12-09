@@ -133,6 +133,28 @@ Route::get('/items.assets.new', 'ItemsController@assets_create')->name('items.as
 Route::resource('income', 'IncomeController');
 Route::get('income.invoices', 'IncomeController@invoices')
     ->name('income.invoices');
+Route::get('income.quotation', 'IncomeController@quotation')
+    ->name('income.quotation');
+Route::get('income.customers', 'IncomeController@customers')
+    ->name('income.customers');
+Route::get('income.leads', 'IncomeController@leads')
+    ->name('income.leads');
+
+// routs for Inventory end
+//******************************************************************* */
+//---------------------------------------------------------------------
+
+// routs for Expense start
+//******************************************************************* */
+
+// For Category 
+Route::resource('expense', 'ExpenseController');
+Route::get('expense.invoices', 'ExpenseController@invoices')
+    ->name('expense.invoices');
+Route::get('expense.quotation', 'ExpenseController@quotation')
+    ->name('expense.quotation');
+Route::get('expense.vendors', 'ExpenseController@vendors')
+    ->name('expense.vendors');
 // Route::get('/items.assets', 'ItemsController@assets')->name('items.assets');
 
 // Route::get('/projects.customer_create', 'ProjectsController@create_customer')->name('projects.customer_create');

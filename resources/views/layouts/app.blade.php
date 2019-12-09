@@ -437,10 +437,10 @@
                                     @if(Auth::user()->hasPermissionTo('Supper Permission'))
                                     <li><a href="{{route('income.index')}}"> Sales Order </a></li>
                                     <li><a href="{{route('income.invoices')}}">Invoices </a></li>
-                                    <li><a href=""> Quotation </a></li>
-                                    <li><a href="">Customers </a></li>
+                                    <li><a href="{{route('income.quotation')}}"> Quotation </a></li>
+                                    <li><a href="{{route('income.customers')}}">Customers </a></li>
                                     @endif
-                                    <li><a href="#"> leads </a></li>
+                                    <li><a href="{{route('income.leads')}}"> leads </a></li>
                                 </ul>
                                 <!-- end dropdown-menu -->
                             </li>
@@ -475,10 +475,10 @@
                                 <ul class="dropdown-menu" role="menu">
                                     @if(Auth::user()->hasPermissionTo('Supper Permission'))
 
-                                    <li><a href="#"> Purchase Order </a></li>
-                                    <li><a href="#"> Invoices </a></li>
-                                    <li><a href="#"> Quotation </a></li>
-                                    <li><a href="#"> Vendors</a></li>
+                                    <li><a href="{{route('expense.index')}}"> Purchase Order </a></li>
+                                    <li><a href="{{route('expense.invoices')}}"> Invoices </a></li>
+                                    <li><a href="{{route('expense.quotation')}}"> Quotation </a></li>
+                                    <li><a href="{{route('expense.vendors')}}"> Vendors</a></li>
                                     @endif
                                 </ul>
                                 <!-- end dropdown-menu -->

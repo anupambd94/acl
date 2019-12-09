@@ -21,7 +21,7 @@ use App\Designations;
 use App\Currentaddress;
 use App\Permanentaddress;
 
-class IncomeController extends Controller
+class ExpenseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -30,7 +30,7 @@ class IncomeController extends Controller
      */
     public function index()
     {
-        if (!Auth::user()->hasPermissionTo('Income Management')) {
+        if (!Auth::user()->hasPermissionTo('Expense Management')) {
             abort('401');
         } else {
             // $items = \DB::table('items')
@@ -41,12 +41,12 @@ class IncomeController extends Controller
             // return view('employees.index',)->with('roles', $roles);
             // return response()->json($items);
 
-            return view('income.orders');
+            return view('expense.orders');
         }
     }
     public function invoices()
     {
-        if (!Auth::user()->hasPermissionTo('Income Management')) {
+        if (!Auth::user()->hasPermissionTo('Expense Management')) {
             abort('401');
         } else {
             // $items = \DB::table('items')
@@ -57,12 +57,12 @@ class IncomeController extends Controller
             // return view('employees.index',)->with('roles', $roles);
             // return response()->json($items);
 
-            return view('income.invoices');
+            return view('expense.invoices');
         }
     }
     public function quotation()
     {
-        if (!Auth::user()->hasPermissionTo('Income Management')) {
+        if (!Auth::user()->hasPermissionTo('Expense Management')) {
             abort('401');
         } else {
             // $items = \DB::table('items')
@@ -73,12 +73,12 @@ class IncomeController extends Controller
             // return view('employees.index',)->with('roles', $roles);
             // return response()->json($items);
 
-            return view('income.quotation');
+            return view('expense.quotation');
         }
     }
-    public function customers()
+    public function vendors()
     {
-        if (!Auth::user()->hasPermissionTo('Income Management')) {
+        if (!Auth::user()->hasPermissionTo('Expense Management')) {
             abort('401');
         } else {
             // $items = \DB::table('items')
@@ -89,23 +89,7 @@ class IncomeController extends Controller
             // return view('employees.index',)->with('roles', $roles);
             // return response()->json($items);
 
-            return view('income.customers');
-        }
-    }
-    public function leads()
-    {
-        if (!Auth::user()->hasPermissionTo('Income Management')) {
-            abort('401');
-        } else {
-            // $items = \DB::table('items')
-            //     ->select('item_id', 'item_name', 'item_amount', 'item_quantity', 'transaction')
-            //     ->where('IsActive', '=', '1')
-            //     ->paginate(10);
-
-            // return view('employees.index',)->with('roles', $roles);
-            // return response()->json($items);
-
-            return view('income.leads');
+            return view('expense.vendors');
         }
     }
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -34,16 +35,15 @@ class ItemsController extends Controller
         if (!Auth::user()->hasPermissionTo('Inventory Management')) {
             abort('401');
         } else {
-        $items = \DB::table('items')
-        ->select('item_id', 'item_name', 'item_amount', 'item_quantity', 'transaction')
-        ->where('IsActive','=','1')
-        ->paginate(10);
-            
+            $items = \DB::table('items')
+                ->select('item_id', 'item_name', 'item_amount', 'item_quantity', 'transaction', 'IsActive')
+                ->where('IsActive', '=', '1')
+                ->paginate(10);
+
             // return view('employees.index',)->with('roles', $roles);
             // return response()->json($items);
-        
-            return view('inventory.items.index',compact('items'));
-        
+
+            return view('inventory.items.index', compact('items'));
         }
         //
     }
@@ -78,21 +78,21 @@ class ItemsController extends Controller
         return view('inventory.items.assets_create');
         //
     }
-    public function pendingItems(){
+    public function pendingItems()
+    {
         if (!Auth::user()->hasPermissionTo('Inventory Management')) {
             abort('401');
         } else {
-        $items = \DB::table('items')
-        ->select('item_id', 'item_name', 'item_amount', 'item_quantity', 'transaction')
-        ->where('IsApproved','=','0')
-        // ->where('is')
-        ->paginate(10);
-            
+            $items = \DB::table('items')
+                ->select('item_id', 'item_name', 'item_amount', 'item_quantity', 'transaction', 'IsActive')
+                ->where('IsApproved', '=', '0')
+                // ->where('is')
+                ->paginate(10);
+
             // return view('employees.index',)->with('roles', $roles);
             // return response()->json($items);
-        
-            return view('inventory.items.pending',compact('items'));
-        
+
+            return view('inventory.items.pending', compact('items'));
         }
         // return view('inventory.items.pending');
     }
@@ -112,7 +112,7 @@ class ItemsController extends Controller
                 'amount' => 'required',
                 'transaction_type' => 'required',
             ]);
-        
+
             if (isset($request->isActive)) {
                 $isActive = 1;
             } else {
@@ -122,31 +122,31 @@ class ItemsController extends Controller
             $class = "";
             $data = $request;
             $register = Items::create([
-                'item_name'=> $data['title'],
-                'item_amount'=> $data['amount'],
-                'item_quantity'=> $data['quantity'],
-                'barcode'=> $data['barcode'],
-                'transaction'=> $data['transaction_type'],
-                'IsAllowCommission'=> $data['allowcommission'],
-                'IsApproved'=> 0,
-                'IsActive'=> 1
+                'item_name' => $data['title'],
+                'item_amount' => $data['amount'],
+                'item_quantity' => $data['quantity'],
+                'barcode' => $data['barcode'],
+                'transaction' => $data['transaction_type'],
+                'IsAllowCommission' => $data['allowcommission'],
+                'IsApproved' => 0,
+                'IsActive' => 1
             ]);
 
             if ($register) {
-                $status = "Item " . $data['title'] ." (".$data['quantity']. ") Successfully Created.";
+                $status = "Item " . $data['title'] . " (" . $data['quantity'] . ") Successfully Created.";
                 $class = "success";
             } else {
                 $status = "not reigstered";
                 $class = "danger";
             }
-            
+
             // return response()->json($request);        
             return redirect()->back()->with('status', $status);
             // return view('employees.index',)->with('roles', $roles);
             // return response()->json($request);
-        
+
             // return view('inventory.items.index',compact('items'));
-        
+
         }
     }
 
@@ -157,9 +157,7 @@ class ItemsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Items $items)
-    {
-        
-    }
+    { }
 
     /**
      * Show the form for editing the specified resource.

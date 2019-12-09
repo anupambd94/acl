@@ -699,7 +699,7 @@ function customeremail(custid){
 
                                     <div class="limit pull-right">
                                         Display #<select id="limit" name="limit" class="inputbox input-mini" size="1"
-                                            onchange="this.form.submit()" style="display: none;">
+                                            onchange="this.form.submit()" style="">
                                             <option value="5">5</option>
                                             <option value="10">10</option>
                                             <option value="15">15</option>
@@ -710,7 +710,7 @@ function customeremail(custid){
                                             <option value="100">100</option>
                                             <option value="0">All</option>
                                         </select>
-                                        <div class="chzn-container chzn-container-single chzn-container-single-nosearch"
+                                        {{-- <div class="chzn-container chzn-container-single chzn-container-single-nosearch"
                                             style="width: 59px;" title="" id="limit_chzn"><a
                                                 class="chzn-single"><span>20</span>
                                                 <div><b></b></div>
@@ -720,7 +720,7 @@ function customeremail(custid){
                                                         readonly=""></div>
                                                 <ul class="chzn-results"></ul>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
 
                                     <ul class="pagination-list">
