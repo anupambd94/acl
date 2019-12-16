@@ -577,8 +577,8 @@
                                     <li><a href="#">Configuaration</a></li>
                                     <li><a href="#">Email Templates</a></li>
 
-                                    <li><a href="#">Transactions</a></li>
-                                    <li><a href="#">Transaction Mode</a></li>
+                                    <li><a href="{{route('transactions.index')}}">Transactions</a></li>
+                                    <li><a href="{{route('transactions.index')}}">Transaction Mode</a></li>
                                     <li class="dropdown-submenu">
                                         <a href="#">Import/Export</a>
                                         <ul class="dropdown-menu">
@@ -796,13 +796,9 @@
     <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-    {{-- <script src="{{ asset('js/default.js') }}"></script> --}}
-    {{-- <script src="{{ asset('js/iframe.js') }}"></script> --}}
-    {{-- <script src="{{ asset('js/scripts.js') }}"></script> --}}
+    
 
-    <script src="{{ asset('js/inject.js') }}"></script>
-
-
+   
 
     <!--Fast Click [ OPTIONAL ]-->
     <script src="{{ asset('plugins/fast-click/fastclick.min.js') }}"></script>
@@ -843,6 +839,11 @@
     <script src="{{ asset('plugins/screenfull/screenfull.js') }}"></script>
     <!--Form Wizard [ SAMPLE ]-->
     <script src="{{ asset('js/demo/index.js') }}"></script>
+    
+ <script src="{{ asset('js/default.js') }}"></script>
+    {{-- <script src="{{ asset('js/iframe.js') }}"></script> --}}
+    {{-- <script src="{{ asset('js/scripts.js') }}"></script> --}}
+    <script src="{{ asset('js/inject.js') }}"></script>
     <!--Form Wizard [ SAMPLE ]-->
 
 

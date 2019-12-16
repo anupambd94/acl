@@ -30,6 +30,9 @@ nyasa.container.addClass('effect');
 Both of the above methods will produce the same results.
 
 */
+import * as JQuery from "jquery";
+const $ = JQuery.default;
+
 $(document).on('ready', function() {
     "use strict";
 

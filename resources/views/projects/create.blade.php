@@ -256,8 +256,6 @@ var url = '{{ route("projects.index") }}';
 document.location.href=url;
 }else{
 }
-
-
 }
 
 function getCustVal(id,name){

@@ -48,6 +48,10 @@ Route::resource('departments', 'EmployeeDepartmentController');
 Route::resource('attendances', 'EmployeeAttendanceController');
 Route::resource('leaves', 'EmployeeLeaveTypeController');
 Route::resource('paydeads', 'EmployeePayHeadController');
+Route::resource('transactions', 'TransactionsController');
+Route::resource('transactionmode', 'TransactionModeController');
+Route::resource('tax', 'TaxController');
+Route::resource('discount', 'DiscountController');
 
 Route::get('/getSections', 'EmployeeController@getSection')->name('getSections');
 Route::get('employee_create', 'EmployeeController@create')->name('employee_create');

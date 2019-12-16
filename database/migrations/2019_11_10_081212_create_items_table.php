@@ -19,7 +19,7 @@ class CreateItemsTable extends Migration
             $table->integer('item_amount');
             $table->integer('item_quantity')->nullable();
             $table->string('barcode')->nullable();
-            $table->enum('transaction', ['For Sale', 'Asset','Rent']);
+            $table->integer('transaction_id');
             $table->boolean('IsActive');
             $table->boolean('IsAllowCommission');
             $table->boolean('IsApproved');
